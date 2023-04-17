@@ -1,0 +1,5 @@
+enum TABLE_DATE_TYPE_ENUM {
+  DAILY,
+  MONTHLY,
+  YEARLY,
+}
