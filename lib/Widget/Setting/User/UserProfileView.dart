@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
@@ -11,7 +13,6 @@ import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Setting/User/Edit/UserEdit.dart';
 
 class UserProfileView extends StatefulWidget {
   UserModel userModel;
@@ -23,22 +24,44 @@ class UserProfileView extends StatefulWidget {
 
 class _UserProfileViewState extends State<UserProfileView> {
   File? imageProfile;
+  XFile? imageProfileWeb;
 
   onClickUserProfile() async {
-    imageProfile = await PopupDialog.chooseImageDialog(context);
-    if (imageProfile != null) {
-      var body = {"image": base64Encode(imageProfile!.readAsBytesSync())};
-      var res =
-          await Singleton.instance.apiExtension.post<UserModel, UserModel>(
-        context: context,
-        baseUrl: ApiEndPoint.updateUserProfile,
-        deserialize: (e) => UserModel.fromJson(e),
-        loading: true,
-        body: body,
-      );
-      if (res.success!) {
-        Singleton.instance.token!.user!.image = res.data!.image;
-        setState(() {});
+    if (!kIsWeb) {
+      imageProfile = await PopupDialog.chooseImageDialog(context);
+      if (imageProfile != null) {
+        var body = {"image": base64Encode(imageProfile!.readAsBytesSync())};
+        var res =
+            await Singleton.instance.apiExtension.post<UserModel, UserModel>(
+          context: context,
+          baseUrl: ApiEndPoint.updateUserProfile,
+          deserialize: (e) => UserModel.fromJson(e),
+          loading: true,
+          body: body,
+        );
+        if (res.success!) {
+          Singleton.instance.token!.user!.image = res.data!.image;
+          setState(() {});
+        }
+      }
+    } else {
+      imageProfileWeb = await PopupDialog.chooseImageDialogWeb(context);
+      if (imageProfileWeb != null) {
+        var body = {
+          "image": base64Encode(await imageProfileWeb!.readAsBytes())
+        };
+        var res =
+            await Singleton.instance.apiExtension.post<UserModel, UserModel>(
+          context: context,
+          baseUrl: ApiEndPoint.updateUserProfile,
+          deserialize: (e) => UserModel.fromJson(e),
+          loading: true,
+          body: body,
+        );
+        if (res.success!) {
+          Singleton.instance.token!.user!.image = res.data!.image;
+          setState(() {});
+        }
       }
     }
   }
@@ -94,17 +117,30 @@ class _UserProfileViewState extends State<UserProfileView> {
                         borderRadius: BorderRadius.circular(100),
                         child: Stack(
                           children: [
-                            imageProfile == null
-                                ? ExtensionComponent.cachedNetworkImage(
-                                    url: widget.userModel.image ?? "",
-                                    profile: false,
-                                  )
-                                : Image.file(
-                                    imageProfile!,
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                  ),
+                            () {
+                              if (imageProfile == null &&
+                                  imageProfileWeb == null)
+                                return ExtensionComponent.cachedNetworkImage(
+                                  url: widget.userModel.image ?? "",
+                                  profile: false,
+                                );
+                              else if (imageProfile != null)
+                                return Image.file(
+                                  imageProfile!,
+                                  width: 80,
+                                  height: 80,
+                                  fit: BoxFit.cover,
+                                );
+                              else if (imageProfileWeb != null) {
+                                return Image.network(
+                                  imageProfileWeb!.path,
+                                  width: 80,
+                                  height: 80,
+                                  fit: BoxFit.cover,
+                                );
+                              } else
+                                return Container();
+                            }(),
                             InkWell(
                               onTap: onClickUserProfile,
                               child: Container(

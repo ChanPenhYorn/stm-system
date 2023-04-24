@@ -5,21 +5,21 @@ class ApiEndPoint {
   // static String plateCaptureByQty = 'plate-capture/getlastbyqty';
   static String ppshvTopup = 'ppshv/topup';
   static String ppshvDeduction = 'ppshv/deduction';
+  static String vehicleRevenue = 'api/v1/report/vehicle-and-weight';
 
   //STM
   static String login = "api/v1/authentication/login";
 
   static String role = "api/v1/role";
   static String activity = "api/v1/activity";
-  // static String rolePost = "api/v1/role";
+  static String user = "api/v1/user";
 
-  static String register = "osr/register";
+  static String register = "api/v1/authentication/register-approval";
   static String getApprovedAccountByUDID = "osr/get-approve-account-by-id";
   static String changePassword = "osr/change-password";
   static String appVersion = "osr/app-version";
 
-  static String user = "osr/users/listing";
-  static String userApproval = "osr/users/not-approve";
+  static String userApproval = "api/v1/user/approval";
   static String userPost = "osr/users";
   static String requestOtp = "osr/request-otp";
   static String submitOtp = "osr/submit-otp";

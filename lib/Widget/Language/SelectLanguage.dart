@@ -28,7 +28,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
   void selectLanguage(int? value) async {
     Singleton.instance.selectedLanguage = value == 0 ? 'km-KH' : 'en-US';
     var res = await Singleton.instance.writeLocalStorage(
-        'language_selected', Singleton.instance.selectedLanguage);
+        'stm_language_selected', Singleton.instance.selectedLanguage);
     if (res) {
       var split = Singleton.instance.selectedLanguage.split("-");
       EasyLocalization.of(context)!.setLocale(Locale(split[0], split[1]));

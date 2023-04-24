@@ -35,10 +35,8 @@ class Extension {
     if (selectedSegmentType == 0)
       return "ប្រចាំថ្ងៃ - " + date.toDateKhmerMonthYear();
     else if (selectedSegmentType == 1)
-      return "ប្រចាំសប្តាហ៍ " + date.toDateKhmerMonthYear();
-    else if (selectedSegmentType == 2)
       return "ប្រចាំខែ - " + date.toYear();
-    else if (selectedSegmentType == 3) return "ប្រចាំឆ្នាំ - " + date.toYear();
+    else if (selectedSegmentType == 2) return "ប្រចាំឆ្នាំ - " + date.toYear();
     return "";
   }
 

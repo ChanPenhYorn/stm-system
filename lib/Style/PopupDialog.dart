@@ -152,7 +152,8 @@ class PopupDialog {
               ),
               contentPadding: EdgeInsets.only(top: 15, bottom: 10),
               titlePadding: EdgeInsets.all(0),
-              content: Padding(
+              content: Container(
+                constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -242,7 +243,8 @@ class PopupDialog {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Padding(
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -574,7 +576,8 @@ class PopupDialog {
         ),
         contentPadding: EdgeInsets.only(top: 15, bottom: 10),
         titlePadding: EdgeInsets.all(0),
-        content: Padding(
+        content: Container(
+          constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -673,7 +676,7 @@ class PopupDialog {
     return result;
   }
 
-  static Future<File?> _captureImage(BuildContext context) async {
+  static Future<File?> captureImage(BuildContext context) async {
     var image = await _picker.pickImage(source: ImageSource.camera);
     _dir = await getApplicationDocumentsDirectory();
     var path = p.join(
@@ -683,6 +686,11 @@ class PopupDialog {
             p.extension(image.path));
     File? img = await _compressAndGetFile(File(image.path), path);
     return img;
+  }
+
+  static Future<XFile?> captureImageWeb(BuildContext context) async {
+    var image = await _picker.pickImage(source: ImageSource.camera);
+    return image;
   }
 
   static Future<File?> getImage(BuildContext context) async {
@@ -695,6 +703,12 @@ class PopupDialog {
             p.extension(image.path));
     File? img = await _compressAndGetFile(File(image.path), path);
     return img;
+  }
+
+  static Future<XFile?> getImageWeb(BuildContext context) async {
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+
+    return image;
   }
 
   static Future<List<File?>> _getImageList(BuildContext context) async {
@@ -774,7 +788,7 @@ class PopupDialog {
                                       AnimateLoading().showLoading(
                                         context,
                                       );
-                                      file = await _captureImage(context);
+                                      file = await captureImage(context);
                                       Navigator.pop(context);
                                       Navigator.pop(context);
                                     } catch (err) {
@@ -835,6 +849,134 @@ class PopupDialog {
         });
 
     return file;
+  }
+
+  static Future<XFile?> chooseImageDialogWeb(BuildContext context) async {
+    Extension.clearFocus(context);
+    XFile? xFile;
+    var result = await showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Container(
+              height: 200,
+              width: 350,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(
+                    'សូមជ្រើសរើស',
+                    style: StyleColor.textStyleKhmerDangrek18,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          elevation: 3,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 100,
+                              width: 130,
+                              child: InkWell(
+                                  splashColor: Colors.lightBlue,
+                                  // disabledColor: Colors.grey,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.add_a_photo,
+                                        color: StyleColor.appBarColor,
+                                        size: 30,
+                                      ),
+                                      Text('ថតរូប',
+                                          style: StyleColor
+                                              .textStyleKhmerContent14)
+                                    ],
+                                  ),
+                                  onTap: () async {
+                                    try {
+                                      AnimateLoading().showLoading(
+                                        context,
+                                      );
+                                      xFile = await captureImageWeb(context);
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                    } catch (err) {
+                                      Navigator.pop(context);
+                                    }
+                                  }),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 100,
+                            width: 130,
+                            child: InkWell(
+                                splashColor: Colors.lightBlue,
+                                // disabledColor: Colors.grey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.image,
+                                      color: StyleColor.appBarColor,
+                                      size: 30,
+                                    ),
+                                    Text(
+                                      'ជ្រើសរើសរូបភាព',
+                                      style: StyleColor.textStyleKhmerContent14,
+                                    )
+                                  ],
+                                ),
+                                onTap: () async {
+                                  try {
+                                    AnimateLoading().showLoading(context);
+                                    xFile = await getImageWeb(context);
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } catch (err) {
+                                    Navigator.pop(context);
+                                  }
+                                }),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+
+    return xFile!;
   }
 
   static Future<List<File?>> chooseListImagesDialog(
@@ -901,7 +1043,7 @@ class PopupDialog {
                                   onTap: () async {
                                     try {
                                       AnimateLoading().showLoading(context);
-                                      File? file = await _captureImage(context);
+                                      File? file = await captureImage(context);
                                       listFiles.add(file!);
                                       Navigator.pop(context);
                                       Navigator.pop(context);

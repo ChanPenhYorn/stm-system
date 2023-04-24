@@ -1,20 +1,12 @@
-import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stm_report_app/Entity/Register/Post/RegisterPostModel.dart';
-import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
-import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Authentication/Login.dart';
-import 'package:share_plus/share_plus.dart';
 
 class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
@@ -26,10 +18,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  // ApiService apiService = ApiService.create();
   TextEditingController usernameInputController = TextEditingController();
   TextEditingController passwordInputController = TextEditingController();
-  // Singleton singleton = Singleton.instance;
   TextEditingController firstNameKhCon = TextEditingController();
   TextEditingController lastNameKhCon = TextEditingController();
   TextEditingController firstNameEnCon = TextEditingController();
@@ -766,6 +756,55 @@ class _RegisterState extends State<Register> {
                                 ),
                               ),
                               SizedBox(
+                                height: 10,
+                              ),
+
+                              /// Password
+                              Container(
+                                child: Theme(
+                                  data: Theme.of(context).copyWith(
+                                    primaryColor: StyleColor.appBarColor,
+                                  ),
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "Message.PleaseInputPassword"
+                                            .tr();
+                                      } else if (value.trim().length < 6) {
+                                        return "Message.PasswordMoreThan6Char"
+                                            .tr();
+                                      }
+                                      return null;
+                                    },
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    style: StyleColor.textStyleKhmerContent14,
+                                    controller: passwordCon,
+                                    obscureText: !_passwordVisible,
+                                    decoration: InputDecoration(
+                                      labelText: "Login.password".tr(),
+                                      prefixIcon: Icon(Icons.lock),
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          // Based on passwordVisible state choose the icon
+                                          _passwordVisible
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: () {
+                                          // Update the state i.e. toogle the state of passwordVisible variable
+                                          setState(() {
+                                            _passwordVisible =
+                                                !_passwordVisible;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
                                 height: 20,
                               ),
                               MaterialButton(
@@ -789,14 +828,14 @@ class _RegisterState extends State<Register> {
                                       String phone = MaskTextInputFormatter(
                                               mask: "### ### ### #")
                                           .unmaskText(phoneCon.text.trim());
-                                      if (phone ==
-                                          Singleton.instance.userAccountCache
-                                              .username!) {
-                                        phone = "";
-                                      }
-                                      await PopupDialog.showPopup(context,
-                                          "បន្ទាប់ពីចុះឈ្មោះគណនីថ្មី ${phone}\n នោះគណនីបច្ចុប្បន្ន ${Singleton.instance.userAccountCache.username}\nនឹងមិនអាចចូលប្រើប្រាស់កម្មវិធីក្នុងឧបករណ៍នេះបានទេ លុះត្រាតែមានការអនុញ្ញាតជាថ្មី!",
-                                          success: 2);
+                                      // if (phone ==
+                                      //     Singleton.instance.userAccountCache
+                                      //         .username!) {
+                                      //   phone = "";
+                                      // }
+                                      // await PopupDialog.showPopup(context,
+                                      //     "បន្ទាប់ពីចុះឈ្មោះគណនីថ្មី ${phone}\n នោះគណនីបច្ចុប្បន្ន ${Singleton.instance.userAccountCache.username}\nនឹងមិនអាចចូលប្រើប្រាស់កម្មវិធីក្នុងឧបករណ៍នេះបានទេ លុះត្រាតែមានការអនុញ្ញាតជាថ្មី!",
+                                      //     success: 2);
                                     }
                                     var prompt =
                                         await PopupDialog.yesNoPrompt(context);
@@ -859,6 +898,7 @@ class _RegisterState extends State<Register> {
       firstNameKh: firstNameKhCon.text.trim(),
       lastNameEn: lastNameEnCon.text.trim(),
       lastNameKh: lastNameKhCon.text.trim(),
+      password: passwordCon.text,
       phoneNumber: MaskTextInputFormatter(mask: "### ### ### #")
           .unmaskText(phoneCon.text.trim()),
       position: positionCon.text.trim(),
@@ -873,7 +913,8 @@ class _RegisterState extends State<Register> {
       body,
     );
     if (res.success!) {
-      await PopupDialog.showSuccess(context);
+      print(res.data!.toJson());
+      await PopupDialog.showSuccess(context, layerContext: 2);
     } else {
       if (res.description == "Invalid input value") {
         PopupDialog.showPopup(context, "Message.Account.InvalidCredential".tr(),

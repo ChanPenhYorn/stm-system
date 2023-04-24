@@ -55,7 +55,7 @@ class STMDataGridSource extends DataGridSource {
         ),
         StackedHeaderCell(
           columnNames: <String>[
-            'weight-tonne',
+            'weight-kg',
             'weight-total-percent',
           ],
           child: Container(
@@ -159,10 +159,10 @@ class STMDataGridSource extends DataGridSource {
             value: null,
           ),
 
-          //Add weight-tonne
+          //Add weight-kg
           DataGridCell<double>(
-            columnName: 'weight-tonne',
-            value: reportModel.total!.weightTonne!,
+            columnName: 'weight-kg',
+            value: reportModel.total!.weightKg!,
           ),
 
           //Add weight-total-percent
@@ -186,7 +186,7 @@ class STMDataGridSource extends DataGridSource {
 
     //Add Year Data
     reportModel.data!.forEach((STMReportDataModel data) {
-      // if (data.checksum == null) return;
+      if (data.vehicleTrx == 0 || data.vehicleTrx == null) return;
       List<DataGridCell> listCell = [];
 
       //Add Date
@@ -216,11 +216,11 @@ class STMDataGridSource extends DataGridSource {
         ),
       );
 
-      //Add weight-tonne
+      //Add weight-kg
       listCell.add(
         DataGridCell<double>(
-          columnName: 'weight-tonne',
-          value: data.weightTonne!,
+          columnName: 'weight-kg',
+          value: data.weightKg!,
         ),
       );
 
@@ -320,7 +320,7 @@ class STMDataGridSource extends DataGridSource {
     //Weight
     listColumn.add(
       GridColumn(
-        columnName: "weight-tonne",
+        columnName: "weight-kg",
         width: Extension.getDeviceType() == DeviceType.PHONE ? 100 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -481,7 +481,7 @@ class STMDataGridSource extends DataGridSource {
           padding: const EdgeInsets.all(8),
           child: Text(
             row.getCells()[3].value != null
-                ? (row.getCells()[3].value as double).toString()
+                ? (row.getCells()[3].value as double).toNumberDoubleFormat()
                 : "",
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,

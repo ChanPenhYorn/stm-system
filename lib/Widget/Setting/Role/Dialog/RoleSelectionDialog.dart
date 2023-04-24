@@ -96,7 +96,8 @@ class _RoleSelectionDialogState extends State<RoleSelectionDialog> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data!.length > 0)
-            return Padding(
+            return Container(
+              constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
               padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

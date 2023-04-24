@@ -3,7 +3,7 @@ import 'package:stm_report_app/Entity/User/UserModel.dart';
 
 class RoleModel {
   String? methodType;
-  String? roleId;
+  int? roleId;
   String? roleName;
   String? createdDate;
   String? updatedDate;

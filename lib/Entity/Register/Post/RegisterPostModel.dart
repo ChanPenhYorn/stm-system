@@ -3,6 +3,7 @@ class RegisterPostModel {
   String? lastNameKh;
   String? firstNameEn;
   String? lastNameEn;
+  String? password;
   String? udid;
   String? position;
   String? org;
@@ -16,6 +17,7 @@ class RegisterPostModel {
       this.lastNameKh,
       this.firstNameEn,
       this.lastNameEn,
+      this.password,
       this.udid,
       this.position,
       this.org,
@@ -29,6 +31,7 @@ class RegisterPostModel {
     lastNameKh = json['last_name_kh'];
     firstNameEn = json['first_name_en'];
     lastNameEn = json['last_name_en'];
+    lastNameEn = json['password'];
     udid = json['udid'];
     position = json['position'];
     org = json['org'];
@@ -44,6 +47,7 @@ class RegisterPostModel {
     data['last_name_kh'] = this.lastNameKh;
     data['first_name_en'] = this.firstNameEn;
     data['last_name_en'] = this.lastNameEn;
+    data['password'] = this.password;
     data['udid'] = this.udid;
     data['position'] = this.position;
     data['org'] = this.org;

@@ -4,6 +4,7 @@ import 'package:stm_report_app/Enum/ValueDataTypeEnum.dart';
 
 final dollarFormat = new format.NumberFormat("#,##0.00", "en_US");
 final numberFormat = new format.NumberFormat("#,###", "en_US");
+final numberDoubleFormat = new format.NumberFormat("#,##0.00", "en_US");
 final percentFormat = new format.NumberFormat.percentPattern('en');
 final khmerFormat = new format.NumberFormat("###,### ####", "en_US");
 
@@ -69,6 +70,10 @@ extension numberParsing on double {
 
   String toPercentFormat() {
     return percentFormat.format(this);
+  }
+
+  String toNumberDoubleFormat() {
+    return numberDoubleFormat.format(this);
   }
 }
 

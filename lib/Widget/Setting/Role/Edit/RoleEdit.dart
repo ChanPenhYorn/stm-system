@@ -72,11 +72,10 @@ class _RoleEditState extends State<RoleEdit> {
           activities: listActivities,
         ).toJson();
         print(body);
-        var res =
-            await Singleton.instance.apiExtension.post<RoleModel, RoleModel>(
+        var res = await Singleton.instance.apiExtension.post<String, String>(
           context: context,
           loading: true,
-          deserialize: (e) => RoleModel.fromJson(e),
+          deserialize: (e) => e.toString(),
           baseUrl: ApiEndPoint.role,
           body: body,
         );

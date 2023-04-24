@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 
 class QRFormModel {

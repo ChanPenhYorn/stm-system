@@ -217,6 +217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  file_saver:
+    dependency: "direct main"
+    description:
+      name: file_saver
+      sha256: "0de62b766ebbd491466b160909fce9f30d2c0b2ba9e062871dbda2e677e5b33b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -422,7 +430,7 @@ packages:
     source: hosted
     version: "0.8.6+6"
   image_picker_for_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: image_picker_for_web
       sha256: "98f50d6b9f294c8ba35e25cc0d13b04bfddd25dbc8d32fa9d566a6572f2c081c"
@@ -1203,5 +1211,5 @@ packages:
     source: hosted
     version: "6.2.2"
 sdks:
-  dart: ">=2.18.6 <4.0.0"
+  dart: ">=2.18.6 <3.0.2"
   flutter: ">=3.3.0"

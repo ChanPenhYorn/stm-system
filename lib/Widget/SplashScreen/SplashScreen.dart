@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
-import 'package:stm_report_app/Extension/AppRoute.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Widget/Authentication/DeviceApproved.dart';
-import 'package:stm_report_app/Widget/Authentication/Login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/QRForm/QRFormModel.dart';
 import 'package:stm_report_app/Entity/Role/RoleModel.dart';
@@ -13,9 +11,7 @@ import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Home/Dashboard.dart';
 import 'package:stm_report_app/Widget/Setting/Role/Dialog/RoleSelectionDialog.dart';
-// import 'package:scan/scan.dart';
 
 class UserApprovalViewEditing extends StatefulWidget {
   UserModel userModel;
@@ -55,7 +51,9 @@ class _UserApprovalViewEditingState extends State<UserApprovalViewEditing> {
 
   onClickSubmit() async {
     bool available = _formKey.currentState!.validate();
-    if (available && listRole.length > 0 && attachment != null) {
+    if (available && listRole.length > 0
+        // && attachment != null
+        ) {
       var prompt = await PopupDialog.yesNoPrompt(context);
       if (prompt) {
         widget.userModel.firstNameKh = firstNameKhCon.text.trim();
@@ -72,13 +70,12 @@ class _UserApprovalViewEditingState extends State<UserApprovalViewEditing> {
               base64Encode(attachment!.readAsBytesSync());
         }
         var body = widget.userModel.toJson();
-        var res = await Singleton.instance.apiExtension
-            .post<UserModel, UserModel>(
-                context: context,
-                loading: true,
-                baseUrl: ApiEndPoint.userApproval,
-                body: body,
-                deserialize: (e) => UserModel.fromJson(e));
+        var res = await Singleton.instance.apiExtension.post<String, String>(
+            context: context,
+            loading: true,
+            baseUrl: ApiEndPoint.userApproval,
+            body: body,
+            deserialize: (e) => e.toString());
         if (res.success!) {
           await PopupDialog.showSuccess(context, data: true, layerContext: 3);
         } else
@@ -88,11 +85,12 @@ class _UserApprovalViewEditingState extends State<UserApprovalViewEditing> {
       PopupDialog.showPopup(
           context, "Message.RoleUser.PleaseSelectRoleUser".tr(),
           success: 2);
-    } else if (attachment == null) {
-      PopupDialog.showPopup(
-          context, "Message.FormPDF.PleaseUploadDocument".tr(),
-          success: 2);
     }
+    // else if (attachment == null) {
+    //   PopupDialog.showPopup(
+    //       context, "Message.FormPDF.PleaseUploadDocument".tr(),
+    //       success: 2);
+    // }
   }
 
   onClickAddRole() async {
@@ -785,37 +783,37 @@ class _UserApprovalViewEditingState extends State<UserApprovalViewEditing> {
                   ],
                 ),
               ),
-              Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      height: 50,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Label.References'.tr(),
-                        style:
-                            StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(right: 10),
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.add_circle,
-                          color: StyleColor.appBarColor,
-                        ),
-                        onPressed: () {
-                          onClickAddAttachment();
-                        }),
-                  ),
-                ],
-              ),
-
-              buildAttachment(),
+              // Stack(
+              //   children: [
+              //     Align(
+              //       alignment: Alignment.center,
+              //       child: Container(
+              //         height: 50,
+              //         alignment: Alignment.center,
+              //         child: Text(
+              //           'Label.References'.tr(),
+              //           style:
+              //               StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
+              //           textAlign: TextAlign.center,
+              //         ),
+              //       ),
+              //     ),
+              //     Container(
+              //       padding: EdgeInsets.only(right: 10),
+              //       alignment: Alignment.centerRight,
+              //       child: IconButton(
+              //           icon: Icon(
+              //             Icons.add_circle,
+              //             color: StyleColor.appBarColor,
+              //           ),
+              //           onPressed: () {
+              //             onClickAddAttachment();
+              //           }),
+              //     ),
+              //   ],
+              // ),
+              //
+              // buildAttachment(),
 
               Stack(
                 children: [

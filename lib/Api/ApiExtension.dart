@@ -60,13 +60,21 @@ class ApiExtension {
           .get(
         Domain.domain + "${baseUrl}?${param}",
         options: Options(
-            receiveDataWhenStatusError: true,
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! < 501;
-            }),
+          receiveDataWhenStatusError: true,
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 501;
+          },
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+          },
+        ),
       )
           .catchError((err) {
+        print('this error');
+        print(err);
         if (loading) Navigator.of(context, rootNavigator: true).pop();
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
             success: 0);
@@ -109,7 +117,6 @@ class ApiExtension {
             success: 0);
       });
       if (loading) Navigator.of(context, rootNavigator: true).pop();
-      // print(res.data);
       return ResponseRes<T, D>.fromJson(res.data,
           deserialize: (e) => deserialize!(e));
     } catch (err) {
@@ -220,8 +227,6 @@ class ApiExtension {
           success: 0);
     });
     if (!noLoading) Navigator.of(context, rootNavigator: true).pop();
-    // ResponseRes<Token, Token> response = ResponseRes.fromJson(res.data!);
-    // print(response.data!.toJson());
 
     return ResponseRes<Token, Token>.fromJson(res.data,
         deserialize: (e) => Token.fromJson(e));

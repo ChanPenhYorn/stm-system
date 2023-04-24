@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Api/Domain.dart';
-import 'package:stm_report_app/Entity/PPSHV/ChecksumModel.dart';
 import 'package:stm_report_app/Entity/PPSHV/PPSHVDeductionModel.dart';
 import 'package:stm_report_app/Entity/TechInspection/TechInspectionModel.dart';
 import 'package:stm_report_app/Enum/AxisDataTypeEnum.dart';

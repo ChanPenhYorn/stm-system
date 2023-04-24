@@ -72,13 +72,13 @@ class _UserEditState extends State<UserEdit> {
           widget.userModel.image =
               base64Encode(imageProfile!.readAsBytesSync());
         }
-        var res = await Singleton.instance.apiExtension
-            .post<UserModel, UserModel>(
-                context: context,
-                loading: true,
-                baseUrl: ApiEndPoint.userPost,
-                body: widget.userModel.toJson(),
-                deserialize: (e) => UserModel.fromJson(e));
+        print(jsonEncode(widget.userModel.toJson()));
+        var res = await Singleton.instance.apiExtension.post<String, String>(
+            context: context,
+            loading: true,
+            baseUrl: ApiEndPoint.user,
+            body: widget.userModel.toJson(),
+            deserialize: (e) => e.toString());
         if (res.success!) {
           PopupDialog.showSuccess(context, layerContext: 3, data: true);
         } else
@@ -105,7 +105,7 @@ class _UserEditState extends State<UserEdit> {
         );
       },
     );
-    if (result!.length > 0) {
+    if (result != null && result!.length > 0) {
       listRole.clear();
       listRole.addAll(result);
     }
@@ -489,7 +489,7 @@ class _UserEditState extends State<UserEdit> {
                           Expanded(
                             child: Container(
                                 margin: EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text('Label.UserNameEn'.tr(),
+                                child: Text('Hint.LastNameEN'.tr(),
                                     style: StyleColor
                                         .textStyleKhmerContent14Grey)),
                           ),
@@ -520,7 +520,7 @@ class _UserEditState extends State<UserEdit> {
                                 ),
                                 hintStyle: StyleColor.textStyleKhmerDangrekAuto(
                                     color: Colors.grey),
-                                hintText: 'Hint.UserNameEn'.tr(),
+                                hintText: 'Hint.LastNameEN'.tr(),
                                 prefixIcon: Icon(Icons.person),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
@@ -544,7 +544,7 @@ class _UserEditState extends State<UserEdit> {
                           Expanded(
                             child: Container(
                                 margin: EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text('Label.UserNameEn'.tr(),
+                                child: Text('Hint.FirstNameEN'.tr(),
                                     style: StyleColor
                                         .textStyleKhmerContent14Grey)),
                           ),
@@ -576,7 +576,7 @@ class _UserEditState extends State<UserEdit> {
                                 ),
                                 hintStyle: StyleColor.textStyleKhmerDangrekAuto(
                                     color: Colors.grey),
-                                hintText: 'Hint.UserNameEn'.tr(),
+                                hintText: 'Hint.FirstNameEN'.tr(),
                                 prefixIcon: Icon(Icons.person),
                                 border: OutlineInputBorder(
                                     borderRadius:
@@ -885,6 +885,9 @@ class _UserEditState extends State<UserEdit> {
                       ),
                     ),
                     onPressed: onClickSubmit,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                 ],
               )

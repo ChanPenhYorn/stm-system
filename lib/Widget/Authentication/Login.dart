@@ -1,29 +1,14 @@
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/AppVersion.dart';
-import 'package:stm_report_app/Entity/Device/UDIDModel.dart';
-import 'package:stm_report_app/Entity/Token.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionMethod.dart';
-import 'package:stm_report_app/Infrastructor/Response/ResponseAPI.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Authentication/ConfirmOTP.dart';
-import 'package:stm_report_app/Widget/Authentication/DeviceApproved.dart';
 import 'package:stm_report_app/Widget/Authentication/Register.dart';
-import 'package:stm_report_app/Widget/Home/Dashboard.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:stm_report_app/Widget/Home/Web/Dashboard_Web.dart';
-import 'package:store_redirect/store_redirect.dart';
 
 class Login extends StatefulWidget {
   int faceIdScanDelay = 0;
@@ -116,10 +101,17 @@ class _LoginState extends State<Login> {
             success: 0,
           );
           return;
-        } else if (res.description!.trim() == "Unauthorized") {
+        } else if (res.description!.trim() == "Reviewing Account") {
           PopupDialog.showPopup(
             context,
-            "Message.Account.InvalidCredential".tr(),
+            "Message.Account.ReviewingAccount".tr(),
+            success: 0,
+          );
+          return;
+        } else if (res.description!.trim() == "Suspended Account") {
+          PopupDialog.showPopup(
+            context,
+            "Message.Account.SuspendedAccount".tr(),
             success: 0,
           );
           return;
@@ -388,16 +380,6 @@ class _LoginState extends State<Login> {
                                     ),
                                     GestureDetector(
                                       onTap: () async {
-                                        if (Singleton.instance.userAccountCache
-                                                    .username !=
-                                                null &&
-                                            Singleton.instance.userAccountCache
-                                                    .username !=
-                                                "") {
-                                          await PopupDialog.showPopup(context,
-                                              "បន្ទាប់ពីចុះឈ្មោះគណនីថ្មី \n នោះគណនីបច្ចុប្បន្ន ${Singleton.instance.userAccountCache.username}\nនឹងមិនអាចចូលប្រើប្រាស់កម្មវិធីក្នុងឧបករណ៍នេះបានទេ លុះត្រាតែមានការអនុញ្ញាតជាថ្មី!",
-                                              success: 2);
-                                        }
                                         await Navigator.push(
                                           context,
                                           PageRouteBuilder(

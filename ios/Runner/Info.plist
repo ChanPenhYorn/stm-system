@@ -55,5 +55,9 @@
     <string>This app need photo to set user profile</string>
     <key>NSCameraUsageDescription</key>
     <string>This app need camera capture user profile</string>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
 </dict>
 </plist>

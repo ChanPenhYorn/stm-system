@@ -114,7 +114,6 @@ class _AdminSettingState extends State<AdminSetting> {
           Singleton.instance.token!.permission![i].located == "setting") {
         int indexInListButton =
             Singleton.instance.dashboardButton.indexWhere((d) => () {
-                  print(d.buttonTitle!.tr());
                   return d.buttonTitle!.tr() ==
                       Singleton.instance.token!.permission![i].widgetKh;
                 }());
@@ -165,11 +164,11 @@ class _AdminSettingState extends State<AdminSetting> {
         }
       }
     }
-    int mod = listButton.length % 4;
+    int mod = listButton.length % 6;
     if (mod != 0) {
       var loopLength;
       var value1 = listButton.length + 1;
-      if (value1 % 4 == 0)
+      if (value1 % 6 == 0)
         loopLength = 1;
       else {
         loopLength = 2;
@@ -211,7 +210,7 @@ class _AdminSettingState extends State<AdminSetting> {
               physics: ClampingScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, crossAxisSpacing: 2, mainAxisSpacing: 2),
+                  crossAxisCount: 6, crossAxisSpacing: 2, mainAxisSpacing: 2),
               itemCount: listButton.length,
               itemBuilder: (context, index) {
                 return listButton[index];

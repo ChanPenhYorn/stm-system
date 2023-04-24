@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stm_report_app/Entity/PPSHV/PPSHVDeductionModel.dart';
-import 'package:stm_report_app/Entity/PPSHV/PPSHVTopupModel.dart';
 import 'package:stm_report_app/Entity/Report/STMReportModel.dart';
 import 'package:stm_report_app/Enum/TableDateType.dart';
 import 'package:stm_report_app/Enum/TableTypeEnum.dart';
@@ -13,11 +11,11 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Dialog/DownloadBottomSheet.dart';
-import 'package:stm_report_app/Widget/TestingReport.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:screenshot_callback/screenshot_callback.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class GraphExpand<T> extends StatefulWidget {
   // Widget graphCard;
@@ -236,17 +234,28 @@ class _GraphExpandState extends State<GraphExpand> {
         ),
       ),
     );
-    final directory = (await getApplicationDocumentsDirectory());
-    File file = await File(
-        '${directory.path}/${widget.downloadFileName! + "-" + DateTime.now().toYYYYMMDD_NoDash()}.jpg');
-    var imageSave = await file.writeAsBytes(captured.toList());
-    Navigator.pop(context);
-    if (imageSave.path.isNotEmpty) {
-      Share.shareXFiles([
-        XFile(
-          imageSave.path,
-        )
-      ]);
+
+    if (kIsWeb) {
+      Navigator.pop(context);
+      await FileSaver.instance.saveFile(
+        name: widget.downloadFileName!,
+        ext: "jpg",
+        bytes: captured,
+        mimeType: MimeType.jpeg,
+      );
+    } else {
+      final directory = (await getApplicationDocumentsDirectory());
+      File file = await File(
+          '${directory.path}/${widget.downloadFileName! + "-" + DateTime.now().toYYYYMMDD_NoDash()}.jpg');
+      var imageSave = await file.writeAsBytes(captured.toList());
+      Navigator.pop(context);
+      if (imageSave.path.isNotEmpty) {
+        Share.shareXFiles([
+          XFile(
+            imageSave.path,
+          )
+        ]);
+      }
     }
   }
 

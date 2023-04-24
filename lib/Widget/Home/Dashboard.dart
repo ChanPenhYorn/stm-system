@@ -409,12 +409,12 @@
 //                                           .initFaceIdPermission();
 //                                       if (Singleton.instance.faceIdPermission) {
 //                                         Singleton.instance.storage
-//                                             .delete(key: "faceId_permission");
+//                                             .delete(key: "stm_faceId_permission");
 //                                         await Singleton.instance
 //                                             .initFaceIdPermission();
 //                                       } else {
 //                                         Singleton.instance.storage.write(
-//                                             key: "faceId_permission",
+//                                             key: "stm_faceId_permission",
 //                                             value: "1");
 //                                         await Singleton.instance
 //                                             .initFaceIdPermission();
@@ -472,12 +472,12 @@
 //                                       if (Singleton
 //                                           .instance.fingerPrintPermission) {
 //                                         Singleton.instance.storage.delete(
-//                                             key: "fingerPrint_permission");
+//                                             key: "stm_fingerPrint_permission");
 //                                         await Singleton.instance
 //                                             .initFingerPrintPermission();
 //                                       } else {
 //                                         Singleton.instance.storage.write(
-//                                             key: "fingerPrint_permission",
+//                                             key: "stm_fingerPrint_permission",
 //                                             value: "1");
 //                                         await Singleton.instance
 //                                             .initFingerPrintPermission();

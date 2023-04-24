@@ -1,6 +1,6 @@
 class RolePostModel {
   String? methodType;
-  String? roleid;
+  int? roleid;
   String? rolename;
   List<Activities>? activities;
 

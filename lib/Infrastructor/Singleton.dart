@@ -170,17 +170,18 @@ class Singleton with ChangeNotifier {
 
   Future<void> clearBiomatrice() async {
     await storage.write(
-      key: "fingerPrint_permission",
+      key: "stm_fingerPrint_permission",
       value: "",
     );
     await storage.write(
-      key: "faceId_permission",
+      key: "stm_faceId_permission",
       value: "",
     );
   }
 
   Future<bool> initFingerPrintPermission() async {
-    var fingerPrintValue = await storage.read(key: "fingerPrint_permission");
+    var fingerPrintValue =
+        await storage.read(key: "stm_fingerPrint_permission");
     if (fingerPrintValue != null && fingerPrintValue == "1") {
       fingerPrintPermission = true;
       return fingerPrintPermission;
@@ -190,7 +191,7 @@ class Singleton with ChangeNotifier {
   }
 
   Future<bool> initFaceIdPermission() async {
-    var faceIdValue = await storage.read(key: "faceId_permission");
+    var faceIdValue = await storage.read(key: "stm_faceId_permission");
     if (faceIdValue != null && faceIdValue == "1") {
       faceIdPermission = true;
       return faceIdPermission;
@@ -200,7 +201,7 @@ class Singleton with ChangeNotifier {
   }
 
   Future<bool> initLocalStorage() async {
-    var lang = await storage.read(key: "language_selected");
+    var lang = await storage.read(key: "stm_language_selected");
     if (lang != null) {
       selectedLanguage = lang;
     } else {
@@ -210,8 +211,8 @@ class Singleton with ChangeNotifier {
   }
 
   Future<bool> initUserLoginCache() async {
-    var username = await storage.read(key: "userNameCache");
-    var password = await storage.read(key: "passWordCache");
+    var username = await storage.read(key: "stm_userNameCache");
+    var password = await storage.read(key: "stm_passWordCache");
     if (username != null && password != null) {
       userAccountCache = UserCache(username: username, password: password);
       isUserLoginCache = true;
@@ -224,8 +225,8 @@ class Singleton with ChangeNotifier {
       {required String username, required String password}) async {
     var user = UserCache(username: username, password: password).toJson();
     try {
-      await storage.write(key: "passWordCache", value: password);
-      await storage.write(key: "userNameCache", value: username);
+      await storage.write(key: "stm_passWordCache", value: password);
+      await storage.write(key: "stm_userNameCache", value: username);
       return true;
     } catch (ex) {
       print(ex);
@@ -291,17 +292,17 @@ class Singleton with ChangeNotifier {
 
   Future<bool> clearUserLoginCache() async {
     try {
-      await storage.delete(key: "userNameCache");
-      await storage.delete(key: "passWordCache");
+      await storage.delete(key: "stm_userNameCache");
+      await storage.delete(key: "stm_passWordCache");
       return true;
     } catch (err) {
       return false;
     }
   }
 
-  Future<bool> clearUserPasswordCache() async {
+  Future<bool> clearUserstm_passWordCache() async {
     try {
-      await storage.delete(key: "passWordCache");
+      await storage.delete(key: "stm_passWordCache");
       return true;
     } catch (err) {
       return false;

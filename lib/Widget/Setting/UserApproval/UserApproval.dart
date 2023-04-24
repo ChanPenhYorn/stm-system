@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/Role/RoleModel.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';

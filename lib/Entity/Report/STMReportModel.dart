@@ -36,7 +36,7 @@ class STMReportDataModel {
   String? date;
   int? vehicleTrx;
   double? vehicleTotalPercent;
-  double? weightTonne;
+  double? weightKg;
   double? weightTotalPercent;
   double? incomeDollar;
   double? incomeTotalPercent;
@@ -45,7 +45,7 @@ class STMReportDataModel {
       {this.date,
       this.vehicleTrx,
       this.vehicleTotalPercent,
-      this.weightTonne,
+      this.weightKg,
       this.weightTotalPercent,
       this.incomeDollar,
       this.incomeTotalPercent});
@@ -54,7 +54,7 @@ class STMReportDataModel {
     date = json['date'];
     vehicleTrx = json['vehicle-trx'];
     vehicleTotalPercent = json['vehicle-total-percent'].toDouble();
-    weightTonne = json['weight-tonne'].toDouble();
+    weightKg = json['weight-kg'].toDouble();
     weightTotalPercent = json['weight-total-percent'].toDouble();
     incomeDollar = json['income-dollar'].toDouble();
     incomeTotalPercent = json['income-total-percent'].toDouble();
@@ -65,7 +65,7 @@ class STMReportDataModel {
     data['date'] = this.date;
     data['vehicle-trx'] = this.vehicleTrx;
     data['vehicle-total-percent'] = this.vehicleTotalPercent;
-    data['weight-tonne'] = this.weightTonne;
+    data['weight-kg'] = this.weightKg;
     data['weight-total-percent'] = this.weightTotalPercent;
     data['income-dollar'] = this.incomeDollar;
     data['income-total-percent'] = this.incomeTotalPercent;
@@ -75,48 +75,48 @@ class STMReportDataModel {
 
 class Total {
   int? vehicleTrx;
-  double? weightTonne;
+  double? weightKg;
   double? incomeDollar;
   int? maximumValueVehicleTrx;
-  double? maximumValueWeightTonne;
+  double? maximumValueWeightKg;
   double? maximumValueIncomeDollar;
   int? minimumValueVehicleTrx;
-  double? minimumValueWeightTonne;
+  double? minimumValueWeightKg;
   double? minimumValueIncomeDollar;
 
   Total(
       {this.vehicleTrx,
-      this.weightTonne,
+      this.weightKg,
       this.incomeDollar,
       this.maximumValueVehicleTrx,
-      this.maximumValueWeightTonne,
+      this.maximumValueWeightKg,
       this.maximumValueIncomeDollar,
       this.minimumValueVehicleTrx,
-      this.minimumValueWeightTonne,
+      this.minimumValueWeightKg,
       this.minimumValueIncomeDollar});
 
   Total.fromJson(Map<String, dynamic> json) {
     vehicleTrx = json['vehicle-trx'];
-    weightTonne = json['weight-tonne'].toDouble();
+    weightKg = json['weight-kg'].toDouble();
     incomeDollar = json['income-dollar'].toDouble();
     maximumValueVehicleTrx = json['maximum-value-vehicle-trx'];
-    maximumValueWeightTonne = json['maximum-value-weight-tonne'].toDouble();
+    maximumValueWeightKg = json['maximum-value-weight-kg'].toDouble();
     maximumValueIncomeDollar = json['maximum-value-income-dollar'].toDouble();
     minimumValueVehicleTrx = json['minimum-value-vehicle-trx'];
-    minimumValueWeightTonne = json['minimum-value-weight-tonne'].toDouble();
+    minimumValueWeightKg = json['minimum-value-weight-kg'].toDouble();
     minimumValueIncomeDollar = json['minimum-value-income-dollar'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['vehicle-trx'] = this.vehicleTrx;
-    data['weight-tonne'] = this.weightTonne;
+    data['weight-kg'] = this.weightKg;
     data['income-dollar'] = this.incomeDollar;
     data['maximum-value-vehicle-trx'] = this.maximumValueVehicleTrx;
-    data['maximum-value-weight-tonne'] = this.maximumValueWeightTonne;
+    data['maximum-value-weight-kg'] = this.maximumValueWeightKg;
     data['maximum-value-income-dollar'] = this.maximumValueIncomeDollar;
     data['minimum-value-vehicle-trx'] = this.minimumValueVehicleTrx;
-    data['minimum-value-weight-tonne'] = this.minimumValueWeightTonne;
+    data['minimum-value-weight-kg'] = this.minimumValueWeightKg;
     data['minimum-value-income-dollar'] = this.minimumValueIncomeDollar;
     return data;
   }

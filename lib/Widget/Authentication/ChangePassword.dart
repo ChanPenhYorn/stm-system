@@ -237,7 +237,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
                               if (res.success!) {
                                 await Singleton.instance
-                                    .clearUserPasswordCache();
+                                    .clearUserstm_passWordCache();
                                 PopupDialog.showPopup(
                                     context,
                                     res.description ??

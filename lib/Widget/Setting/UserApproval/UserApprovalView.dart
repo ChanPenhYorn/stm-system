@@ -27,6 +27,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.userModel.toJson());
     return Scaffold(
       appBar: AppBar(
         title: Text(

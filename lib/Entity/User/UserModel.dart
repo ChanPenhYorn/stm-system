@@ -59,7 +59,6 @@ class UserModel {
       this.pdfUrl});
 
   String get fullNameKh {
-    print(lastNameKh);
     lastNameKh = lastNameKh == null ? "" : lastNameKh!;
     firstNameKh = firstNameKh == null ? "" : firstNameKh!;
     return lastNameKh! + " " + firstNameKh!;
@@ -106,7 +105,6 @@ class UserModel {
         });
       }
     } catch (err) {
-      print("sup");
       print(err);
     }
   }

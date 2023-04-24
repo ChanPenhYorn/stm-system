@@ -49,6 +49,9 @@ class _AddRoleState extends State<AddRole> {
       if (prompt) {
         List<Activities> listActivities = [];
         for (int i = 0; i < listCheckBox.length; i++) {
+          if (listCheckBox[i].GET == false &&
+              listCheckBox[i].UPDATE == false &&
+              listCheckBox[i].DELETE == false) continue;
           listActivities.add(
             Activities(
               id: listActivityModel[i].id!,
@@ -63,16 +66,17 @@ class _AddRoleState extends State<AddRole> {
           rolename: roleNameCon.text.trim(),
           activities: listActivities,
         ).toJson();
-        var res =
-            await Singleton.instance.apiExtension.post<RoleModel, RoleModel>(
+        var res = await Singleton.instance.apiExtension.post<String, String>(
           context: context,
           loading: true,
-          deserialize: (e) => RoleModel.fromJson(e),
+          deserialize: (e) => e.toString(),
           baseUrl: ApiEndPoint.role,
           body: body,
         );
         if (res.success!) {
           PopupDialog.showSuccess(context, layerContext: 2, data: true);
+        } else {
+          PopupDialog.showFailed(context);
         }
       }
     }

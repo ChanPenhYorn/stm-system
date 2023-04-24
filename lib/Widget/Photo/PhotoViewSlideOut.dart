@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Style/StyleColor.dart';
 
 class PhotoViewSlideOut extends StatefulWidget {
   String? url;

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Chart/AxisKeyDataModel.dart';
 import 'package:stm_report_app/Entity/Report/STMReportModel.dart';
 import 'package:stm_report_app/Enum/AxisDataTypeEnum.dart';
@@ -10,6 +11,7 @@ import 'package:stm_report_app/Enum/TableTypeEnum.dart';
 import 'package:stm_report_app/Enum/ValueDataTypeEnum.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Extension/ExtensionComponent.dart';
+import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
@@ -40,20 +42,20 @@ class _STMReportState extends State<STMReport> {
   int lastPeriod = 0;
   //Future
   Future<STMReportModel> initData() async {
-    // var res = await Singleton.instance.apiExtension
-    //     .get<PPSHVDeductionModel, PPSHVDeductionModel>(
-    //   context: context,
-    //   loading: false,
-    //   param:
-    //       "type=${getTypeBySegmentIndex()}&date=${date.toYYYYMMDD()}&last_period=${lastPeriod}",
-    //   baseUrl: ApiEndPoint.ppshvDeduction,
-    //   deserialize: (e) => PPSHVDeductionModel.fromJson(e),
-    // );
-    // if (res.success!)
-    //   return res.data!;
-    // else
-    //   return Future.error(true);
-    return STMReportModel.fromJson(Extension.jsonSTMReport);
+    var res = await Singleton.instance.apiExtension
+        .get<STMReportModel, STMReportModel>(
+      context: context,
+      loading: false,
+      param:
+          "type=${getTypeBySegmentIndex()}&date=${date.toYYYYMMDD()}&last_period=${lastPeriod}",
+      baseUrl: ApiEndPoint.vehicleRevenue,
+      deserialize: (e) => STMReportModel.fromJson(e),
+    );
+    if (res.success!)
+      return res.data!;
+    else
+      return Future.error(true);
+    // return STMReportModel.fromJson(Extension.jsonSTMReport);
   }
 
   Future<STMReportModel>? InitData;
@@ -69,11 +71,11 @@ class _STMReportState extends State<STMReport> {
     if (selectedSegmentType == 0)
       return "daily";
     else if (selectedSegmentType == 1)
-      return "weekly";
-    else if (selectedSegmentType == 2)
       return "monthly";
-    else if (selectedSegmentType == 3) return "yearly";
-    return "";
+    else if (selectedSegmentType == 2)
+      return "yearly";
+    else
+      return "yearly";
   }
 
   String getDateCaption(STMReportModel snapshot) {
@@ -104,7 +106,7 @@ class _STMReportState extends State<STMReport> {
   }
 
   Widget getSelectSegmentDetail() {
-    if (selectedSegmentType == 0 || selectedSegmentType == 1) {
+    if (selectedSegmentType == 0) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -135,10 +137,14 @@ class _STMReportState extends State<STMReport> {
                         EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
                     backgroundColor: StyleColor.appBarColor,
                   ),
-                  child: Text(
-                    DateFormat('MMMM', "km").format(date) + " ${date.year}",
-                    style: StyleColor.textStyleKhmerContentAuto(
-                      color: Colors.white,
+                  child: Container(
+                    height: 30,
+                    alignment: Alignment.center,
+                    child: Text(
+                      DateFormat('MMMM', "km").format(date) + " ${date.year}",
+                      style: StyleColor.textStyleKhmerContentAuto(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 )
@@ -161,7 +167,7 @@ class _STMReportState extends State<STMReport> {
           getLastPeriod(),
         ],
       );
-    } else if (selectedSegmentType == 2 || selectedSegmentType == 3) {
+    } else if (selectedSegmentType == 1 || selectedSegmentType == 2) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -181,10 +187,14 @@ class _STMReportState extends State<STMReport> {
                         EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
                     backgroundColor: StyleColor.appBarColor,
                   ),
-                  child: Text(
-                    DateFormat('yyyy').format(date),
-                    style: StyleColor.textStyleKhmerContentAuto(
-                      color: Colors.white,
+                  child: Container(
+                    height: 30,
+                    alignment: Alignment.center,
+                    child: Text(
+                      DateFormat('yyyy').format(date),
+                      style: StyleColor.textStyleKhmerContentAuto(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 )
@@ -244,7 +254,7 @@ class _STMReportState extends State<STMReport> {
           ),
         ),
       );
-    } else if (selectedSegmentType == 2) {
+    } else if (selectedSegmentType == 1) {
       return Container(
         margin: EdgeInsets.only(
           left: 10,
@@ -342,9 +352,9 @@ class _STMReportState extends State<STMReport> {
   TABLE_DATE_TYPE_ENUM getDateTypeBySegment() {
     if (selectedSegmentType == 0)
       return TABLE_DATE_TYPE_ENUM.DAILY;
-    else if (selectedSegmentType == 2)
+    else if (selectedSegmentType == 1)
       return TABLE_DATE_TYPE_ENUM.MONTHLY;
-    else if (selectedSegmentType == 3) return TABLE_DATE_TYPE_ENUM.YEARLY;
+    else if (selectedSegmentType == 2) return TABLE_DATE_TYPE_ENUM.YEARLY;
     return TABLE_DATE_TYPE_ENUM.DAILY;
   }
 
@@ -376,152 +386,156 @@ class _STMReportState extends State<STMReport> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 15,
-          ),
-          ToggleSwitch(
-            labels: ['ប្រចាំថ្ងៃ', 'ប្រចាំសប្តាហ៍', 'ប្រចាំខែ', 'ប្រចាំឆ្នាំ'],
-            activeFgColor: Colors.white,
-            initialLabelIndex: selectedSegmentType,
-            minWidth: 90,
-            dividerMargin: 0,
-            totalSwitches: 4,
-            onToggle: onSelectToggle,
-            customTextStyles: [
-              StyleColor.textStyleKhmerContentAuto(
-                color: Colors.white,
-                fontSize: 12,
-                bold: selectedSegmentType == 0 ? true : false,
-              ),
-              StyleColor.textStyleKhmerContentAuto(
-                color: Colors.white,
-                fontSize: 12,
-                bold: selectedSegmentType == 1 ? true : false,
-              ),
-              StyleColor.textStyleKhmerContentAuto(
-                color: Colors.white,
-                fontSize: 12,
-                bold: selectedSegmentType == 2 ? true : false,
-              ),
-              StyleColor.textStyleKhmerContentAuto(
-                color: Colors.white,
-                fontSize: 12,
-                bold: selectedSegmentType == 3 ? true : false,
-              ),
-            ],
-          ),
-          //Segmented Detail
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 500),
-              child: getSelectSegmentDetail(),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          children: [
+            // SizedBox(
+            //   height: 15,
+            // ),
+            ToggleSwitch(
+              labels: ['ប្រចាំថ្ងៃ', 'ប្រចាំខែ', 'ប្រចាំឆ្នាំ'],
+              activeFgColor: Colors.white,
+              initialLabelIndex: selectedSegmentType,
+              minWidth: 90,
+              dividerMargin: 0,
+              totalSwitches: 3,
+              onToggle: onSelectToggle,
+              customTextStyles: [
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 0 ? true : false,
+                ),
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 1 ? true : false,
+                ),
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 3 ? true : false,
+                ),
+              ],
             ),
-          ),
-          // Divider(),
-          Expanded(
-            child: FutureBuilder<STMReportModel>(
-              future: InitData,
-              builder: (context, snapshot) {
-                return AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  child: () {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                        return ListView(
-                          physics: ClampingScrollPhysics(),
-                          children: [
-                            GraphCard(
-                              bigTitle: "STM Monitoring Report",
-                              widgetFunction: (duration, axisFontSize) {
-                                return ExtensionComponent.graphComponent
-                                    .getChart<STMReportDataModel>(
-                                  axisFontSize: Singleton
-                                      .instance.graphAxisFontSizeScreen,
-                                  chartType: CHART_TYPE_ENUM.STACK_BAR_AND_LINE,
-                                  title: "",
-                                  jsonData: snapshot.data!.data!,
-                                  primaryAxisX: 'date',
-                                  primaryAxisY: [
-                                    AxisKeyDataModel(
-                                      label: "ទំងន់",
-                                      data: "weight-tonne",
-                                      colorRgb: StyleColor.mtcColor,
-                                      trendLineColorRgb:
-                                          StyleColor.etcTrendLineColor,
-                                      chartType: CHART_TYPE_ENUM.STACK_BAR,
-                                    ),
-                                    AxisKeyDataModel(
-                                      label: "ចំនួនឡាន",
-                                      data: "vehicle-trx",
-                                      colorRgb: Colors.blueAccent,
-                                      trendLineColorRgb: StyleColor.mtcColor,
-                                      chartType: CHART_TYPE_ENUM.STACK_BAR,
-                                    ),
-                                  ],
-                                  primaryAxisYDataType: VALUE_DATA_TYPE.DOLLAR,
-                                  primaryAxisYTitle: "",
-                                  animationDuration: duration,
-                                  primaryAxisYGridLine: 0.3,
-                                  secondaryAxisYGridLine: 0,
-                                  sideBySideSeries: false,
-                                  primaryAxisXInterval: getIntervalByLength(
-                                      snapshot.data!.data!.length),
-                                  primaryAxisXFormat: getTypeBySegmentIndex() ==
-                                          "monthly"
-                                      ? AXIS_DATA_TYPE.DATETIME_yMMMM
-                                      : getTypeBySegmentIndex() == "yearly"
-                                          ? AXIS_DATA_TYPE.DATETIME_y
-                                          : AXIS_DATA_TYPE.DATETIME_MMMMEEEEd,
-                                  intervalType:
-                                      getTypeBySegmentIndex() == "monthly"
-                                          ? INTERVAL_TYPE_ENUM.MONTH
-                                          : getTypeBySegmentIndex() == "yearly"
-                                              ? INTERVAL_TYPE_ENUM.YEAR
-                                              : INTERVAL_TYPE_ENUM.AUTO,
-                                  primaryAxisYCompact: true,
-                                  primaryDeserialize: (e) => e.toJson(),
-                                  secondaryAxisY: [
-                                    AxisKeyDataModel(
-                                      label: "ចំណូល",
-                                      data: "income-dollar",
-                                      colorRgb: StyleColor.etcColor,
-                                      chartType: CHART_TYPE_ENUM.LINE_CHART,
-                                    ),
-                                  ],
-                                  secondaryAxisYDataType:
-                                      VALUE_DATA_TYPE.DOLLAR,
-                                  secondaryAxisYTitle: "",
-                                );
-                              },
-                              title:
-                                  "តារាងទិន្នន័យដឹកជញ្ជូន និងចំណូល${Extension.getTitleBySegmentIndex(
-                                selectedSegmentType: selectedSegmentType,
-                                date: date,
-                              )}",
-                              downloadFileName: "revenue-truck",
-                              obj: snapshot.data!,
-                              tableDateType: getDateTypeBySegment(),
-                              tableTypeEnum: TABLE_TYPE_ENUM.STMRevenueTruck,
-                            ),
-                            Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                                child: getTable(snapshot.data!)),
-                          ],
-                        );
-                      else
-                        return PopupDialog.noResult();
-                    }
-                    return AnimateLoading();
-                  }(),
-                );
-              },
+            //Segmented Detail
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 500),
+                child: getSelectSegmentDetail(),
+              ),
             ),
-          ),
-        ],
+            // Divider(),
+            Expanded(
+              child: FutureBuilder<STMReportModel>(
+                future: InitData,
+                builder: (context, snapshot) {
+                  return AnimatedSwitcher(
+                    duration: Duration(milliseconds: 500),
+                    child: () {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData && snapshot.data!.data!.length > 0)
+                          return ListView(
+                            physics: ClampingScrollPhysics(),
+                            children: [
+                              //Graph
+                              GraphCard(
+                                bigTitle: "STM Monitoring Report",
+                                widgetFunction: (duration, axisFontSize) {
+                                  return ExtensionComponent.graphComponent
+                                      .getChart<STMReportDataModel>(
+                                    axisFontSize: Singleton
+                                        .instance.graphAxisFontSizeScreen,
+                                    chartType:
+                                        CHART_TYPE_ENUM.STACK_BAR_AND_LINE,
+                                    title: "",
+                                    jsonData: snapshot.data!.data!,
+                                    primaryAxisX: 'date',
+                                    primaryAxisY: [
+                                      AxisKeyDataModel(
+                                        label: "ទំងន់",
+                                        data: "weight-kg",
+                                        colorRgb: StyleColor.mtcColor,
+                                        trendLineColorRgb:
+                                            StyleColor.etcTrendLineColor,
+                                        chartType: CHART_TYPE_ENUM.STACK_BAR,
+                                      ),
+                                      AxisKeyDataModel(
+                                        label: "ចំនួនឡាន",
+                                        data: "vehicle-trx",
+                                        colorRgb: Colors.blueAccent,
+                                        trendLineColorRgb: StyleColor.mtcColor,
+                                        chartType: CHART_TYPE_ENUM.STACK_BAR,
+                                      ),
+                                    ],
+                                    primaryAxisYDataType:
+                                        VALUE_DATA_TYPE.DOLLAR,
+                                    primaryAxisYTitle: "",
+                                    animationDuration: duration,
+                                    primaryAxisYGridLine: 0.3,
+                                    secondaryAxisYGridLine: 0,
+                                    sideBySideSeries: false,
+                                    primaryAxisXInterval: getIntervalByLength(
+                                        snapshot.data!.data!.length),
+                                    primaryAxisXFormat:
+                                        getTypeBySegmentIndex() == "monthly"
+                                            ? AXIS_DATA_TYPE.DATETIME_yMMMM
+                                            : getTypeBySegmentIndex() ==
+                                                    "yearly"
+                                                ? AXIS_DATA_TYPE.DATETIME_y
+                                                : AXIS_DATA_TYPE
+                                                    .DATETIME_MMMMEEEEd,
+                                    intervalType: getTypeBySegmentIndex() ==
+                                            "monthly"
+                                        ? INTERVAL_TYPE_ENUM.MONTH
+                                        : getTypeBySegmentIndex() == "yearly"
+                                            ? INTERVAL_TYPE_ENUM.YEAR
+                                            : INTERVAL_TYPE_ENUM.AUTO,
+                                    primaryAxisYCompact: true,
+                                    primaryDeserialize: (e) => e.toJson(),
+                                    secondaryAxisY: [
+                                      AxisKeyDataModel(
+                                        label: "ចំណូល",
+                                        data: "income-dollar",
+                                        colorRgb: StyleColor.etcColor,
+                                        chartType: CHART_TYPE_ENUM.LINE_CHART,
+                                      ),
+                                    ],
+                                    secondaryAxisYDataType:
+                                        VALUE_DATA_TYPE.DOLLAR,
+                                    secondaryAxisYTitle: "",
+                                  );
+                                },
+                                title:
+                                    "តារាងទិន្នន័យដឹកជញ្ជូន និងចំណូល${Extension.getTitleBySegmentIndex(
+                                  selectedSegmentType: selectedSegmentType,
+                                  date: date,
+                                )}",
+                                downloadFileName: "revenue-truck",
+                                obj: snapshot.data!,
+                                tableDateType: getDateTypeBySegment(),
+                                tableTypeEnum: TABLE_TYPE_ENUM.STMRevenueTruck,
+                              ),
+                              //Table
+                              Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: getTable(snapshot.data!)),
+                            ],
+                          );
+                        else
+                          return PopupDialog.noResult();
+                      }
+                      return AnimateLoading();
+                    }(),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

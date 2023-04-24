@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/Role/RoleModel.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
@@ -9,7 +8,6 @@ import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Setting/Role/AddRole.dart';
-import 'package:stm_report_app/Widget/Setting/Role/RoleView.dart';
 import 'package:stm_report_app/Widget/Setting/User/UserView.dart';
 
 class User extends StatefulWidget {
@@ -73,12 +71,11 @@ class _UserState extends State<User> {
     var prompt = await PopupDialog.yesNoPrompt(context);
     if (prompt) {
       var body = UserModel(id: id, methodType: "delete").toJson();
-      var res =
-          await Singleton.instance.apiExtension.post<UserModel, UserModel>(
+      var res = await Singleton.instance.apiExtension.post<String, String>(
         context: context,
         loading: true,
-        deserialize: (e) => UserModel.fromJson(e),
-        baseUrl: ApiEndPoint.userPost,
+        deserialize: (e) => e.toString(),
+        baseUrl: ApiEndPoint.user,
         body: body,
       );
       if (res.success!) {

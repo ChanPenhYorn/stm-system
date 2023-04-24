@@ -67,15 +67,14 @@ class _RoleState extends State<Role> {
     }
   }
 
-  void onClickDelete(String id) async {
+  void onClickDelete(int id) async {
     var prompt = await PopupDialog.yesNoPrompt(context);
     if (prompt) {
       var body = RoleModel(roleId: id, methodType: "delete").toJson();
-      var res = await Singleton.instance.apiExtension
-          .post<List<RoleModel>, RoleModel>(
+      var res = await Singleton.instance.apiExtension.post<String, String>(
         context: context,
         loading: true,
-        deserialize: (e) => RoleModel.fromJson(e),
+        deserialize: (e) => e.toString(),
         baseUrl: ApiEndPoint.role,
         body: body,
       );
