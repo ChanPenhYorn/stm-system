@@ -328,7 +328,7 @@ class _GraphExpandState extends State<GraphExpand> {
                                           .instance.graphAxisFontSizeScreen,
                                     ),
                                   ),
-                                  getTable()
+                                  getTable(overrideWrapColumn: false)
                                 ],
                               ),
                             ),

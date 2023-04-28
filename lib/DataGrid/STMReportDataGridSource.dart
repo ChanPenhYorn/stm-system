@@ -12,9 +12,10 @@ class STMDataGridSource extends DataGridSource {
   late TABLE_TYPE_ENUM stmReportTable;
   late BuildContext context;
   late String downloadFileName;
+  final TABLE_DATE_TYPE_ENUM tableDateType;
   STMDataGridSource({
     required STMReportModel model,
-    required TABLE_DATE_TYPE_ENUM tableDateType,
+    required this.tableDateType,
     required TABLE_TYPE_ENUM stmReportTable,
     required BuildContext context,
     required this.downloadFileName,
@@ -450,12 +451,46 @@ class STMDataGridSource extends DataGridSource {
       return DataGridRowAdapter(cells: <Widget>[
         Container(
           alignment: Alignment.centerRight,
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            row.getCells()[0].value.toString(),
-            overflow: TextOverflow.ellipsis,
+          padding: const EdgeInsets.only(right: 5, left: 5),
+          child: Row(
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: Text(
+                  row.getCells()[0].value.toString(),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 4,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    onDownloadRowClick(
+                        date: DateTime.now().toYYYYMMDD(), pdf: "", excel: "");
+                  },
+                  child: row.getCells()[0].value.toString() == "Total"
+                      ? Container()
+                      : Icon(
+                          Icons.ios_share,
+                          size: 20,
+                          color: Colors.grey,
+                        ),
+                ),
+              ),
+            ],
           ),
         ),
+        // Container(
+        //   alignment: Alignment.centerRight,
+        //   padding: const EdgeInsets.all(8),
+        //   child: Text(
+        //     row.getCells()[0].value.toString(),
+        //     overflow: TextOverflow.ellipsis,
+        //   ),
+        // ),
         Container(
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(8),

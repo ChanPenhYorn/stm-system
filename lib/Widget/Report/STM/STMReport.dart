@@ -390,9 +390,9 @@ class _STMReportState extends State<STMReport> {
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
-            // SizedBox(
-            //   height: 15,
-            // ),
+            SizedBox(
+              height: 15,
+            ),
             ToggleSwitch(
               labels: ['ប្រចាំថ្ងៃ', 'ប្រចាំខែ', 'ប្រចាំឆ្នាំ'],
               activeFgColor: Colors.white,
