@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp.router(
+      title: 'STM Report System',
       routerConfig: AppRoute.routes,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

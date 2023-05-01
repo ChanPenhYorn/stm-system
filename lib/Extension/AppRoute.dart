@@ -6,6 +6,7 @@ import 'package:stm_report_app/Widget/Authentication/ChangePassword.dart';
 import 'package:stm_report_app/Widget/Authentication/Login.dart';
 import 'package:stm_report_app/Widget/Home/Web/Dashboard_Web.dart';
 import 'package:stm_report_app/Widget/Language/SelectLanguage.dart';
+import 'package:stm_report_app/Widget/PriceList/PriceList.dart';
 import 'package:stm_report_app/Widget/Setting/AdminSetting.dart';
 import 'package:stm_report_app/Widget/Setting/Role/Role.dart';
 import 'package:stm_report_app/Widget/Setting/User/User.dart';
@@ -24,6 +25,7 @@ class AppRoute {
   static const role = "/role";
   static const user = "/user";
   static const approval = "/approval";
+  static const priceList = "/price_list";
 
   static final GoRouter routes = GoRouter(routes: <GoRoute>[
     GoRoute(
@@ -74,6 +76,11 @@ class AppRoute {
     GoRoute(
       path: approval,
       builder: (BuildContext context, state) => UserApproval(),
+      redirect: (context, state) => _redirect(context),
+    ),
+    GoRoute(
+      path: priceList,
+      builder: (BuildContext context, state) => PriceList(),
       redirect: (context, state) => _redirect(context),
     ),
   ]);

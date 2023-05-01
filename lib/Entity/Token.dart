@@ -31,6 +31,7 @@ class Token {
       expiresIn = json['expires_in'];
       print("no error");
     } catch (err) {
+      print('sup');
       print(err);
     }
   }
@@ -49,79 +50,6 @@ class Token {
     return data;
   }
 }
-
-// class User {
-//   int? id;
-//   String? username;
-//   String? approved;
-//   String? approvedBy;
-//   String? firstName;
-//   String? lastName;
-//   String? phoneNumber;
-//   String? map;
-//   String? createdTime;
-//   String? dbCode;
-//   String? createdBy;
-//   String? image;
-//   String? status;
-//   String? type;
-//   String? typeId;
-//
-//   User(
-//       {this.id,
-//       this.username,
-//       this.approved,
-//       this.approvedBy,
-//       this.firstName,
-//       this.lastName,
-//       this.phoneNumber,
-//       this.map,
-//       this.createdTime,
-//       this.dbCode,
-//       this.createdBy,
-//       this.image,
-//       this.status,
-//       this.type,
-//       this.typeId});
-//
-//   User.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     username = json['username'];
-//     approved = json['approved'];
-//     approvedBy = json['approved_by'];
-//     firstName = json['first_name'];
-//     lastName = json['last_name'];
-//     phoneNumber = json['phone_number'];
-//     map = json['map'];
-//     createdTime = json['created_time'];
-//     dbCode = json['db_code'];
-//     createdBy = json['created_by'];
-//     image = json['image'];
-//     status = json['status'];
-//     type = json['type'];
-//     typeId = json['type_id'];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['username'] = this.username;
-//     data['approved'] = this.approved;
-//     data['approved_by'] = this.approvedBy;
-//     data['first_name'] = this.firstName;
-//     data['last_name'] = this.lastName;
-//     data['phone_number'] = this.phoneNumber;
-//     data['map'] = this.map;
-//     data['created_time'] = this.createdTime;
-//     data['db_code'] = this.dbCode;
-//     data['created_by'] = this.createdBy;
-//     data['image'] = this.image;
-//     data['status'] = this.status;
-//     data['type'] = this.type;
-//     data['type_id'] = this.typeId;
-//     return data;
-//   }
-// }
 
 class Permission {
   String? activity;

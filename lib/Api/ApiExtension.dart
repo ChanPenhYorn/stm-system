@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Api/Domain.dart';
 import 'package:stm_report_app/Entity/Token.dart';
@@ -186,6 +187,7 @@ class ApiExtension {
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
             success: 0);
       });
+      print(res.data);
       if (loading) Navigator.of(context, rootNavigator: true).pop();
       return ResponseRes<T, D>.fromJson(res.data,
           deserialize: (e) => deserialize!(e));
@@ -194,7 +196,7 @@ class ApiExtension {
     }
   }
 
-  Future<File> downloadFile(
+  Future<File?> downloadFile(
       {required String url,
       required String filename,
       required String extension}) async {
@@ -203,6 +205,43 @@ class ApiExtension {
     Response res = await Singleton.instance.dio.download(url, dir);
     if (res.statusCode == 200) return File(dir);
     return File("");
+  }
+
+  Future<Uint8List?> downloadReportFile(BuildContext context,
+      {required String date, required periodType, required fileType}) async {
+    try {
+      AnimateLoading().showLoading(context);
+      Singleton.instance.dioBearerSecondTokenInitialize();
+
+      final res = await Singleton.instance.dio
+          .get(
+        Domain.domain +
+            "${ApiEndPoint.vehicleRevenueExport}?type=${periodType}&file_type=${fileType}&date=${date}",
+        options: Options(
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+              'Access-Control-Allow-Headers':
+                  'Origin, Content-Type, X-Auth-Token'
+            },
+            responseType: ResponseType.bytes,
+            receiveDataWhenStatusError: true,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 501;
+            }),
+      )
+          .catchError((err) {
+        Navigator.pop(context);
+        PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
+            success: 0);
+      });
+
+      Navigator.of(context, rootNavigator: true).pop();
+      return res.data;
+    } catch (err) {
+      return null;
+    }
   }
 
   Future<ResponseRes<Token, Token>> userLogin(
@@ -281,7 +320,7 @@ class ApiExtension {
           success: 0);
     });
     if (!noLoading) Navigator.of(context, rootNavigator: true).pop();
-
+    print(res.data);
     return ResponseRes.fromJson(res.data);
   }
 }

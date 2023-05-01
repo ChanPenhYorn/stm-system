@@ -52,6 +52,13 @@ class Singleton with ChangeNotifier {
       route: '/approval',
       initFunc: () {},
     ),
+    DashboardButton(
+      id: 123431,
+      buttonTitle: 'Navigation.PriceList'.tr(),
+      icon: 'assets/image/price.png',
+      route: '/price_list',
+      initFunc: () {},
+    ),
   ];
 
   List<Language> listLanguages = [

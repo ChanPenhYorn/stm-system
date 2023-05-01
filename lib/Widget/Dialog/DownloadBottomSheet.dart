@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:file_saver/file_saver.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,6 +14,7 @@ class DownloadBottomSheet extends StatefulWidget {
   String pdfUrl;
   String excelUrl;
   String filename;
+  String? date;
   DownloadBottomSheet({
     Key? key,
     required this.screenshotFunc,
@@ -16,6 +22,7 @@ class DownloadBottomSheet extends StatefulWidget {
     required this.pdfUrl,
     required this.excelUrl,
     required this.filename,
+    this.date,
   }) : super(key: key);
 
   @override
@@ -53,27 +60,51 @@ class _DownloadBottomSheetState extends State<DownloadBottomSheet> {
   }
 
   void onDownloadClick() async {
-    Navigator.pop(context);
     if (selectedType == 0) {
+      Navigator.pop(context);
       widget.screenshotFunc();
     } else if (selectedType == 1) {
-      var file = await Singleton.instance.apiExtension.downloadFile(
-        url: widget.pdfUrl,
-        extension: "pdf",
-        filename: "table-" + widget.filename,
-      );
-      Share.shareXFiles([
-        XFile(
-          file.path,
-        )
-      ]);
+      var stream = await Singleton.instance.apiExtension.downloadReportFile(
+          context,
+          date: widget.date!,
+          periodType: "daily",
+          fileType: "pdf");
+      Navigator.pop(context);
+      print(stream);
+      if (kIsWeb) {
+        print(stream);
+        await FileSaver.instance.saveFile(
+          name: "file.pdf",
+          ext: "pdf",
+          bytes: stream,
+          mimeType: MimeType.pdf,
+        );
+      } else {
+        String dir = (await getTemporaryDirectory()).path + "file.pdf";
+        final file = File(dir);
+        await file.writeAsBytes(stream!);
+        Share.shareXFiles([XFile(file.path, mimeType: "pdf")]);
+      }
     } else if (selectedType == 2) {
-      var file = await Singleton.instance.apiExtension.downloadFile(
-        url: widget.excelUrl,
-        extension: "xlsx",
-        filename: "table-" + widget.filename,
-      );
-      Share.shareXFiles([XFile(file.path, mimeType: "xlsx")]);
+      var stream = await Singleton.instance.apiExtension.downloadReportFile(
+          context,
+          date: widget.date!,
+          periodType: "daily",
+          fileType: "excel");
+      Navigator.pop(context);
+      if (kIsWeb) {
+        await FileSaver.instance.saveFile(
+          name: "file.xlsx",
+          ext: "xlsx",
+          bytes: stream!,
+          mimeType: MimeType.microsoftExcel,
+        );
+      } else {
+        String dir = (await getTemporaryDirectory()).path + "file.xlsx";
+        final file = File(dir);
+        await file.writeAsBytes(stream!);
+        Share.shareXFiles([XFile(file.path, mimeType: "xlsx")]);
+      }
     }
   }
 

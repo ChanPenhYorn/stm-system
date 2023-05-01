@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Entity/Report/STMReportModel.dart';
 import 'package:stm_report_app/Enum/TableDateType.dart';
@@ -422,6 +423,7 @@ class STMDataGridSource extends DataGridSource {
           enableScreenshot: false,
           screenshotFunc: () {},
           filename: downloadFileName + "-" + date.toDateYYYYMMDD_NoDash(),
+          date: date,
           pdfUrl: pdf,
           excelUrl: excel,
         );
@@ -469,9 +471,22 @@ class STMDataGridSource extends DataGridSource {
                 child: InkWell(
                   onTap: () {
                     onDownloadRowClick(
-                        date: DateTime.now().toYYYYMMDD(), pdf: "", excel: "");
+
+                        // date: DateTime.parse(row.getCells()[0].value)
+                        //     .toYYYYMMDD(),
+                        date: () {
+                          if (tableDateType == TABLE_DATE_TYPE_ENUM.MONTHLY) {
+                            return DateFormat("yyyy-MM")
+                                .parse(row.getCells()[0].value)
+                                .toYYYYMMDD();
+                          } else
+                            return "";
+                        }(),
+                        pdf: "report",
+                        excel: "report");
                   },
-                  child: row.getCells()[0].value.toString() == "Total"
+                  child: row.getCells()[0].value.toString() == "Total" ||
+                          tableDateType != TABLE_DATE_TYPE_ENUM.MONTHLY
                       ? Container()
                       : Icon(
                           Icons.ios_share,

@@ -10,27 +10,22 @@
     "Add": "បន្ថែម",
     "Continue" : "បន្ត",
     "Download" : "ទាញយក",
-    "Approve"  : "អនុញ្ញាត",
-    "TrafficAndRevenue" : "ចរាចរណ៍ និងចំណូល"
+    "Approve"  : "អនុញ្ញាត"
   },
   "Navigation": {
     "Home": "ទំព័រដើម",
     "Account": "គណនី",
-    "TrafficAndRevenue" : "ចរាចរណ៍ និងចំណូល",
     "TopUp" : "បញ្ចូលទឹកប្រាក់",
-    "RevenueFromPenaltyServices" : "ចំណូលពីសេវាពិន័យ",
-    "TextInspection" : "ត្រួតពិនិត្យលក្ខណៈបច្ចេកទេសយានជំនិះ",
     "RolePermission" : "សិទ្ធអ្នកប្រើប្រាស់",
     "Permission" : "សិទ្ធ",
     "Users"     : "អ្នកប្រើប្រាស់",
     "EditRolePermission" : "កែប្រែអ្នកប្រើប្រាស់",
     "Register" : "ចុះឈ្មោះប្រើប្រាស់",
-    "ScanQR" : "ស្កេន QR Code"
+    "ScanQR" : "ស្កេន QR Code",
+    "PriceList" : "តារាងតម្លៃ"
   },
   "Home": {
-    "SeeMore": "ចូលមើល",
-    "CheckTextInspection" : "រួតពិនិត្យលក្ខណៈបច្ចេកទេសយានជំនិះ(ឆៀក)",
-    "PPSHVExpressWay" : "ផ្លូវល្បឿនលឿន ភ្នំពេញ-ក្រុងព្រះសីហនុ"
+    "SeeMore": "ចូលមើល"
   },
   "Login": {
     "phoneNumber" : "លេខទូរស័ព្ទ",
@@ -74,11 +69,6 @@
     "Weekly" : "ប្រចាំសប្តាហ៍",
     "Monthly" : "ប្រចាំខែ",
     "Yearly" : "ប្រចាំឆ្នាំ",
-    "Penalty" : "សេវាពិន័យ",
-    "TotalRevenue" : "ចំណូលសរុប",
-    "TotalRevenueFromPenaltyService" : "ចំណូលពីសេវាពិន័យ",
-    "RevenueFromTextInspection" : "ចំណូលពីសេវាឆៀក",
-    "ServiceTextInspection" : "សេវាឆៀក",
     "No" : "ល.រ",
     "RolePermissionName" : "ឈ្មោះសិទ្ធ",
     "View" : "មើល",
@@ -111,17 +101,7 @@
     "Yearly"  : "របាយការណ៍ឆ្នាំ៖ ",
     "Last7Days" : "7 ថ្ងៃចុងក្រោយ",
     "Last12Months" : "12 ខែចុងក្រោយ",
-    "PPSHVDeductionTrafficVehicleType" : "ចំនួនចរាចរណ៍ (ប្រភេទយានយន្ត)",
-    "PPSHVDeductionRevenueVehicleType" : "ចំណូលធៀបនឹងចរាចរណ៍ (ប្រភេទយានយន្ត)",
-    "PPSHVDeductionMixedTrx" : "ចរាចរណ៍ និងចំណូល",
-    "PPSHVDeductionCrossDigitalTrx" : "ចំណូលធៀបនឹងចរាចរណ៍ (ប្រភេទច្រក)",
-    "CompareRevenue" : "ប្រៀបធៀបចំណូល",
-    "PercentageOfTrafficETCAndANPR" : "ភាគរយចំនួនចរាចរណ៍ ETC នឹង ANPR",
-    "PercentageOfTrafficLane" : "ភាគរយចំនួនចរាចរណ៍ (ប្រភេទច្រក)",
-    "PercentageOfTraffic" : "ភាគរយចំនួនចរាចរណ៍",
-    "PPSHVTopupMixedTrx" : "ការបញ្ចូលទឹកប្រាក់ធៀបនឹងចរាចរណ៍",
-    "ETCAndAnpr" : "ការបញ្ចូលទឹកប្រាក់ធៀបនឹងចរាចរណ៍",
-    "AverageTopUp" : "ការបញ្ចូលទឹកប្រាក់ធៀបនឹងចរាចរណ៍"
+    "CompareRevenue" : "ប្រៀបធៀបចំណូល"
   },
   "Role" : {
     "RolePermission"  : "សិទ្ធប្រើប្រាស់",

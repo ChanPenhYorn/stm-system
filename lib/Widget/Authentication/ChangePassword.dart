@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
@@ -228,23 +229,23 @@ class _ChangePasswordState extends State<ChangePassword> {
                               //         newpassword: newPassword.text)
                               //     .toJson();
                               var body = {
-                                "old_password": oldPassword.text.trim(),
-                                "password": newPassword.text.trim(),
-                                "confirm_password": newPasswordCon.text.trim(),
+                                "oldpassword": oldPassword.text.trim(),
+                                "newpassword": newPassword.text.trim(),
                               };
+                              print(body);
                               final res = await Singleton.instance.apiExtension
                                   .postChangePassword(context, body);
 
                               if (res.success!) {
                                 await Singleton.instance
                                     .clearUserstm_passWordCache();
-                                PopupDialog.showPopup(
+                                await PopupDialog.showPopup(
                                     context,
                                     res.description ??
                                         "Message.OperationSuccess".tr(),
                                     success: 1,
-                                    pushToLogin: true,
                                     data: true);
+                                context.pushReplacement('/login');
                               } else {
                                 PopupDialog.showPopup(
                                     context,

@@ -117,6 +117,7 @@ class _AdminSettingState extends State<AdminSetting> {
                   return d.buttonTitle!.tr() ==
                       Singleton.instance.token!.permission![i].widgetKh;
                 }());
+
         if (indexInListButton >= 0) {
           listButton.add(
             ReusableComponent.textButton(

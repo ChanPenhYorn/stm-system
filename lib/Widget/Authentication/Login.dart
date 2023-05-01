@@ -24,8 +24,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   void initState() {
-    usernameInputController.text = "khdev";
-    passwordInputController.text = "silverhong";
+    // usernameInputController.text = "khdev";
+    // passwordInputController.text = "silverhong";
     initPermissionAndData();
     InitUserModels = initUserModels();
     super.initState();

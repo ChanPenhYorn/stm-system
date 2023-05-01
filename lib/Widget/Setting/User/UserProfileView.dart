@@ -534,7 +534,8 @@ class _UserProfileViewState extends State<UserProfileView> {
                                           Expanded(
                                             child: Text(
                                               widget.userModel.role![index]
-                                                  .roleName!,
+                                                      .roleName ??
+                                                  "",
                                               style: StyleColor
                                                   .textStyleKhmerContentAuto(
                                                 fontSize: 14,
