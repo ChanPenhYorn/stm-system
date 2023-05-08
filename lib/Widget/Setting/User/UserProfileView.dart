@@ -104,7 +104,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     left: 20, right: 20, top: 10, bottom: 0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: StyleColor.appBarColor.withOpacity(0.1),
+                    color: StyleColor.appBarColorOpa01,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.all(20),
@@ -200,7 +200,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.blueLighter.withOpacity(0.1),
+                      color: StyleColor.blueLighterOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -228,7 +228,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.appBarColor.withOpacity(0.1),
+                      color: StyleColor.appBarColorOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -257,7 +257,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.blueLighter.withOpacity(0.1),
+                      color: StyleColor.blueLighterOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -286,7 +286,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.appBarColor.withOpacity(0.1),
+                      color: StyleColor.appBarColorOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -316,7 +316,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.blueLighter.withOpacity(0.1),
+                      color: StyleColor.blueLighterOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -345,7 +345,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.appBarColor.withOpacity(0.1),
+                      color: StyleColor.appBarColorOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -374,7 +374,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.blueLighter.withOpacity(0.1),
+                      color: StyleColor.blueLighterOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -403,7 +403,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.appBarColor.withOpacity(0.1),
+                      color: StyleColor.appBarColorOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -435,7 +435,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     ),
                     Container(
                       padding: EdgeInsets.all(10),
-                      color: StyleColor.blueLighter.withOpacity(0.1),
+                      color: StyleColor.blueLighterOpa01,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -484,7 +484,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: StyleColor.appBarColor.withOpacity(0.1),
+                          color: StyleColor.appBarColorOpa01,
                         ),
                         child: Text(
                           'Role.RoleAdmin'.tr(),
@@ -511,10 +511,8 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero,
                                       backgroundColor: (index % 2) == 0
-                                          ? StyleColor.blueLighter
-                                              .withOpacity(0.1)
-                                          : StyleColor.appBarColor
-                                              .withOpacity(0.1),
+                                          ? StyleColor.blueLighterOpa01
+                                          : StyleColor.appBarColorOpa01,
                                     ),
                                     child: Container(
                                       padding:
@@ -556,7 +554,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: StyleColor.appBarColor.withOpacity(0.1),
+                              color: StyleColor.appBarColorOpa01,
                             ),
                             child: Text(
                               'Role.NullPermission'.tr(),

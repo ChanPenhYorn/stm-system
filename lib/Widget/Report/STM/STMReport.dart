@@ -227,7 +227,7 @@ class _STMReportState extends State<STMReport> {
         margin: EdgeInsets.only(
           left: 10,
         ),
-        width: 130,
+        width: 120,
         child: ListTileTheme(
           horizontalTitleGap: 0,
           child: CheckboxListTile(
@@ -383,6 +383,47 @@ class _STMReportState extends State<STMReport> {
       return Container();
   }
 
+  List<AxisKeyDataModel> getPrimaryAxisY() {
+    List<AxisKeyDataModel> list = [];
+    if (Extension.getPermissionByActivity(
+            activiyName: "Revenue Report - Car Weight Truck", activityEn: true)
+        .GET)
+      list.add(AxisKeyDataModel(
+        label: "ទំងន់",
+        data: "weight-kg",
+        colorRgb: StyleColor.mtcColor,
+        trendLineColorRgb: StyleColor.etcTrendLineColor,
+        chartType: CHART_TYPE_ENUM.STACK_BAR,
+      ));
+    if (Extension.getPermissionByActivity(
+            activiyName: "Revenue Report - Car Trx Truck", activityEn: true)
+        .GET)
+      list.add(AxisKeyDataModel(
+        label: "ចំនួនឡាន",
+        data: "vehicle-trx",
+        colorRgb: Colors.blueAccent,
+        trendLineColorRgb: StyleColor.mtcColor,
+        chartType: CHART_TYPE_ENUM.STACK_BAR,
+      ));
+    return list;
+  }
+
+  List<AxisKeyDataModel> getSecondaryAxisY() {
+    List<AxisKeyDataModel> list = [];
+    if (Extension.getPermissionByActivity(
+            activiyName: "Revenue Report - Car Revenue Truck", activityEn: true)
+        .GET)
+      list.add(
+        AxisKeyDataModel(
+          label: "ចំណូល",
+          data: "income-dollar",
+          colorRgb: StyleColor.etcColor,
+          chartType: CHART_TYPE_ENUM.LINE_CHART,
+        ),
+      );
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -446,36 +487,22 @@ class _STMReportState extends State<STMReport> {
                                 widgetFunction: (duration, axisFontSize) {
                                   return ExtensionComponent.graphComponent
                                       .getChart<STMReportDataModel>(
-                                    axisFontSize: Singleton
-                                        .instance.graphAxisFontSizeScreen,
+                                    axisFontSize: Singleton.instance
+                                        .getAxisFontSizeScreenType(),
                                     chartType:
                                         CHART_TYPE_ENUM.STACK_BAR_AND_LINE,
                                     title: "",
                                     jsonData: snapshot.data!.data!,
                                     primaryAxisX: 'date',
-                                    primaryAxisY: [
-                                      AxisKeyDataModel(
-                                        label: "ទំងន់",
-                                        data: "weight-kg",
-                                        colorRgb: StyleColor.mtcColor,
-                                        trendLineColorRgb:
-                                            StyleColor.etcTrendLineColor,
-                                        chartType: CHART_TYPE_ENUM.STACK_BAR,
-                                      ),
-                                      AxisKeyDataModel(
-                                        label: "ចំនួនឡាន",
-                                        data: "vehicle-trx",
-                                        colorRgb: Colors.blueAccent,
-                                        trendLineColorRgb: StyleColor.mtcColor,
-                                        chartType: CHART_TYPE_ENUM.STACK_BAR,
-                                      ),
-                                    ],
+                                    primaryAxisY: getPrimaryAxisY(),
                                     primaryAxisYDataType:
                                         VALUE_DATA_TYPE.DOLLAR,
                                     primaryAxisYTitle: "",
                                     animationDuration: duration,
                                     primaryAxisYGridLine: 0.3,
                                     secondaryAxisYGridLine: 0,
+                                    // primaryAxisYInterval: 2000,
+                                    // secondaryAxisYInterval: 4000,
                                     sideBySideSeries: false,
                                     primaryAxisXInterval: getIntervalByLength(
                                         snapshot.data!.data!.length),
@@ -495,14 +522,7 @@ class _STMReportState extends State<STMReport> {
                                             : INTERVAL_TYPE_ENUM.AUTO,
                                     primaryAxisYCompact: true,
                                     primaryDeserialize: (e) => e.toJson(),
-                                    secondaryAxisY: [
-                                      AxisKeyDataModel(
-                                        label: "ចំណូល",
-                                        data: "income-dollar",
-                                        colorRgb: StyleColor.etcColor,
-                                        chartType: CHART_TYPE_ENUM.LINE_CHART,
-                                      ),
-                                    ],
+                                    secondaryAxisY: getSecondaryAxisY(),
                                     secondaryAxisYDataType:
                                         VALUE_DATA_TYPE.DOLLAR,
                                     secondaryAxisYTitle: "",

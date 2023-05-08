@@ -279,6 +279,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "vehicle-trx",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Trx Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 100 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -301,6 +307,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "vehicle-total-percent",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Trx Percent Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 110 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -323,6 +335,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "weight-kg",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Weight Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 100 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -343,6 +361,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "weight-total-percent",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Weight Percent Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 120 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -365,6 +389,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "income-dollar",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Revenue Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 130 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none
@@ -386,6 +416,12 @@ class STMDataGridSource extends DataGridSource {
     listColumn.add(
       GridColumn(
         columnName: "income-total-percent",
+        visible: Extension.getPermissionByActivity(
+                    activiyName: "Revenue Report - Car Revenue Percent Truck",
+                    activityEn: true)
+                .GET
+            ? true
+            : false,
         width: Extension.getDeviceType() == DeviceType.PHONE ? 130 : double.nan,
         columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
             ? ColumnWidthMode.none

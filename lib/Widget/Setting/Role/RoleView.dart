@@ -277,273 +277,282 @@ class _RoleViewState extends State<RoleView> {
               }()
             ],
           ),
-          body: TabBarView(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    //Title
-                    Container(
-                      margin: EdgeInsets.only(bottom: 20),
-                      child: Text(
-                        widget.roleModel.roleName!,
-                        style:
-                            StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
-                      ),
-                    ),
-
-                    //Title List
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      decoration: BoxDecoration(
-                        color: StyleColor.appBarColor.withOpacity(0.8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
+          body: Center(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: Singleton.instance.largeScreenWidthConstraint,
+              ),
+              child: TabBarView(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        //Title
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20),
+                          child: Text(
+                            widget.roleModel.roleName!,
+                            style: StyleColor.textStyleKhmerDangrekAuto(
+                                fontSize: 20),
+                          ),
                         ),
-                      ),
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 40,
-                            child: Text(
-                              'ល.រ',
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
+
+                        //Title List
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          decoration: BoxDecoration(
+                            color: StyleColor.appBarColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
                             ),
                           ),
-                          Expanded(
-                            child: Text(
-                              'Label.RolePermissionName'.tr(),
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
                               Container(
-                                width: 35,
-                                alignment: Alignment.center,
+                                width: 40,
                                 child: Text(
-                                  'Label.View'.tr(),
+                                  'ល.រ',
                                   style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              Container(
-                                width: 35,
-                                alignment: Alignment.center,
+                              Expanded(
                                 child: Text(
-                                  'Label.Edit'.tr(),
+                                  'Label.RolePermissionName'.tr(),
                                   style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              Container(
-                                width: 35,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Label.Delete'.tr(),
-                                  style: StyleColor.textStyleKhmerDangrekAuto(
-                                    color: Colors.white,
+                              Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 35,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Label.View'.tr(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Container(
+                                    width: 35,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Label.Edit'.tr(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Label.Delete'.tr(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                    //Check List
-                    Expanded(
-                      child: ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        itemCount: widget.roleModel.activity!.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 50,
-                            child: Container(
-                              color: (index % 2) == 0
-                                  ? StyleColor.blueLighter.withOpacity(0.1)
-                                  : StyleColor.appBarColor.withOpacity(0.1),
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 40,
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      (index + 1).toString(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      widget.roleModel.activity![index]
-                                          .widgetNameKh!,
-                                      style:
-                                          StyleColor.textStyleKhmerContentAuto(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                  getCheckBox(checkBoxIndex: index),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    //Title List
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      decoration: BoxDecoration(
-                        color: StyleColor.appBarColor.withOpacity(0.8),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          topRight: Radius.circular(5),
                         ),
-                      ),
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 40,
-                            child: Text(
-                              'Label.No'.tr(),
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
+                        //Check List
+                        Expanded(
+                          child: ListView.builder(
+                            physics: ClampingScrollPhysics(),
+                            itemCount: widget.roleModel.activity!.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 50,
+                                child: Container(
+                                  color: (index % 2) == 0
+                                      ? StyleColor.blueLighterOpa01
+                                      : StyleColor.appBarColorOpa01,
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 40,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          (index + 1).toString(),
+                                          style: StyleColor
+                                              .textStyleKhmerDangrekAuto(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          widget.roleModel.activity![index]
+                                              .widgetNameKh!,
+                                          style: StyleColor
+                                              .textStyleKhmerContentAuto(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      getCheckBox(checkBoxIndex: index),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          Expanded(
-                            child: Text(
-                              'Navigation.Users'.tr(),
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.25,
-                            child: Text(
-                              'Hint.Org'.tr(),
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.20,
-                            child: Text(
-                              'Hint.Position'.tr(),
-                              style: StyleColor.textStyleKhmerDangrekAuto(
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    //Check List
-                    Expanded(
-                      child: widget.roleModel.user!.length > 0
-                          ? ListView.builder(
-                              physics: ClampingScrollPhysics(),
-                              itemCount: widget.roleModel.user!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 50,
-                                  child: Container(
-                                    color: (index % 2) == 0
-                                        ? StyleColor.blueLighter
-                                            .withOpacity(0.1)
-                                        : StyleColor.appBarColor
-                                            .withOpacity(0.1),
-                                    padding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 40,
-                                          child: Text(
-                                            (index + 1).toString(),
-                                            style: StyleColor
-                                                .textStyleKhmerDangrekAuto(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            widget.roleModel.user![index]
-                                                .fullNameKh,
-                                            style: StyleColor
-                                                .textStyleKhmerContentAuto(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.25,
-                                          child: Text(
-                                            widget.roleModel.user![index].org ??
-                                                "Label.Unknown".tr(),
-                                            style: StyleColor
-                                                .textStyleKhmerContentAuto(),
-                                          ),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.20,
-                                          child: Text(
-                                            widget.roleModel.user![index]
-                                                    .position ??
-                                                "Label.Unknown".tr(),
-                                            style: StyleColor
-                                                .textStyleKhmerContentAuto(),
-                                          ),
-                                        )
-                                      ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        //Title List
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          decoration: BoxDecoration(
+                            color: StyleColor.appBarColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                            ),
+                          ),
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                width: 40,
+                                child: Text(
+                                  'Label.No'.tr(),
+                                  style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Navigation.Users'.tr(),
+                                  style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Text(
+                                    'Hint.Org'.tr(),
+                                    style: StyleColor.textStyleKhmerDangrekAuto(
+                                      color: Colors.white,
                                     ),
                                   ),
-                                );
-                              },
-                            )
-                          : PopupDialog.noResult(),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Text(
+                                    'Hint.Position'.tr(),
+                                    style: StyleColor.textStyleKhmerDangrekAuto(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        //Check List
+                        Expanded(
+                          child: widget.roleModel.user!.length > 0
+                              ? ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  itemCount: widget.roleModel.user!.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      height: 50,
+                                      child: Container(
+                                        color: (index % 2) == 0
+                                            ? StyleColor.blueLighter
+                                                .withOpacity(0.1)
+                                            : StyleColor.appBarColor
+                                                .withOpacity(0.1),
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: 40,
+                                              child: Text(
+                                                (index + 1).toString(),
+                                                style: StyleColor
+                                                    .textStyleKhmerDangrekAuto(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                widget.roleModel.user![index]
+                                                    .fullNameKh,
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                child: Text(
+                                                  widget.roleModel.user![index]
+                                                          .org ??
+                                                      "Label.Unknown".tr(),
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                child: Text(
+                                                  widget.roleModel.user![index]
+                                                          .position ??
+                                                      "Label.Unknown".tr(),
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : PopupDialog.noResult(),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

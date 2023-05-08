@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
+import 'package:stm_report_app/Entity/PriceList/PriceListModel.dart';
 import 'package:stm_report_app/Entity/PriceList/PricePostModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Extension/ExtensionMethod.dart';
@@ -10,24 +11,22 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 
-class AddPriceListDialog extends StatefulWidget {
-  const AddPriceListDialog({Key? key}) : super(key: key);
+class EditBasePriceDialog extends StatefulWidget {
+  final DefaultPrice price;
+  const EditBasePriceDialog({Key? key, required this.price}) : super(key: key);
 
   @override
-  State<AddPriceListDialog> createState() => _AddPriceListDialogState();
+  State<EditBasePriceDialog> createState() => _EditBasePriceDialogState();
 }
 
-class _AddPriceListDialogState extends State<AddPriceListDialog> {
+class _EditBasePriceDialogState extends State<EditBasePriceDialog> {
   //Instance
   final _formKey = GlobalKey<FormState>();
-  TextEditingController dateCon = TextEditingController();
   TextEditingController priceCon = TextEditingController();
-  DateTime selectDate = DateTime.now();
 
   //Method
   void onClickSubmit() async {
     priceCon.text = priceCon.text.replaceAll(",", ".");
-
     Extension.clearFocus(context);
 
     var result = _formKey.currentState!.validate();
@@ -35,7 +34,6 @@ class _AddPriceListDialogState extends State<AddPriceListDialog> {
       var prompt = await PopupDialog.yesNoPrompt(context);
       if (prompt) {
         var body = PricePostModel(
-          date: selectDate.toYYYYMMDD(),
           priceUnit: "usd",
           price: double.parse(
             priceCon.text.trim(),
@@ -43,7 +41,7 @@ class _AddPriceListDialogState extends State<AddPriceListDialog> {
         ).toJson();
         var res = await Singleton.instance.apiExtension.post<String, String>(
           context: context,
-          baseUrl: ApiEndPoint.priceCreateUpdate,
+          baseUrl: ApiEndPoint.priceDefaultUpdate,
           body: body,
           loading: true,
           deserialize: (e) => e.toString(),
@@ -62,6 +60,13 @@ class _AddPriceListDialogState extends State<AddPriceListDialog> {
         }
       }
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    priceCon.text = widget.price.price!.toStringAsFixed(2);
+    super.initState();
   }
 
   @override
@@ -84,46 +89,11 @@ class _AddPriceListDialogState extends State<AddPriceListDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'កាលបរិច្ឆេទ',
-                style: StyleColor.textStyleKhmerContentAuto(
-                  fontSize: 16,
-                ),
-              ),
-              TextButton(
-                onPressed: () async {
-                  var res = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now().subtract(Duration(days: 365)),
-                      lastDate: DateTime.now().add(
-                        Duration(days: 365),
-                      ));
-                  if (res != null) {
-                    print(res);
-                    selectDate = res;
-                    setState(() {});
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: StyleColor.appBarColor,
-                    border: Border.all(color: StyleColor.appBarColor, width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    selectDate.toYYYYMMDD(),
-                    style: StyleColor.textStyleDefaultAuto(
-                        color: Colors.white, bold: true),
-                  ),
-                ),
+                'តម្លៃមូលដ្ឋាន',
+                style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
               ),
               SizedBox(
                 height: 5,
-              ),
-              Text(
-                'តម្លៃ',
-                style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
               ),
               TextFormField(
                 controller: priceCon,

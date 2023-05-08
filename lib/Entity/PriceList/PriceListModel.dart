@@ -35,7 +35,7 @@ class DefaultPrice {
   DefaultPrice({this.price, this.priceUnit});
 
   DefaultPrice.fromJson(Map<String, dynamic> json) {
-    price = json['price'];
+    price = json['price'].toDouble();
     priceUnit = json['price_unit'];
   }
 

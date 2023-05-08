@@ -40,7 +40,6 @@ class _DashboardState extends State<Dashboard> {
             )
           : null,
       drawer: () {
-        print(Extension.getDeviceType());
         if (Extension.getDeviceType() == DeviceType.PHONE)
           return Container(
             width: 300,

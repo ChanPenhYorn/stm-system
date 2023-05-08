@@ -10,6 +10,7 @@ import 'package:stm_report_app/Entity/Cache/UserCache.dart';
 import 'package:stm_report_app/Entity/Language/Language.dart';
 import 'package:stm_report_app/Entity/Setting/DashboardButton.dart';
 import 'package:stm_report_app/Entity/Token.dart';
+import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Authentication/Login.dart';
@@ -81,9 +82,18 @@ class Singleton with ChangeNotifier {
     await initVersion();
   }
 
+  double largeScreenWidthConstraint = 700;
   double animationDurationGraph = 800;
   int graphAxisFontSizeReport = 12;
   int graphAxisFontSizeScreen = 8;
+
+  int getAxisFontSizeScreenType() {
+    if (Extension.getDeviceType() == DeviceType.PHONE)
+      return 8;
+    else
+      return 11;
+  }
+
   GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
   //User Setting
   //Authentication

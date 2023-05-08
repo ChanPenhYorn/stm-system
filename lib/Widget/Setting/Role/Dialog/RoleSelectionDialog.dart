@@ -118,8 +118,8 @@ class _RoleSelectionDialogState extends State<RoleSelectionDialog> {
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,
                               backgroundColor: (index % 2) == 0
-                                  ? StyleColor.blueLighter.withOpacity(0.1)
-                                  : StyleColor.appBarColor.withOpacity(0.1),
+                                  ? StyleColor.blueLighterOpa01
+                                  : StyleColor.appBarColorOpa01,
                             ),
                             child: Container(
                               padding: EdgeInsets.only(left: 10, right: 10),

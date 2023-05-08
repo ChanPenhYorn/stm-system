@@ -19,6 +19,7 @@ class ApiEndPoint {
   static String priceList = "api/v1/price/list";
   static String priceDelete = "api/v1/price/delete";
   static String priceCreateUpdate = "api/v1/price/createOrUpdate";
+  static String priceDefaultUpdate = "api/v1/price/defaultUpdate";
 
   static String register = "api/v1/authentication/register-approval";
   static String getApprovedAccountByUDID = "osr/get-approve-account-by-id";

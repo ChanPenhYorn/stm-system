@@ -179,8 +179,7 @@ class _LoginState extends State<Login> {
             context: context,
             baseUrl: ApiEndPoint.getFormApproval,
             deserialize: (e) => UserModel.fromJson(e));
-    // print("res.data : ${res.data!}");
-    if (res.data!.length != 0) {
+    if (res.data != null && res.data!.length != 0) {
       userModels = res.data!;
     }
   }

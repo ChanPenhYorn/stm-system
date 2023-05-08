@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 class StyleColor {
   static Color appBarColor = Color.fromRGBO(24, 73, 181, 1);
+  static Color appBarColorOpa01 = Color.fromRGBO(229, 233, 243, 1);
   static Color appBarGoldColor = Color.fromRGBO(201, 160, 55, 1);
   static Color appBarDarkColor = Color.fromRGBO(41, 93, 160, 1);
   static Color blueDarker = Color(0xFF7484AF);
   static Color blueLighter = Color(0xFF909CBF);
+
+  static Color blueLighterOpa01 = Color.fromRGBO(244, 245, 248, 1);
 
   static Color etcColor = Color.fromRGBO(253, 132, 31, 1.0);
   static Color anprColor = Color.fromRGBO(62, 109, 156, 1.0);

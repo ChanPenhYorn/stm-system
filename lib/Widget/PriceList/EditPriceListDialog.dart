@@ -27,6 +27,7 @@ class _EditPriceListDialogState extends State<EditPriceListDialog> {
 
   //Method
   void onClickSubmit() async {
+    priceCon.text = priceCon.text.replaceAll(",", ".");
     Extension.clearFocus(context);
 
     var result = _formKey.currentState!.validate();
@@ -73,152 +74,117 @@ class _EditPriceListDialogState extends State<EditPriceListDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(maxWidth: 400),
-      padding: EdgeInsets.all(20),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'កាលបរិច្ឆេទ',
-              style: StyleColor.textStyleKhmerContentAuto(
-                fontSize: 16,
-              ),
-            ),
-            // TextFormField(
-            //   controller: dateCon,
-            //   validator: (value) {
-            //     if (value!.isEmpty) {
-            //       return 'សូមបញ្ជូលកាលបរិច្ឆេទ';
-            //     }
-            //     return null;
-            //   },
-            //   decoration: InputDecoration(
-            //     errorStyle: StyleColor.textStyleKhmerContent14,
-            //     labelText: 'ធនាគារ',
-            //     prefixIcon: Icon(
-            //       Icons.money,
-            //       color: StyleColor.appBarColor,
-            //     ),
-            //     floatingLabelBehavior: FloatingLabelBehavior.auto,
-            //     border: OutlineInputBorder(
-            //       borderRadius: BorderRadius.all(
-            //         Radius.circular(
-            //           10,
-            //         ),
-            //       ),
-            //     ),
-            //     contentPadding: EdgeInsets.only(
-            //       left: 10,
-            //       top: 13,
-            //       right: 10,
-            //       bottom: 15,
-            //     ),
-            //   ),
-            //   style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
-            // ),
-            TextButton(
-              onPressed: () async {
-                // var res = await showDatePicker(
-                //     context: context,
-                //     initialDate: selectDate,
-                //     firstDate: DateTime.now().subtract(Duration(days: 365)),
-                //     lastDate: DateTime.now().add(
-                //       Duration(days: 365),
-                //     ));
-                // if (res != null) {
-                //   print(res);
-                //   selectDate = res;
-                //   setState(() {});
-                // }
-              },
-              child: Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  // border: Border.all(color: StyleColor.appBarColor, width: 1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  selectDate.toYYYYMMDD(),
-                  style: StyleColor.textStyleDefaultAuto(
-                      color: Colors.white, bold: true),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        Extension.clearFocus(context);
+        Singleton.instance.handleUserInteraction(context);
+      },
+      onPanDown: (_) {
+        Singleton.instance.handleUserInteraction(context);
+      },
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 400),
+        padding: EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'កាលបរិច្ឆេទ',
+                style: StyleColor.textStyleKhmerContentAuto(
+                  fontSize: 16,
                 ),
               ),
-            ),
-
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              'តម្លៃ',
-              style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
-            ),
-            TextFormField(
-              controller: priceCon,
-              validator: (value) {
-                String pattern = r'(^[0-9]*$)';
-                RegExp regExp = new RegExp(pattern);
-                if (value!.isEmpty) {
-                  return 'សូមបញ្ជូលតម្លៃ';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
-              decoration: InputDecoration(
-                prefixText: '\$',
-                errorStyle: StyleColor.textStyleKhmerContent14,
-                labelText: 'តម្លៃទំនិញ',
-                prefixIcon: Icon(
-                  Icons.price_change,
-                  color: StyleColor.appBarColor,
-                ),
-                floatingLabelBehavior: FloatingLabelBehavior.auto,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      10,
-                    ),
-                  ),
-                ),
-                contentPadding: EdgeInsets.only(
-                  left: 10,
-                  top: 13,
-                  right: 10,
-                  bottom: 15,
-                ),
-              ),
-              style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(0),
-                  backgroundColor: StyleColor.appBarColor,
-                  splashFactory: InkRipple.splashFactory,
-                  shape: RoundedRectangleBorder(
+              TextButton(
+                onPressed: () async {},
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    // border: Border.all(color: StyleColor.appBarColor, width: 1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-                child: Container(
-                  height: 50,
-                  width: 150,
-                  alignment: Alignment.center,
                   child: Text(
-                    'បញ្ជូន',
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                        fontSize: 16, color: Colors.white),
+                    selectDate.toYYYYMMDD(),
+                    style: StyleColor.textStyleDefaultAuto(
+                        color: Colors.white, bold: true),
                   ),
                 ),
-                onPressed: onClickSubmit)
-          ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'តម្លៃ',
+                style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
+              ),
+              TextFormField(
+                controller: priceCon,
+                validator: (value) {
+                  String pattern = r'^\d+(?:[\.,]\d{0,2})?$';
+                  RegExp regExp = new RegExp(pattern);
+                  if (value!.isEmpty) {
+                    return 'សូមបញ្ជូលតម្លៃ';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r'^\d+(?:[\.,]\d{0,2})?$')),
+                ],
+                decoration: InputDecoration(
+                  prefixText: '\$',
+                  errorStyle: StyleColor.textStyleKhmerContent14,
+                  labelText: 'តម្លៃទំនិញ',
+                  prefixIcon: Icon(
+                    Icons.price_change,
+                    color: StyleColor.appBarColor,
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        10,
+                      ),
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.only(
+                    left: 10,
+                    top: 13,
+                    right: 10,
+                    bottom: 15,
+                  ),
+                ),
+                style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(0),
+                    backgroundColor: StyleColor.appBarColor,
+                    splashFactory: InkRipple.splashFactory,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Container(
+                    height: 50,
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'បញ្ជូន',
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                          fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                  onPressed: onClickSubmit)
+            ],
+          ),
         ),
       ),
     );

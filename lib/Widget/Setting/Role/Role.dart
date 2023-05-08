@@ -199,131 +199,138 @@ class _RoleState extends State<Role> {
   }
 
   Widget screenPhone() {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: FutureBuilder<List<RoleModel>>(
-            future: InitData,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData && snapshot.data!.length > 0)
-                  return Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        color: StyleColor.appBarColor.withOpacity(0.8),
-                        height: 50,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              child: Text(
-                                'Label.No'.tr(),
-                                style: StyleColor.textStyleKhmerDangrekAuto(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Label.RolePermissionName'.tr(),
-                                style: StyleColor.textStyleKhmerDangrekAuto(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 50,
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Container(
-                                height: 50,
-                                child: TextButton(
-                                  onPressed: () {
-                                    onClickView(snapshot.data![index]);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                    backgroundColor: (index % 2) == 0
-                                        ? StyleColor.blueLighter
-                                            .withOpacity(0.1)
-                                        : StyleColor.appBarColor
-                                            .withOpacity(0.1),
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: Singleton.instance.largeScreenWidthConstraint,
+        ),
+        padding: EdgeInsets.all(10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: FutureBuilder<List<RoleModel>>(
+              future: InitData,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData && snapshot.data!.length > 0)
+                    return Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          color: StyleColor.appBarColor.withOpacity(0.8),
+                          height: 50,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 80,
+                                child: Text(
+                                  'Label.No'.tr(),
+                                  style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
+                                    color: Colors.white,
                                   ),
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 80,
-                                          child: Text(
-                                            (index + 1).toString(),
-                                            style: StyleColor
-                                                .textStyleKhmerDangrekAuto(
-                                              fontSize: 14,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Label.RolePermissionName'.tr(),
+                                  style: StyleColor.textStyleKhmerDangrekAuto(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 50,
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            physics: ClampingScrollPhysics(),
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Container(
+                                  height: 50,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      onClickView(snapshot.data![index]);
+                                    },
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor: (index % 2) == 0
+                                          ? StyleColor.blueLighter
+                                              .withOpacity(0.1)
+                                          : StyleColor.appBarColor
+                                              .withOpacity(0.1),
+                                    ),
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 80,
+                                            child: Text(
+                                              (index + 1).toString(),
+                                              style: StyleColor
+                                                  .textStyleKhmerDangrekAuto(
+                                                fontSize: 14,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            snapshot.data![index].roleName!,
-                                            style: StyleColor
-                                                .textStyleKhmerContentAuto(
-                                              fontSize: 14,
+                                          Expanded(
+                                            child: Text(
+                                              snapshot.data![index].roleName!,
+                                              style: StyleColor
+                                                  .textStyleKhmerContentAuto(
+                                                fontSize: 14,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          width: 50,
-                                          child: IconButton(
-                                            icon: Extension
-                                                        .getPermissionByActivity(
-                                                            activiyName: "Role",
-                                                            activityEn: true)
-                                                    .GET
-                                                ? Icon(
-                                                    Icons.clear,
-                                                    color:
-                                                        StyleColor.appBarColor,
-                                                  )
-                                                : Container(),
-                                            onPressed: () {
-                                              onClickDelete(snapshot
-                                                  .data![index].roleId!);
-                                            },
-                                          ),
-                                        )
-                                      ],
+                                          Container(
+                                            width: 50,
+                                            child: IconButton(
+                                              icon: Extension
+                                                          .getPermissionByActivity(
+                                                              activiyName:
+                                                                  "Role",
+                                                              activityEn: true)
+                                                      .GET
+                                                  ? Icon(
+                                                      Icons.clear,
+                                                      color: StyleColor
+                                                          .appBarColor,
+                                                    )
+                                                  : Container(),
+                                              onPressed: () {
+                                                onClickDelete(snapshot
+                                                    .data![index].roleId!);
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  );
-                return PopupDialog.noResult();
-              }
-              return AnimateLoading();
-            }),
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    );
+                  return PopupDialog.noResult();
+                }
+                return AnimateLoading();
+              }),
+        ),
       ),
     );
   }

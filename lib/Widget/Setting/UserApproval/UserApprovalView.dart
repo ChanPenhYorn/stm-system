@@ -62,7 +62,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.blueLighter.withOpacity(0.1),
+                  color: StyleColor.blueLighterOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -84,7 +84,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.appBarColor.withOpacity(0.1),
+                  color: StyleColor.appBarColorOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -112,7 +112,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.blueLighter.withOpacity(0.1),
+                  color: StyleColor.blueLighterOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -140,7 +140,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.appBarColor.withOpacity(0.1),
+                  color: StyleColor.appBarColorOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -169,7 +169,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.blueLighter.withOpacity(0.1),
+                  color: StyleColor.blueLighterOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -197,7 +197,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.appBarColor.withOpacity(0.1),
+                  color: StyleColor.appBarColorOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -225,7 +225,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.blueLighter.withOpacity(0.1),
+                  color: StyleColor.blueLighterOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -253,7 +253,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.appBarColor.withOpacity(0.1),
+                  color: StyleColor.appBarColorOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -281,7 +281,7 @@ class _UserApprovalViewState extends State<UserApprovalView> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  color: StyleColor.blueLighter.withOpacity(0.1),
+                  color: StyleColor.blueLighterOpa01,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
