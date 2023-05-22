@@ -53,11 +53,18 @@ class STMReportDataModel {
   STMReportDataModel.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     vehicleTrx = json['vehicle-trx'];
-    vehicleTotalPercent = json['vehicle-total-percent'].toDouble();
-    weightKg = json['weight-kg'].toDouble();
-    weightTotalPercent = json['weight-total-percent'].toDouble();
-    incomeDollar = json['income-dollar'].toDouble();
-    incomeTotalPercent = json['income-total-percent'].toDouble();
+    vehicleTotalPercent = json['vehicle-total-percent'] != null
+        ? json['vehicle-total-percent'].toDouble()
+        : null;
+    weightKg = json['weight-kg'] != null ? json['weight-kg'].toDouble() : null;
+    weightTotalPercent = json['weight-total-percent'] != null
+        ? json['weight-total-percent'].toDouble()
+        : null;
+    incomeDollar =
+        json['income-dollar'] != null ? json['income-dollar'].toDouble() : null;
+    incomeTotalPercent = json['income-total-percent'] != null
+        ? json['income-total-percent'].toDouble()
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -97,14 +104,25 @@ class Total {
 
   Total.fromJson(Map<String, dynamic> json) {
     vehicleTrx = json['vehicle-trx'];
-    weightKg = json['weight-kg'].toDouble();
-    incomeDollar = json['income-dollar'].toDouble();
-    maximumValueVehicleTrx = json['maximum-value-vehicle-trx'];
-    maximumValueWeightKg = json['maximum-value-weight-kg'].toDouble();
-    maximumValueIncomeDollar = json['maximum-value-income-dollar'].toDouble();
+    weightKg = json['weight-kg'] != null ? json['weight-kg'].toDouble() : null;
+    incomeDollar =
+        json['income-dollar'] != null ? json['income-dollar'].toDouble() : null;
+    maximumValueVehicleTrx = json['maximum-value-vehicle-trx'] != null
+        ? json['maximum-value-vehicle-trx']
+        : null;
+    maximumValueWeightKg = json['maximum-value-weight-kg'] != null
+        ? json['maximum-value-weight-kg'].toDouble()
+        : null;
+    maximumValueIncomeDollar = json['maximum-value-income-dollar'] != null
+        ? json['maximum-value-income-dollar'].toDouble()
+        : null;
     minimumValueVehicleTrx = json['minimum-value-vehicle-trx'];
-    minimumValueWeightKg = json['minimum-value-weight-kg'].toDouble();
-    minimumValueIncomeDollar = json['minimum-value-income-dollar'].toDouble();
+    minimumValueWeightKg = json['minimum-value-weight-kg'] != null
+        ? json['minimum-value-weight-kg'].toDouble()
+        : null;
+    minimumValueIncomeDollar = json['minimum-value-income-dollar'] != null
+        ? json['minimum-value-income-dollar'].toDouble()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

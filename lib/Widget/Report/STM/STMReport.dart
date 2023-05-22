@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Chart/AxisKeyDataModel.dart';
 import 'package:stm_report_app/Entity/Report/STMReportModel.dart';
@@ -17,7 +18,6 @@ import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Card/GraphCard.dart';
-import 'package:month_picker_dialog_2/month_picker_dialog_2.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class STMReport extends StatefulWidget {
@@ -75,7 +75,7 @@ class _STMReportState extends State<STMReport> {
     else if (selectedSegmentType == 2)
       return "yearly";
     else
-      return "yearly";
+      return "";
   }
 
   String getDateCaption(STMReportModel snapshot) {
@@ -371,7 +371,11 @@ class _STMReportState extends State<STMReport> {
   }
 
   Widget getTable(STMReportModel data) {
-    if (data.data!.where((element) => element.vehicleTrx! > 0).length > 0)
+    if (data.data!
+            .where((element) =>
+                element.vehicleTrx != null && element.vehicleTrx! > 0)
+            .length >
+        0)
       return Singleton.instance.tableComponent.getSTMReportRevenueTruck(
         context: context,
         stmReportTableType: TABLE_TYPE_ENUM.STMRevenueTruck,

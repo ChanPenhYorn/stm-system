@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:stm_report_app/Api/Domain.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 
 class PhotoViewSlideOut extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PhotoViewSlideOutState extends State<PhotoViewSlideOut> {
               slideType: SlideType.onlyImage,
               resetPageDuration: Duration(milliseconds: 100),
               child: ExtendedImage.network(
-                widget.url!,
+                Domain.domain + widget.url!,
                 enableSlideOutPage: true,
                 clearMemoryCacheWhenDispose: true,
                 mode: ExtendedImageMode.gesture,

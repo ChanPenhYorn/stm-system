@@ -188,8 +188,12 @@ class STMDataGridSource extends DataGridSource {
 
     //Add Year Data
     reportModel.data!.forEach((STMReportDataModel data) {
-      if (data.vehicleTrx == 0 || data.vehicleTrx == null) return;
+      if (data.vehicleTrx == null) {
+        return;
+      }
+      ;
       List<DataGridCell> listCell = [];
+      // print(data.toJson());
 
       //Add Date
       listCell.add(
