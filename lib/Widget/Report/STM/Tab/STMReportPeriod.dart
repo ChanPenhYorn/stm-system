@@ -18,18 +18,16 @@ import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Card/GraphCard.dart';
-import 'package:stm_report_app/Widget/Report/STM/Tab/STMReportDetail.dart';
-import 'package:stm_report_app/Widget/Report/STM/Tab/STMReportPeriod.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class STMReport extends StatefulWidget {
-  const STMReport({Key? key}) : super(key: key);
+class STMReportPeriod extends StatefulWidget {
+  const STMReportPeriod({Key? key}) : super(key: key);
 
   @override
-  State<STMReport> createState() => _STMReportState();
+  State<STMReportPeriod> createState() => _STMReportPeriodState();
 }
 
-class _STMReportState extends State<STMReport> {
+class _STMReportPeriodState extends State<STMReportPeriod> {
   @override
   void initState() {
     InitData = initData();
@@ -432,45 +430,136 @@ class _STMReportState extends State<STMReport> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: <Widget>[
-          Container(
-            color: StyleColor.appBarColorOpa01,
-            child: TabBar(
-              indicatorColor: StyleColor.appBarColor,
-              indicatorPadding: EdgeInsets.only(bottom: 9, left: 20, right: 20),
-              indicatorSize: TabBarIndicatorSize.label,
-              tabs: [
-                Tab(
-                  child: Text(
-                    'របាយការណ៍លំអិត',
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      color: StyleColor.appBarColor,
-                    ),
-                  ),
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            ToggleSwitch(
+              labels: ['ប្រចាំថ្ងៃ', 'ប្រចាំខែ', 'ប្រចាំឆ្នាំ'],
+              activeFgColor: Colors.white,
+              initialLabelIndex: selectedSegmentType,
+              minWidth: 90,
+              dividerMargin: 0,
+              totalSwitches: 3,
+              onToggle: onSelectToggle,
+              customTextStyles: [
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 0 ? true : false,
                 ),
-                Tab(
-                  child: Text(
-                    'របាយការណ៍រយៈពេល',
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      color: StyleColor.appBarColor,
-                    ),
-                  ),
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 1 ? true : false,
+                ),
+                StyleColor.textStyleKhmerContentAuto(
+                  color: Colors.white,
+                  fontSize: 12,
+                  bold: selectedSegmentType == 3 ? true : false,
                 ),
               ],
             ),
-          ),
-          Expanded(
-            child: TabBarView(
-              children: [
-                STMReportDetail(),
-                STMReportPeriod(),
-              ],
+            //Segmented Detail
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 500),
+                child: getSelectSegmentDetail(),
+              ),
             ),
-          ),
-        ],
+            // Divider(),
+            Expanded(
+              child: FutureBuilder<STMReportModel>(
+                future: InitData,
+                builder: (context, snapshot) {
+                  return AnimatedSwitcher(
+                    duration: Duration(milliseconds: 500),
+                    child: () {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData && snapshot.data!.data!.length > 0)
+                          return ListView(
+                            physics: ClampingScrollPhysics(),
+                            children: [
+                              //Graph
+                              GraphCard(
+                                bigTitle: "STM Monitoring Report",
+                                widgetFunction: (duration, axisFontSize) {
+                                  return ExtensionComponent.graphComponent
+                                      .getChart<STMReportDataModel>(
+                                    axisFontSize: Singleton.instance
+                                        .getAxisFontSizeScreenType(),
+                                    chartType:
+                                        CHART_TYPE_ENUM.STACK_BAR_AND_LINE,
+                                    title: "",
+                                    jsonData: snapshot.data!.data!,
+                                    primaryAxisX: 'date',
+                                    primaryAxisY: getPrimaryAxisY(),
+                                    primaryAxisYDataType:
+                                        VALUE_DATA_TYPE.DOLLAR,
+                                    primaryAxisYTitle: "",
+                                    animationDuration: duration,
+                                    primaryAxisYGridLine: 0.3,
+                                    secondaryAxisYGridLine: 0,
+                                    // primaryAxisYInterval: 2000,
+                                    // secondaryAxisYInterval: 4000,
+                                    sideBySideSeries: false,
+                                    primaryAxisXInterval: getIntervalByLength(
+                                        snapshot.data!.data!.length),
+                                    primaryAxisXFormat:
+                                        getTypeBySegmentIndex() == "monthly"
+                                            ? AXIS_DATA_TYPE.DATETIME_yMMMM
+                                            : getTypeBySegmentIndex() ==
+                                                    "yearly"
+                                                ? AXIS_DATA_TYPE.DATETIME_y
+                                                : AXIS_DATA_TYPE
+                                                    .DATETIME_MMMMEEEEd,
+                                    intervalType: getTypeBySegmentIndex() ==
+                                            "monthly"
+                                        ? INTERVAL_TYPE_ENUM.MONTH
+                                        : getTypeBySegmentIndex() == "yearly"
+                                            ? INTERVAL_TYPE_ENUM.YEAR
+                                            : INTERVAL_TYPE_ENUM.AUTO,
+                                    primaryAxisYCompact: true,
+                                    primaryDeserialize: (e) => e.toJson(),
+                                    secondaryAxisY: getSecondaryAxisY(),
+                                    secondaryAxisYDataType:
+                                        VALUE_DATA_TYPE.DOLLAR,
+                                    secondaryAxisYTitle: "",
+                                  );
+                                },
+                                title:
+                                    "តារាងទិន្នន័យដឹកជញ្ជូន និងចំណូល${Extension.getTitleBySegmentIndex(
+                                  selectedSegmentType: selectedSegmentType,
+                                  date: date,
+                                )}",
+                                downloadFileName: "revenue-truck",
+                                obj: snapshot.data!,
+                                tableDateType: getDateTypeBySegment(),
+                                tableTypeEnum: TABLE_TYPE_ENUM.STMRevenueTruck,
+                              ),
+                              //Table
+                              Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: getTable(snapshot.data!)),
+                            ],
+                          );
+                        else
+                          return PopupDialog.noResult();
+                      }
+                      return AnimateLoading();
+                    }(),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

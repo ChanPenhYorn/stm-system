@@ -116,7 +116,8 @@ class _GraphExpandState extends State<GraphExpand> {
       if (widget.tableTypeEnum == TABLE_TYPE_ENUM.STMRevenueTruck) {
         tableRowsLength = (widget.obj as STMReportModel)
             .data!
-            .where((element) => element.vehicleTrx! > 0)
+            .where((element) =>
+                element.vehicleTrx != null && element.vehicleTrx! > 0)
             .length;
         return Singleton.instance.tableComponent.getSTMReportRevenueTruck(
           context: context,
