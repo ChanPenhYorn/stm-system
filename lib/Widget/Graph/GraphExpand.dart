@@ -156,79 +156,82 @@ class _GraphExpandState extends State<GraphExpand> {
                           TABLE_TYPE_ENUM.PPSHVDeductionRevenueVehicle
                       ? Size(1200, (tableRowsLength * 30) + 800)
                       : Size(1000, (tableRowsLength * 30) + 800),
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        color: Colors.white,
-        home: Scaffold(
-          body: MediaQuery(
-            data: MediaQueryData(padding: EdgeInsets.zero),
-            child: Container(
-              alignment: Alignment.topCenter,
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //Title
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/image/stm_report_logo.png",
-                          width: 70,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              child: Text(
-                                widget.bigTitle,
-                                style: StyleColor.textStyleKhmerContentAuto(
-                                  fontSize: 26,
-                                  bold: false,
+      MediaQuery(
+        data: MediaQueryData(padding: EdgeInsets.zero),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          color: Colors.white,
+          home: Scaffold(
+            body: MediaQuery(
+              data: MediaQueryData(padding: EdgeInsets.zero),
+              child: Container(
+                alignment: Alignment.topCenter,
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    //Title
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/image/stm_report_logo.png",
+                            width: 70,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                child: Text(
+                                  widget.bigTitle,
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 26,
+                                    bold: false,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              child: Text(
-                                widget.title,
-                                style: StyleColor.textStyleKhmerContentAuto(
-                                  fontSize: 22,
-                                  bold: false,
+                              Container(
+                                child: Text(
+                                  widget.title,
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 22,
+                                    bold: false,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: 10,
-                      right: 10,
-                      top: 20,
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        right: 10,
+                        top: 20,
+                      ),
+                      height: 400,
+                      width: double.infinity,
+                      child: widget.widgetFunction(
+                        0,
+                        Singleton.instance.graphAxisFontSizeReport,
+                      ),
                     ),
-                    height: 400,
-                    width: double.infinity,
-                    child: widget.widgetFunction(
-                      0,
-                      Singleton.instance.graphAxisFontSizeReport,
+                    Expanded(
+                      child: getTable(
+                        overrideWrapColumn: true,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: getTable(
-                      overrideWrapColumn: true,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

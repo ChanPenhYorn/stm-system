@@ -230,7 +230,7 @@ class _PriceListState extends State<PriceList> {
                                         Text(
                                           'តម្លៃមូលដ្ឋាន',
                                           style: StyleColor
-                                              .textStyleKhmerDangrekAuto(
+                                              .textStyleKhmerContentAuto(
                                                   color: Colors.white,
                                                   fontSize: 18),
                                         ),

@@ -397,7 +397,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                 .frontPlateObj!
                                                                 .plateNumberFormatted!,
                                                         style: StyleColor
-                                                            .textStyleKhmerDangrekAuto(
+                                                            .textStyleKhmerContentAuto(
                                                           fontSize: 14,
                                                         ),
                                                         textAlign:
