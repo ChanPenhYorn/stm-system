@@ -22,7 +22,23 @@
     "EditRolePermission" : "កែប្រែអ្នកប្រើប្រាស់",
     "Register" : "ចុះឈ្មោះប្រើប្រាស់",
     "ScanQR" : "ស្កេន QR Code",
-    "PriceList" : "តារាងតម្លៃ"
+    "PriceList" : "តារាងតម្លៃ",
+    "Company" : "ក្រុមហ៊ុន",
+    "CompanyEntity": {
+      "Info": "ព៌តមានក្រុមហ៊ុន"
+    },
+    "Customer": "អតិថិជន",
+    "CustomerEntity": {
+      "Info": "ព៌តមានអតិថិជន"
+    },
+    "Product": "ទំនិញ",
+    "ProductEntity": {
+      "Info": "ព៌តមានតំបន់"
+    },
+    "Zone": "តំបន់",
+    "ZonerEntity": {
+      "Info": "ព៌តមានតំបន់"
+    }
   },
   "Home": {
     "SeeMore": "ចូលមើល"
@@ -76,19 +92,22 @@
     "Delete" : "លុប",
     "Unknown" : "មិនស្គាល់",
     "InfoUser" : "ព័ត៌មានអ្នកប្រើប្រាស់",
-    "Code" : "លេខកូដ៖",
+    "Code" : "លេខកូដ",
     "UserName" : "ឈ្មោះគណនី៖",
     "Name"      : "នាម៖",
-    "NameEn" : "នាម (ឡាតាំង)៖",
-    "UserNameEn" : "គោត្តនាម (ឡាតាំង)៖",
-    "CodeDevice" : "កូដឧបករណ៍៖",
-    "DateRegister" : "កាលបរិច្ឆេទចុះឈ្មោះ៖",
-    "ApprovedRegister" : "កាលបរិច្ឆេទអនុញ្ញាត៖",
+    "NameEn" : "នាម (ឡាតាំង)",
+    "UserNameEn" : "គោត្តនាម (ឡាតាំង)",
+    "CodeDevice" : "កូដឧបករណ៍",
+    "DateRegister" : "កាលបរិច្ឆេទចុះឈ្មោះ",
+    "ApprovedRegister" : "កាលបរិច្ឆេទអនុញ្ញាត",
     "FullName" : "គោត្តនាម និងនាម",
     "FullNameEn" : "គោត្តនាម និងនាម (ឡាតាំង)៖",
     "References" : "ឯកសារយោង",
     "NoReferences" : "មិនមានឯកសារយោង",
-    "RegisterInfo" : "ព័ត៌មានអ្នកចុះឈ្មោះ"
+    "RegisterInfo" : "ព័ត៌មានអ្នកចុះឈ្មោះ",
+    "Description": "បរិយាយ",
+    "PhoneNumber" : "លេខទូរស័ព្ទ",
+    "Address": "អាសយដ្ឋាន"
   },
   "TechInspection" : {
     "Year" : "ឆ្នាំ",
