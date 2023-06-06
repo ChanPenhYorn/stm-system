@@ -101,15 +101,6 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      // routes: <String, WidgetBuilder>{
-      //   '/role': (BuildContext context) => Role(),
-      //   '/user': (BuildContext context) => User(),
-      //   '/register': (BuildContext context) => User(),
-      //   '/approval': (BuildContext context) => UserApproval(),
-      // },
-      // // home: Dashboard(),
-      // home: SplashScreen(),
-      // navigatorKey: Singleton.instance.globalKey,
     );
   }
 }

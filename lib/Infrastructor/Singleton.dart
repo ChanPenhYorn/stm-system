@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -54,10 +55,31 @@ class Singleton with ChangeNotifier {
       initFunc: () {},
     ),
     DashboardButton(
-      id: 123431,
-      buttonTitle: 'Navigation.PriceList'.tr(),
-      icon: 'assets/image/price.png',
-      route: '/price_list',
+      id: 123432,
+      buttonTitle: 'Navigation.Company'.tr(),
+      icon: 'assets/image/setting/company.png',
+      route: '/company',
+      initFunc: () {},
+    ),
+    DashboardButton(
+      id: 123433,
+      buttonTitle: 'Navigation.Customer'.tr(),
+      icon: 'assets/image/setting/customer.png',
+      route: '/customer',
+      initFunc: () {},
+    ),
+    DashboardButton(
+      id: 123434,
+      buttonTitle: 'Navigation.Product'.tr(),
+      icon: 'assets/image/setting/product.png',
+      route: '/product',
+      initFunc: () {},
+    ),
+    DashboardButton(
+      id: 123435,
+      buttonTitle: 'Navigation.Customer'.tr(),
+      icon: 'assets/image/setting/customer.png',
+      route: '/customer',
       initFunc: () {},
     ),
   ];
@@ -194,6 +216,24 @@ class Singleton with ChangeNotifier {
       key: "stm_faceId_permission",
       value: "",
     );
+  }
+
+  Future<bool> writeLoginToken({required Token token}) async {
+    try {
+      await storage.write(key: "stm_token", value: jsonEncode(token.toJson()));
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  Future<bool> readLoginToken() async {
+    var res = await storage.read(key: "stm_token");
+    if (res != null) {
+      token = Token.fromJson(jsonDecode(res));
+      return true;
+    } else
+      return false;
   }
 
   Future<bool> initFingerPrintPermission() async {

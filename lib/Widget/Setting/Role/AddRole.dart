@@ -260,262 +260,268 @@ class _AddRoleState extends State<AddRole> {
                 fontSize: 18, color: Colors.white),
           ),
         ),
-        body: Container(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  controller: roleNameCon,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Message.RoleUser.PleaseAddRoleUser'.tr();
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    errorStyle: StyleColor.textStyleKhmerContent14,
-                    labelText: 'Role.RolePermissionName'.tr(),
-                    prefixIcon: Icon(
-                      Icons.key,
-                      color: StyleColor.appBarColor,
-                    ),
-                    floatingLabelBehavior: FloatingLabelBehavior.auto,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          10,
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            constraints: BoxConstraints(
+              maxWidth: Singleton.instance.largeScreenWidthConstraint,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFormField(
+                    controller: roleNameCon,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Message.RoleUser.PleaseAddRoleUser'.tr();
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      errorStyle: StyleColor.textStyleKhmerContent14,
+                      labelText: 'Role.RolePermissionName'.tr(),
+                      prefixIcon: Icon(
+                        Icons.key,
+                        color: StyleColor.appBarColor,
+                      ),
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            10,
+                          ),
                         ),
                       ),
+                      contentPadding: EdgeInsets.only(
+                        left: 10,
+                        top: 13,
+                        right: 10,
+                        bottom: 15,
+                      ),
                     ),
-                    contentPadding: EdgeInsets.only(
-                      left: 10,
-                      top: 13,
-                      right: 10,
-                      bottom: 15,
-                    ),
+                    style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
                   ),
-                  style: StyleColor.textStyleKhmerContentAuto(fontSize: 16),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                //List View
-                Expanded(
-                    child: FutureBuilder<List<ActivityModel>>(
-                  future: InitActivity,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      if (snapshot.data!.isNotEmpty)
-                        return Column(
-                          children: [
-                            //Check All
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: 30,
-                                    width: 35,
-                                    child: Checkbox(
-                                      activeColor: StyleColor.appBarColor,
-                                      value: getCheckAllStatus(GET: true),
-                                      onChanged: (value) {
-                                        onClickCheckAll(GET: true);
-                                        setState(() {});
-                                      },
+                  //List View
+                  Expanded(
+                      child: FutureBuilder<List<ActivityModel>>(
+                    future: InitActivity,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.data!.isNotEmpty)
+                          return Column(
+                            children: [
+                              //Check All
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 10, bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: 35,
+                                      child: Checkbox(
+                                        activeColor: StyleColor.appBarColor,
+                                        value: getCheckAllStatus(GET: true),
+                                        onChanged: (value) {
+                                          onClickCheckAll(GET: true);
+                                          setState(() {});
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                    width: 35,
-                                    child: Checkbox(
-                                      activeColor: StyleColor.appBarColor,
-                                      value: getCheckAllStatus(UPDATE: true),
-                                      onChanged: (value) {
-                                        onClickCheckAll(UPDATE: true);
-                                        setState(() {});
-                                      },
+                                    SizedBox(
+                                      height: 30,
+                                      width: 35,
+                                      child: Checkbox(
+                                        activeColor: StyleColor.appBarColor,
+                                        value: getCheckAllStatus(UPDATE: true),
+                                        onChanged: (value) {
+                                          onClickCheckAll(UPDATE: true);
+                                          setState(() {});
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                    width: 35,
-                                    child: Checkbox(
-                                      activeColor: StyleColor.appBarColor,
-                                      value: getCheckAllStatus(DELETE: true),
-                                      onChanged: (value) {
-                                        onClickCheckAll(DELETE: true);
-                                        setState(() {});
-                                      },
+                                    SizedBox(
+                                      height: 30,
+                                      width: 35,
+                                      child: Checkbox(
+                                        activeColor: StyleColor.appBarColor,
+                                        value: getCheckAllStatus(DELETE: true),
+                                        onChanged: (value) {
+                                          onClickCheckAll(DELETE: true);
+                                          setState(() {});
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //Title
-                            Container(
-                              padding: EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                color: StyleColor.appBarColor.withOpacity(0.8),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
+                                  ],
                                 ),
                               ),
-                              height: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    width: 40,
-                                    child: Text(
-                                      'Label.No'.tr(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
+                              //Title
+                              Container(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                decoration: BoxDecoration(
+                                  color:
+                                      StyleColor.appBarColor.withOpacity(0.8),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5),
+                                  ),
+                                ),
+                                height: 50,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      child: Text(
+                                        'Label.No'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      'Label.RolePermissionName'.tr(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
+                                    Expanded(
+                                      child: Text(
+                                        'Label.RolePermissionName'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Container(
-                                        width: 35,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Label.View'.tr(),
-                                          style: StyleColor
-                                              .textStyleKhmerDangrekAuto(
-                                            color: Colors.white,
+                                    Row(
+                                      children: <Widget>[
+                                        Container(
+                                          width: 35,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Label.View'.tr(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 35,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Label.Edit'.tr(),
-                                          style: StyleColor
-                                              .textStyleKhmerDangrekAuto(
-                                            color: Colors.white,
+                                        Container(
+                                          width: 35,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Label.Edit'.tr(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 35,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Label.Delete'.tr(),
-                                          style: StyleColor
-                                              .textStyleKhmerDangrekAuto(
-                                            color: Colors.white,
+                                        Container(
+                                          width: 35,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Label.Delete'.tr(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            //Check List
-                            Expanded(
-                              child: ListView.builder(
-                                physics: ClampingScrollPhysics(),
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      onClickActivity(index: index);
-                                    },
-                                    child: Container(
-                                      height: 50,
+                              //Check List
+                              Expanded(
+                                child: ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        onClickActivity(index: index);
+                                      },
                                       child: Container(
-                                        color: (index % 2) == 0
-                                            ? StyleColor.blueLighter
-                                                .withOpacity(0.1)
-                                            : StyleColor.appBarColor
-                                                .withOpacity(0.1),
-                                        padding: EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 40,
-                                              child: Text(
-                                                (index + 1).toString(),
-                                                style: StyleColor
-                                                    .textStyleKhmerDangrekAuto(
-                                                  fontSize: 14,
+                                        height: 50,
+                                        child: Container(
+                                          color: (index % 2) == 0
+                                              ? StyleColor.blueLighter
+                                                  .withOpacity(0.1)
+                                              : StyleColor.appBarColor
+                                                  .withOpacity(0.1),
+                                          padding: EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: 40,
+                                                child: Text(
+                                                  (index + 1).toString(),
+                                                  style: StyleColor
+                                                      .textStyleKhmerDangrekAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                snapshot
-                                                    .data![index].widgetNameKh!,
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              Expanded(
+                                                child: Text(
+                                                  snapshot.data![index]
+                                                      .widgetNameKh!,
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            getCheckBox(checkBoxIndex: index),
-                                          ],
+                                              getCheckBox(checkBoxIndex: index),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        );
-                      else
-                        return PopupDialog.noResult();
-                    }
-                    return AnimateLoading();
-                  },
-                )),
-                //Button
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(0),
-                    backgroundColor: StyleColor.appBarColor,
-                    splashFactory: InkRipple.splashFactory,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                            ],
+                          );
+                        else
+                          return PopupDialog.noResult();
+                      }
+                      return AnimateLoading();
+                    },
+                  )),
+                  //Button
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.all(0),
+                      backgroundColor: StyleColor.appBarColor,
+                      splashFactory: InkRipple.splashFactory,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  child: Container(
-                    height: 50,
-                    width: 150,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Button.Submit'.tr(),
-                      style: StyleColor.textStyleKhmerDangrekAuto(
-                          fontSize: 16, color: Colors.white),
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Button.Submit'.tr(),
+                        style: StyleColor.textStyleKhmerDangrekAuto(
+                            fontSize: 16, color: Colors.white),
+                      ),
                     ),
-                  ),
-                  onPressed: onClickSubmit,
-                )
-              ],
+                    onPressed: onClickSubmit,
+                  )
+                ],
+              ),
             ),
           ),
         ),

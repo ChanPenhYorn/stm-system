@@ -89,6 +89,7 @@ class _LoginState extends State<Login> {
               username: usernameInputController.text.trim(),
               password: passwordInputController.text);
         }
+        await Singleton.instance.writeLoginToken(token: res.data!);
         Singleton.instance.token = res.data!;
         widget.isLoggedOut = false;
         // Navigat

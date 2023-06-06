@@ -138,7 +138,7 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
                     backgroundColor: StyleColor.appBarColor,
                   ),
                   child: Container(
-                    height: 30,
+                    height: 40,
                     alignment: Alignment.center,
                     child: Text(
                       DateFormat('MMMM', "km").format(date) + " ${date.year}",
@@ -414,17 +414,17 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
 
   List<AxisKeyDataModel> getSecondaryAxisY() {
     List<AxisKeyDataModel> list = [];
-    if (Extension.getPermissionByActivity(
-            activiyName: "Revenue Report - Car Revenue Truck", activityEn: true)
-        .GET)
-      list.add(
-        AxisKeyDataModel(
-          label: "ចំណូល",
-          data: "income-dollar",
-          colorRgb: StyleColor.etcColor,
-          chartType: CHART_TYPE_ENUM.LINE_CHART,
-        ),
-      );
+    // if (Extension.getPermissionByActivity(
+    //         activiyName: "Revenue Report - Car Revenue Truck", activityEn: true)
+    //     .GET)
+    //   list.add(
+    //     AxisKeyDataModel(
+    //       label: "ចំណូល",
+    //       data: "income-dollar",
+    //       colorRgb: StyleColor.etcColor,
+    //       chartType: CHART_TYPE_ENUM.LINE_CHART,
+    //     ),
+    //   );
     return list;
   }
 
@@ -505,8 +505,6 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
                                     animationDuration: duration,
                                     primaryAxisYGridLine: 0.3,
                                     secondaryAxisYGridLine: 0,
-                                    // primaryAxisYInterval: 2000,
-                                    // secondaryAxisYInterval: 4000,
                                     sideBySideSeries: false,
                                     primaryAxisXInterval: getIntervalByLength(
                                         snapshot.data!.data!.length),
@@ -533,7 +531,7 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
                                   );
                                 },
                                 title:
-                                    "តារាងទិន្នន័យដឹកជញ្ជូន និងចំណូល${Extension.getTitleBySegmentIndex(
+                                    "តារាងទិន្នន័យដឹកជញ្ជូន ${Extension.getTitleBySegmentIndex(
                                   selectedSegmentType: selectedSegmentType,
                                   date: date,
                                 )}",

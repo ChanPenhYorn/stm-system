@@ -70,21 +70,6 @@ class STMDataGridSource extends DataGridSource {
             ),
           ),
         ),
-        StackedHeaderCell(
-          columnNames: <String>[
-            'income-dollar',
-            'income-total-percent',
-          ],
-          child: Container(
-            alignment: Alignment.center,
-            child: Text(
-              'ចំណូល',
-              style: StyleColor.textStyleKhmerContentAuto(),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
       ])
     ];
     return stackedHeaderRows;
@@ -101,37 +86,6 @@ class STMDataGridSource extends DataGridSource {
     return dateStr.toDateYYYYMMDD();
   }
 
-  // DataGridRow getTotalRow(STMReportDataModel reportDataModel) {
-  //   return DataGridRow(cells: [
-  //     DataGridCell(columnName: '', value: "Total"),
-  //     DataGridCell<int>(
-  //       columnName: 'transaction-digital',
-  //       value: deductionModel.total!.transactionDigital!.toInt(),
-  //     ),
-  //     DataGridCell<double>(
-  //       columnName: 'transaction-digital-total-percent',
-  //       value: deductionModel.total!.transactionDigitalTotalPercent!,
-  //     ),
-  //     DataGridCell<int>(
-  //       columnName: 'transaction-total',
-  //       value: deductionModel.total!.transactionTotal!.toInt(),
-  //     ),
-  //     DataGridCell<double>(
-  //       columnName: 'amount-digital-total-dollar',
-  //       value: deductionModel.total!.amountDigitalTotalDollar,
-  //     ),
-  //     DataGridCell<double>(
-  //       columnName: 'amount-digital-total-percent',
-  //       value: deductionModel.total!.amountDigitalTotalPercent!,
-  //     ),
-  //     DataGridCell<double>(
-  //       columnName: 'amount-total',
-  //       value: deductionModel.total!.amountTotal,
-  //     ),
-  //   ]);
-  // }
-
-  //Init buildSTMDReport Rows
   void buildSTMDReport(
       {required STMReportModel reportModel,
       required TABLE_DATE_TYPE_ENUM tableDateType}) {
@@ -172,16 +126,6 @@ class STMDataGridSource extends DataGridSource {
             columnName: 'weight-total-percent',
             value: null,
           ),
-
-          //Add income-dollar
-
-          DataGridCell<double>(
-            columnName: 'income-dollar',
-            value: reportModel.total!.incomeDollar,
-          ),
-
-          //Add income-total-percent
-          DataGridCell<double>(columnName: 'income-total-percent', value: null),
         ],
       ),
     );
@@ -235,21 +179,6 @@ class STMDataGridSource extends DataGridSource {
         DataGridCell<double>(
           columnName: 'weight-total-percent',
           value: data.weightTotalPercent!,
-        ),
-      );
-      //Add income-dollar
-      listCell.add(
-        DataGridCell<double>(
-          columnName: 'income-dollar',
-          value: data.incomeDollar,
-        ),
-      );
-
-      //Add income-total-percent
-      listCell.add(
-        DataGridCell<double>(
-          columnName: 'income-total-percent',
-          value: data.incomeTotalPercent!,
         ),
       );
       _dataGridRows.add(DataGridRow(cells: listCell));
@@ -389,60 +318,6 @@ class STMDataGridSource extends DataGridSource {
         ),
       ),
     );
-    //Income
-    listColumn.add(
-      GridColumn(
-        columnName: "income-dollar",
-        visible: Extension.getPermissionByActivity(
-                    activiyName: "Revenue Report - Car Revenue Truck",
-                    activityEn: true)
-                .GET
-            ? true
-            : false,
-        width: Extension.getDeviceType() == DeviceType.PHONE ? 130 : double.nan,
-        columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
-            ? ColumnWidthMode.none
-            : ColumnWidthMode.fill,
-        // allowSorting: true,
-        label: Container(
-          alignment: Alignment.centerRight,
-          child: Text(
-            "ចំណូលសរុប",
-            style: StyleColor.textStyleKhmerContentAuto(
-              color: StyleColor.digitalColor,
-            ),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ),
-    );
-    listColumn.add(
-      GridColumn(
-        columnName: "income-total-percent",
-        visible: Extension.getPermissionByActivity(
-                    activiyName: "Revenue Report - Car Revenue Percent Truck",
-                    activityEn: true)
-                .GET
-            ? true
-            : false,
-        width: Extension.getDeviceType() == DeviceType.PHONE ? 130 : double.nan,
-        columnWidthMode: Extension.getDeviceType() == DeviceType.PHONE
-            ? ColumnWidthMode.none
-            : ColumnWidthMode.fill,
-        // allowSorting: true,
-        label: Container(
-          alignment: Alignment.centerRight,
-          child: Text(
-            "ភាគរយ",
-            style: StyleColor.textStyleKhmerContentAuto(
-                color: StyleColor.etcColor),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ),
-    );
   }
 
   List<GridColumn> getColumn() => listColumn;
@@ -538,14 +413,6 @@ class STMDataGridSource extends DataGridSource {
             ],
           ),
         ),
-        // Container(
-        //   alignment: Alignment.centerRight,
-        //   padding: const EdgeInsets.all(8),
-        //   child: Text(
-        //     row.getCells()[0].value.toString(),
-        //     overflow: TextOverflow.ellipsis,
-        //   ),
-        // ),
         Container(
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.all(8),
@@ -583,26 +450,6 @@ class STMDataGridSource extends DataGridSource {
           child: Text(
             row.getCells()[4].value != null
                 ? (row.getCells()[4].value as double).toPercentFormat()
-                : "",
-            textAlign: TextAlign.right,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Container(
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            (row.getCells()[5].value as double).toDollarCurrency(),
-            textAlign: TextAlign.right,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Container(
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.all(8),
-          child: Text(
-            row.getCells()[6].value != null
-                ? (row.getCells()[6].value as double).toPercentFormat()
                 : "",
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,

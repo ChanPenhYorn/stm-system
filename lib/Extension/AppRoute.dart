@@ -8,6 +8,9 @@ import 'package:stm_report_app/Widget/Home/Web/Dashboard_Web.dart';
 import 'package:stm_report_app/Widget/Language/SelectLanguage.dart';
 import 'package:stm_report_app/Widget/PriceList/PriceList.dart';
 import 'package:stm_report_app/Widget/Setting/AdminSetting.dart';
+import 'package:stm_report_app/Widget/Setting/Company/Company.dart';
+import 'package:stm_report_app/Widget/Setting/Customer/Customer.dart';
+import 'package:stm_report_app/Widget/Setting/Product/Product.dart';
 import 'package:stm_report_app/Widget/Setting/Role/Role.dart';
 import 'package:stm_report_app/Widget/Setting/User/User.dart';
 import 'package:stm_report_app/Widget/Setting/User/UserProfileView.dart';
@@ -26,6 +29,10 @@ class AppRoute {
   static const user = "/user";
   static const approval = "/approval";
   static const priceList = "/price_list";
+  static const company = "/company";
+  static const customer = "/customer";
+  static const product = "/product";
+  static const zone = "/zone";
 
   static final GoRouter routes = GoRouter(routes: <GoRoute>[
     GoRoute(
@@ -83,9 +90,31 @@ class AppRoute {
       builder: (BuildContext context, state) => PriceList(),
       redirect: (context, state) => _redirect(context),
     ),
+    GoRoute(
+      path: company,
+      builder: (BuildContext context, state) => Company(),
+      redirect: (context, state) => _redirect(context),
+    ),
+    GoRoute(
+      path: customer,
+      builder: (BuildContext context, state) => Customer(),
+      redirect: (context, state) => _redirect(context),
+    ),
+    GoRoute(
+      path: product,
+      builder: (BuildContext context, state) => Product(),
+      redirect: (context, state) => _redirect(context),
+    ),
+    GoRoute(
+      path: zone,
+      builder: (BuildContext context, state) => PriceList(),
+      redirect: (context, state) => _redirect(context),
+    ),
   ]);
 
-  static String? _redirect(BuildContext context) {
-    return Singleton.instance.token != null ? null : "/login";
+  static Future<String?> _redirect(BuildContext context) async {
+    var token = await Singleton.instance.readLoginToken();
+    print('res=${token}');
+    return token == true ? null : "/login";
   }
 }

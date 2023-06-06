@@ -414,22 +414,6 @@ class _STMReportState extends State<STMReport> {
     return list;
   }
 
-  List<AxisKeyDataModel> getSecondaryAxisY() {
-    List<AxisKeyDataModel> list = [];
-    if (Extension.getPermissionByActivity(
-            activiyName: "Revenue Report - Car Revenue Truck", activityEn: true)
-        .GET)
-      list.add(
-        AxisKeyDataModel(
-          label: "ចំណូល",
-          data: "income-dollar",
-          colorRgb: StyleColor.etcColor,
-          chartType: CHART_TYPE_ENUM.LINE_CHART,
-        ),
-      );
-    return list;
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

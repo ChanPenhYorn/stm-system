@@ -101,10 +101,14 @@ class _STMReportDetailState extends State<STMReportDetail> {
                         EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
                     backgroundColor: StyleColor.appBarColor,
                   ),
-                  child: Text(
-                    DateFormat('d MMMM', 'km').format(date) + " ${date.year}",
-                    style: StyleColor.textStyleKhmerContentAuto(
-                      color: Colors.white,
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    child: Text(
+                      DateFormat('d MMMM', 'km').format(date) + " ${date.year}",
+                      style: StyleColor.textStyleKhmerContentAuto(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -112,7 +116,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
             ),
             //Search
             Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 10),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: TextFormField(
                 style: StyleColor.textStyleKhmerContent14,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -519,16 +523,15 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              child: Text(
-                                                snapshot.data!.data!.length
-                                                    .toString(),
-                                                style: StyleColor
-                                                    .textStyleKhmerDangrekAuto(
-                                                  fontSize: 14,
-                                                  color: Colors.white,
-                                                ),
+                                          Container(
+                                            width: 150,
+                                            child: Text(
+                                              snapshot.data!.data!.length
+                                                  .toString(),
+                                              style: StyleColor
+                                                  .textStyleKhmerDangrekAuto(
+                                                fontSize: 14,
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ),

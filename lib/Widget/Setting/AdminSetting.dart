@@ -32,81 +32,6 @@ class _AdminSettingState extends State<AdminSetting> {
   }
 
   List<Widget> listButton = <Widget>[];
-
-  // void initButtonTablet() {
-  //   int range = Singleton.instance.token!.permission!.length;
-  //   for (int i = 0; i < range; i++) {
-  //     if (Singleton.instance.token!.permission![i].grant!.substring(0, 1) ==
-  //             "1" &&
-  //         Singleton.instance.token!.permission![i].located == "setting") {
-  //       int indexInListButton = Singleton.instance.dashboardButton.indexWhere(
-  //           (d) =>
-  //               d.buttonTitle ==
-  //               Singleton.instance.token!.permission![i].widgetKh);
-  //       if (indexInListButton >= 0) {
-  //         listButton.add(
-  //           InkWell(
-  //             onTap: () {
-  //               Singleton
-  //                   .instance.dashboardButton[indexInListButton].initFunc!();
-  //               Navigator.pushNamed(
-  //                   context,
-  //                   Singleton
-  //                       .instance.dashboardButton[indexInListButton].route!);
-  //             },
-  //             child: Container(
-  //               alignment: Alignment.center,
-  //               child: Container(
-  //                 child: Column(
-  //                   mainAxisSize: MainAxisSize.min,
-  //                   children: <Widget>[
-  //                     SvgPicture.asset(
-  //                       Singleton
-  //                           .instance.dashboardButton[indexInListButton].icon!,
-  //                       color: StyleColor.appBarColor,
-  //                       height: 40,
-  //                       width: 40,
-  //                     ),
-  //                     SizedBox(
-  //                       height: 10,
-  //                     ),
-  //                     Text(
-  //                       Singleton.instance.dashboardButton[indexInListButton]
-  //                           .buttonTitle!
-  //                           .tr(),
-  //                       style: StyleColor.textStyleKhmerContentAuto(
-  //                         fontSize: 16,
-  //                         color: Colors.black,
-  //                       ),
-  //                     )
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //     }
-  //   }
-  //   int mod = listButton.length % 4;
-  //   if (mod != 0) {
-  //     var loopLength;
-  //     var value1 = listButton.length + 1;
-  //     if (value1 % 4 == 0)
-  //       loopLength = 2;
-  //     else {
-  //       loopLength = 3;
-  //     }
-  //     for (int y = 0; y < loopLength; y++) {
-  //       listButton.add(
-  //         InkWell(
-  //           child: Container(),
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
-
   void initButtonPhone() {
     int range = Singleton.instance.token!.permission!.length;
     for (int i = 0; i < range; i++) {
@@ -187,7 +112,7 @@ class _AdminSettingState extends State<AdminSetting> {
   }
 
   int getAxisCount() {
-    return Extension.getDeviceType() == DeviceType.PHONE ? 3 : 6;
+    return Extension.getDeviceType() == DeviceType.PHONE ? 3 : 8;
   }
 
   @override

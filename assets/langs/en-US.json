@@ -22,7 +22,23 @@
     "EditRolePermission" : "Edit Role Permission",
     "Register" : "Register",
     "ScanQR" : "Scan QR Code",
-    "PriceList" : "Price List"
+    "PriceList" : "Price List",
+    "Company" : "Company",
+    "CompanyEntity": {
+      "Info": "Company Info"
+    },
+    "Customer": "Customer",
+    "CustomerEntity": {
+      "Info": "Customer Info"
+    },
+    "Product": "Product",
+    "ProductEntity": {
+      "Info": "Product Info"
+    },
+    "Zone": "Zone",
+    "ZonerEntity": {
+      "Info": "Zone Info"
+    }
   },
   "Home": {
     "SeeMore": "See More"
@@ -88,7 +104,11 @@
     "FullNameEn" : "Full Name (English)៖",
     "References" : "Document References",
     "NoReferences" : "No Document References",
-    "RegisterInfo" : "Register Info"
+    "RegisterInfo" : "Register Info",
+    "Description": "Description",
+    "PhoneNumber" : "Tel",
+    "Address": "address"
+
   },
   "TechInspection" : {
     "Year" : "Year",
