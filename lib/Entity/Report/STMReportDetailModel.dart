@@ -32,6 +32,10 @@ class STMReportDetailDataModel {
   String? couponInId;
   String? couponOutId;
   String? company;
+  String? companyName;
+  String? zoneName;
+  String? productName;
+  String? customerName;
   String? frontPlateNumber;
   String? backPlateNumber;
   String? stationInId;
@@ -46,6 +50,7 @@ class STMReportDetailDataModel {
   String? createdBy;
   int? status;
   FrontPlateObj? frontPlateObj;
+  BackPlateObj? backPlateObj;
   CouponIn? couponIn;
   CouponIn? couponOut;
 
@@ -54,6 +59,10 @@ class STMReportDetailDataModel {
       this.couponInId,
       this.couponOutId,
       this.company,
+      this.companyName,
+      this.zoneName,
+      this.productName,
+      this.customerName,
       this.frontPlateNumber,
       this.backPlateNumber,
       this.stationInId,
@@ -68,6 +77,7 @@ class STMReportDetailDataModel {
       this.createdBy,
       this.status,
       this.frontPlateObj,
+      this.backPlateObj,
       this.couponIn,
       this.couponOut});
 
@@ -76,10 +86,14 @@ class STMReportDetailDataModel {
     couponInId = json['coupon_in_id'];
     couponOutId = json['coupon_out_id'];
     company = json['company'];
+    companyName = json['company_name'];
+    zoneName = json['zone_name'];
+    productName = json['product_name'];
+    customerName = json['customer_name'];
     frontPlateNumber = json['front_plate_number'];
     backPlateNumber = json['back_plate_number'];
-    stationInId = json['station_in_id'];
-    stationOutId = json['station_out_id'];
+    stationInId = json['station_in_id'] ?? "";
+    stationOutId = json['station_out_id'] ?? "";
     weightInDate = json['weight_in_date'];
     weightOutDate = json['weight_out_date'];
     weightIn = json['weight_in'];
@@ -91,6 +105,9 @@ class STMReportDetailDataModel {
     status = json['status'];
     frontPlateObj = json['front_plate_obj'] != null
         ? new FrontPlateObj.fromJson(json['front_plate_obj'])
+        : null;
+    backPlateObj = json['back_plate_obj'] != null
+        ? new BackPlateObj.fromJson(json['back_plate_obj'])
         : null;
     couponIn = json['coupon_in'] != null
         ? new CouponIn.fromJson(json['coupon_in'])
@@ -106,6 +123,10 @@ class STMReportDetailDataModel {
     data['coupon_in_id'] = this.couponInId;
     data['coupon_out_id'] = this.couponOutId;
     data['company'] = this.company;
+    data['company_name'] = this.companyName;
+    data['zone_name'] = this.zoneName;
+    data['customer_name'] = this.customerName;
+    data['product_name'] = this.productName;
     data['front_plate_number'] = this.frontPlateNumber;
     data['back_plate_number'] = this.backPlateNumber;
     data['station_in_id'] = this.stationInId;
@@ -121,6 +142,9 @@ class STMReportDetailDataModel {
     data['status'] = this.status;
     if (this.frontPlateObj != null) {
       data['front_plate_obj'] = this.frontPlateObj!.toJson();
+    }
+    if (this.backPlateObj != null) {
+      data['back_plate_obj'] = this.backPlateObj!.toJson();
     }
     if (this.couponIn != null) {
       data['coupon_in'] = this.couponIn!.toJson();
@@ -158,6 +182,32 @@ class FrontPlateObj {
   }
 }
 
+class BackPlateObj {
+  String? code;
+  String? nameKh;
+  String? nameEn;
+  String? plateNumberFormatted;
+
+  BackPlateObj(
+      {this.code, this.nameKh, this.nameEn, this.plateNumberFormatted});
+
+  BackPlateObj.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    nameKh = json['name_kh'];
+    nameEn = json['name_en'];
+    plateNumberFormatted = json['plate_number_formatted'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['code'] = this.code;
+    data['name_kh'] = this.nameKh;
+    data['name_en'] = this.nameEn;
+    data['plate_number_formatted'] = this.plateNumberFormatted;
+    return data;
+  }
+}
+
 class CouponIn {
   String? plateFrontUrl;
   String? plateBackUrl;
@@ -171,6 +221,35 @@ class CouponIn {
       this.vehicleBackUrl});
 
   CouponIn.fromJson(Map<String, dynamic> json) {
+    plateFrontUrl = json['plate_front_url'];
+    plateBackUrl = json['plate_back_url'];
+    vehicleFrontUrl = json['vehicle_front_url'];
+    vehicleBackUrl = json['vehicle_back_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['plate_front_url'] = this.plateFrontUrl;
+    data['plate_back_url'] = this.plateBackUrl;
+    data['vehicle_front_url'] = this.vehicleFrontUrl;
+    data['vehicle_back_url'] = this.vehicleBackUrl;
+    return data;
+  }
+}
+
+class CouponOut {
+  String? plateFrontUrl;
+  String? plateBackUrl;
+  String? vehicleFrontUrl;
+  String? vehicleBackUrl;
+
+  CouponOut(
+      {this.plateFrontUrl,
+      this.plateBackUrl,
+      this.vehicleFrontUrl,
+      this.vehicleBackUrl});
+
+  CouponOut.fromJson(Map<String, dynamic> json) {
     plateFrontUrl = json['plate_front_url'];
     plateBackUrl = json['plate_back_url'];
     vehicleFrontUrl = json['vehicle_front_url'];

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' as IO;
 import 'package:easy_localization/easy_localization.dart';
@@ -34,7 +35,7 @@ class PopupDialog {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                constraints: BoxConstraints(maxWidth: 300, maxHeight: 300),
+                constraints: BoxConstraints(maxWidth: 400, maxHeight: 400),
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -79,7 +80,7 @@ class PopupDialog {
                       else
                         return Container();
                     }(),
-                    Text(
+                    AutoSizeText(
                       content,
                       style: StyleColor.textStyleKhmerContent,
                       textAlign: TextAlign.center,

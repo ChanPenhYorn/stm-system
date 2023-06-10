@@ -271,343 +271,360 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   Expanded(
-                    child: SmartRefresher(
-                      enablePullDown: true,
-                      header: ClassicHeader(),
-                      physics: ClampingScrollPhysics(),
-                      controller: _refreshController,
-                      onRefresh: () async {
-                        _refreshController.refreshCompleted();
-                        InitData = initData();
-                        setState(() {});
-                      },
-                      child: FutureBuilder<STMReportDetailModel>(
-                          future: InitData,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasData &&
-                                  snapshot.data!.data!.length > 0)
-                                return Column(
-                                  children: [
-                                    Expanded(
-                                      child: ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        physics: ClampingScrollPhysics(),
-                                        itemCount: snapshot.data!.data!.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            margin: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            height: 50,
-                                            child: TextButton(
-                                              onPressed: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (_) => Dialog(
-                                                    child: STMReportViewDialog(
-                                                        stmReportDataModel:
-                                                            snapshot.data!
-                                                                .data![index]),
-                                                  ),
-                                                );
-                                              },
-                                              style: TextButton.styleFrom(
-                                                  padding: EdgeInsets.zero,
-                                                  backgroundColor: (index %
-                                                              2) ==
-                                                          0
-                                                      ? StyleColor
-                                                          .blueLighterOpa01
-                                                      : StyleColor
-                                                          .appBarColorOpa01),
-                                              child: Container(
-                                                padding: EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      width: 40,
-                                                      child: Text(
-                                                        (index + 1).toString(),
-                                                        style: StyleColor
-                                                            .textStyleKhmerDangrekAuto(
-                                                          fontSize: 14,
-                                                        ),
+                    child: FutureBuilder<STMReportDetailModel>(
+                        future: InitData,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            if (snapshot.hasData &&
+                                snapshot.data!.data!.length > 0)
+                              return Column(
+                                children: [
+                                  Expanded(
+                                    child: ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemCount: snapshot.data!.data!.length,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          margin: EdgeInsets.only(
+                                              top: 5, bottom: 5),
+                                          height: 50,
+                                          child: TextButton(
+                                            onPressed: () async {
+                                              showDialog(
+                                                context: context,
+                                                builder: (_) => Dialog(
+                                                  child: STMReportViewDialog(
+                                                      stmReportDataModel:
+                                                          snapshot.data!
+                                                              .data![index]),
+                                                ),
+                                              );
+                                            },
+                                            style: TextButton.styleFrom(
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    (index % 2) == 0
+                                                        ? StyleColor
+                                                            .blueLighterOpa01
+                                                        : StyleColor
+                                                            .appBarColorOpa01),
+                                            child: Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 40,
+                                                    child: Text(
+                                                      (index + 1).toString(),
+                                                      style: StyleColor
+                                                          .textStyleKhmerDangrekAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    Container(
-                                                      width: 80,
-                                                      height: 50,
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          showDialog(
-                                                            useSafeArea: false,
-                                                            context: context,
-                                                            builder: (_) =>
-                                                                PhotoViewSlideOut(
-                                                              url: snapshot
-                                                                      .data!
-                                                                      .data![
-                                                                          index]
-                                                                      .couponIn!
-                                                                      .plateFrontUrl! ??
-                                                                  "",
-                                                            ),
-                                                          );
-                                                        },
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          child: Container(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    192,
-                                                                    192,
-                                                                    192,
-                                                                    0.2),
-                                                            child: ExtensionComponent
-                                                                .cachedNetworkImage(
-                                                              url: snapshot
-                                                                      .data!
-                                                                      .data![
-                                                                          index]
-                                                                      .couponIn!
-                                                                      .plateFrontUrl! ??
-                                                                  "",
-                                                              profile: true,
-                                                            ),
+                                                  ),
+                                                  Container(
+                                                    width: 80,
+                                                    height: 50,
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        showDialog(
+                                                          useSafeArea: false,
+                                                          context: context,
+                                                          builder: (_) =>
+                                                              PhotoViewSlideOut(
+                                                            url: snapshot
+                                                                    .data!
+                                                                    .data![
+                                                                        index]
+                                                                    .couponIn!
+                                                                    .plateFrontUrl! ??
+                                                                "",
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        child: Container(
+                                                          color: Color.fromRGBO(
+                                                              192,
+                                                              192,
+                                                              192,
+                                                              0.2),
+                                                          child: ExtensionComponent
+                                                              .cachedNetworkImage(
+                                                            url: snapshot
+                                                                    .data!
+                                                                    .data![
+                                                                        index]
+                                                                    .couponIn!
+                                                                    .plateFrontUrl! ??
+                                                                "",
+                                                            profile: true,
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 5,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Container(
+                                                    width: 70,
+                                                    child: Text(
+                                                      snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .frontPlateObj!
+                                                              .nameKh! +
+                                                          "\n" +
+                                                          snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .frontPlateObj!
+                                                              .plateNumberFormatted!,
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.center,
                                                     ),
-                                                    Container(
-                                                      width: 70,
-                                                      child: Text(
-                                                        snapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .frontPlateObj!
-                                                                .nameKh! +
-                                                            "\n" +
-                                                            snapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .frontPlateObj!
-                                                                .plateNumberFormatted!,
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
-                                                        textAlign:
-                                                            TextAlign.center,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .stationInId !=
+                                                              null
+                                                          ? snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .stationInId!
+                                                          : "",
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        snapshot
-                                                                .data!
-                                                                .data![index]
-                                                                .stationInId! ??
-                                                            "",
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    child: Text(
+                                                      snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .weightIn !=
+                                                              null
+                                                          ? snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .weightIn!
+                                                              .toNumberFormat()
+                                                          : "",
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Container(
-                                                      width: 100,
-                                                      child: Text(
-                                                        snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .weightIn!
-                                                            .toNumberFormat(),
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .stationOutId !=
+                                                              null
+                                                          ? snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .stationOutId
+                                                              .toString()
+                                                          : "",
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .stationOutId
-                                                            .toString(),
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    child: Text(
+                                                      snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .weightOut !=
+                                                              null
+                                                          ? snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .weightOut!
+                                                              .toNumberFormat()
+                                                          : "",
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Container(
-                                                      width: 100,
-                                                      child: Text(
-                                                        snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .weightOut!
-                                                            .toNumberFormat(),
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Expanded(
+                                                    child: Text(
+                                                      snapshot
+                                                                  .data!
+                                                                  .data![index]
+                                                                  .weightProduct !=
+                                                              null
+                                                          ? snapshot
+                                                              .data!
+                                                              .data![index]
+                                                              .weightProduct!
+                                                              .toNumberFormat()
+                                                          : "",
+                                                      style: StyleColor
+                                                          .textStyleKhmerContentAuto(
+                                                        fontSize: 14,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        snapshot
-                                                            .data!
-                                                            .data![index]
-                                                            .weightProduct!
-                                                            .toNumberFormat(),
-                                                        style: StyleColor
-                                                            .textStyleKhmerContentAuto(
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    SizedBox(
-                                      height: 5,
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: StyleColor.appBarColor
+                                          .withOpacity(0.6),
                                     ),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.only(left: 10, right: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: StyleColor.appBarColor
-                                            .withOpacity(0.6),
-                                      ),
-                                      height: 50,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 40,
-                                            child: Text(
-                                              'សរុប'.tr(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                              ),
+                                    height: 50,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 40,
+                                          child: Text(
+                                            'សរុប'.tr(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 14,
+                                              color: Colors.white,
                                             ),
                                           ),
-                                          Container(
-                                            width: 150,
-                                            child: Text(
-                                              snapshot.data!.data!.length
-                                                  .toString(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                              ),
+                                        ),
+                                        Container(
+                                          width: 150,
+                                          child: Text(
+                                            snapshot.data!.data!.length
+                                                .toString(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 14,
+                                              color: Colors.white,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Container(),
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            child: Text(
-                                              () {
-                                                int total = 0;
-                                                total = snapshot.data!.data!
-                                                    .map((e) => e.weightIn)
-                                                    .reduce((value, element) =>
-                                                        value! + element!)!;
-                                                return total.toNumberFormat();
-                                              }(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                                bold: true,
-                                              ),
+                                        ),
+                                        Expanded(
+                                          child: Container(),
+                                        ),
+                                        Container(
+                                          width: 100,
+                                          child: Text(
+                                            () {
+                                              int total = 0;
+                                              total = snapshot.data!.data!
+                                                  .map((e) => e.weightIn ?? 0)
+                                                  .reduce((value, element) =>
+                                                      value + element);
+                                              return total.toNumberFormat();
+                                            }(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              bold: true,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Container(),
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            child: Text(
-                                              () {
-                                                int total = 0;
-                                                total = snapshot.data!.data!
-                                                    .map((e) => e.weightOut)
-                                                    .reduce((value, element) =>
-                                                        value! + element!)!;
-                                                return total.toNumberFormat();
-                                              }(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                                bold: true,
-                                              ),
+                                        ),
+                                        Expanded(
+                                          child: Container(),
+                                        ),
+                                        Container(
+                                          width: 100,
+                                          child: Text(
+                                            () {
+                                              int total = 0;
+                                              total = snapshot.data!.data!
+                                                  .map((e) => e.weightOut ?? 0)
+                                                  .reduce((value, element) =>
+                                                      value + element);
+                                              return total.toNumberFormat();
+                                            }(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              bold: true,
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              () {
-                                                int total = 0;
-                                                total = snapshot.data!.data!
-                                                    .map((e) => e.weightProduct)
-                                                    .reduce((value, element) =>
-                                                        value! + element!)!;
-                                                return total.toNumberFormat();
-                                              }(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
-                                                color: Colors.white,
-                                                bold: true,
-                                              ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            () {
+                                              int total = 0;
+                                              total = snapshot.data!.data!
+                                                  .map((e) =>
+                                                      e.weightProduct ?? 0)
+                                                  .reduce((value, element) =>
+                                                      value + element);
+                                              return total.toNumberFormat();
+                                            }(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              bold: true,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                );
-                              return PopupDialog.noResult();
-                            }
-                            return AnimateLoading();
-                            return Container();
-                          }),
-                    ),
+                                  ),
+                                ],
+                              );
+                            return PopupDialog.noResult();
+                          }
+                          return AnimateLoading();
+                          return Container();
+                        }),
                   ),
                 ],
               ),

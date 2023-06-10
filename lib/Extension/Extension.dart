@@ -13,8 +13,11 @@ class Extension {
   }
 
   static Widget getNoImage() {
-    return Image.asset(
-      'assets/image/noimage.jpg',
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.asset(
+        'assets/image/noimage.jpg',
+      ),
     );
   }
 

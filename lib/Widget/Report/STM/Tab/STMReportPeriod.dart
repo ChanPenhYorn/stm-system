@@ -188,7 +188,7 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
                     backgroundColor: StyleColor.appBarColor,
                   ),
                   child: Container(
-                    height: 30,
+                    height: 40,
                     alignment: Alignment.center,
                     child: Text(
                       DateFormat('yyyy').format(date),

@@ -170,7 +170,7 @@ class STMDataGridSource extends DataGridSource {
       listCell.add(
         DataGridCell<double>(
           columnName: 'weight-kg',
-          value: data.weightKg!,
+          value: data.weightKg ?? 0,
         ),
       );
 
