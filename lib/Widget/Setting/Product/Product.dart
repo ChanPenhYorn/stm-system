@@ -8,6 +8,8 @@ import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Setting/Customer/AddCustomer.dart';
+import 'package:stm_report_app/Widget/Setting/Product/AddProduct.dart';
+import 'package:stm_report_app/Widget/Setting/Product/ProductView.dart';
 
 class Product extends StatefulWidget {
   const Product({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class _ProductState extends State<Product> {
         .get<List<ProductModel>, ProductModel>(
             context: context,
             loading: false,
-            baseUrl: ApiEndPoint.customerList,
+            baseUrl: ApiEndPoint.productList,
             deserialize: (e) => ProductModel.fromJson(e));
     if (res.success!)
       return res.data!;
@@ -36,7 +38,7 @@ class _ProductState extends State<Product> {
     var result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => AddCustomer(),
+        builder: (_) => AddProduct(),
       ),
     );
     if (result != null && result) {
@@ -45,17 +47,17 @@ class _ProductState extends State<Product> {
     }
   }
 
-  void onClickView(ProductModel customerModel) async {
-    // var result = await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (_) => CustomerView(customerModel: customerModel),
-    //   ),
-    // );
-    // if (result != null && result) {
-    //   InitData = initData();
-    //   setState(() {});
-    // }
+  void onClickView(ProductModel productModel) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProductView(productModel: productModel),
+      ),
+    );
+    if (result != null && result) {
+      InitData = initData();
+      setState(() {});
+    }
   }
 
   void onClickDelete(String code) async {
@@ -66,7 +68,7 @@ class _ProductState extends State<Product> {
         context: context,
         loading: true,
         deserialize: (e) => e.toString(),
-        baseUrl: ApiEndPoint.customerDelete,
+        baseUrl: ApiEndPoint.productDelete,
         body: body,
       );
       if (res.success!) {
@@ -91,7 +93,7 @@ class _ProductState extends State<Product> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Navigation.Customer'.tr(),
+            'Navigation.Product'.tr(),
             style: StyleColor.textStyleKhmerDangrekAuto(
                 fontSize: 18, color: Colors.white),
           ),
@@ -138,7 +140,7 @@ class _ProductState extends State<Product> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    'Navigation.Customer'.tr(),
+                                    'Navigation.Product'.tr(),
                                     style: StyleColor.textStyleKhmerDangrekAuto(
                                       fontSize: 14,
                                       color: Colors.white,
@@ -208,7 +210,7 @@ class _ProductState extends State<Product> {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                snapshot.data![index].code ??
+                                                snapshot.data![index].nameKh ??
                                                     "",
                                                 style: StyleColor
                                                     .textStyleKhmerContentAuto(
@@ -232,7 +234,7 @@ class _ProductState extends State<Product> {
                                               child: Extension
                                                           .getPermissionByActivity(
                                                               activiyName:
-                                                                  "Customer",
+                                                                  "Product",
                                                               activityEn: true)
                                                       .DELETE
                                                   ? IconButton(
@@ -269,7 +271,7 @@ class _ProductState extends State<Product> {
         ),
       ),
       floatingActionButton: Extension.getPermissionByActivity(
-                  activiyName: "Customer", activityEn: true)
+                  activiyName: "Product", activityEn: true)
               .GET
           ? FloatingActionButton(
               onPressed: onClickAdd,

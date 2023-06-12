@@ -33,10 +33,10 @@
     },
     "Product": "ទំនិញ",
     "ProductEntity": {
-      "Info": "ព៌តមានតំបន់"
+      "Info": "ព៌តមានទំនិញ់"
     },
     "Zone": "តំបន់",
-    "ZonerEntity": {
+    "ZoneEntity": {
       "Info": "ព៌តមានតំបន់"
     }
   },

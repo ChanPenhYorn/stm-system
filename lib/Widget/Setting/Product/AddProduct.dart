@@ -7,37 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
+import 'package:stm_report_app/Entity/Product/ProductModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionComponent.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 
-class CustomerEdit extends StatefulWidget {
-  final CustomerModel customerModel;
-  CustomerEdit({Key? key, required this.customerModel}) : super(key: key);
+class AddProduct extends StatefulWidget {
+  AddProduct({Key? key}) : super(key: key);
 
   @override
-  State<CustomerEdit> createState() => _CustomerEditState();
+  State<AddProduct> createState() => _AddProductState();
 }
 
-class _CustomerEditState extends State<CustomerEdit> {
+class _AddProductState extends State<AddProduct> {
   @override
   void initState() {
     // TODO: implement initState
-    customerFirstNameCon.text = widget.customerModel.firstName ?? "";
-    customerLastNameCon.text = widget.customerModel.lastName ?? "";
-    customerDescCon.text = widget.customerModel.description ?? "";
-    customerPhoneNumberCon.text = widget.customerModel.phoneNumber ?? "";
-    customerAddressCon.text = widget.customerModel.address ?? "";
     super.initState();
   }
 
-  TextEditingController customerFirstNameCon = TextEditingController();
-  TextEditingController customerLastNameCon = TextEditingController();
-  TextEditingController customerDescCon = TextEditingController();
-  TextEditingController customerPhoneNumberCon = TextEditingController();
-  TextEditingController customerAddressCon = TextEditingController();
+  TextEditingController nameEnCon = TextEditingController();
+  TextEditingController nameKhCon = TextEditingController();
+  TextEditingController descriptionCon = TextEditingController();
   String logoBase64 = "";
   File? imageProfile;
   XFile? imageProfileWeb;
@@ -48,23 +40,19 @@ class _CustomerEditState extends State<CustomerEdit> {
     if (available) {
       var prompt = await PopupDialog.yesNoPrompt(context);
       if (prompt) {
-        var body = CustomerModel(
-          code: widget.customerModel.code!,
-          firstName: customerFirstNameCon.text.trim(),
-          lastName: customerLastNameCon.text.trim(),
-          description: customerDescCon.text.trim(),
-          address: customerAddressCon.text.trim(),
-          phoneNumber: customerPhoneNumberCon.text.trim(),
+        var body = ProductModel(
+          nameEn: nameEnCon.text.trim(),
+          nameKh: nameKhCon.text.trim(),
           image: logoBase64,
         ).toJson();
         var res = await Singleton.instance.apiExtension.post<String, String>(
             context: context,
             loading: true,
-            baseUrl: ApiEndPoint.customerUpdate,
+            baseUrl: ApiEndPoint.productCreate,
             body: body,
             deserialize: (e) => e.toString());
         if (res.success!) {
-          await PopupDialog.showSuccess(context, data: true, layerContext: 3);
+          await PopupDialog.showSuccess(context, data: true, layerContext: 2);
         } else
           PopupDialog.showFailed(context, data: false);
       }
@@ -99,7 +87,7 @@ class _CustomerEditState extends State<CustomerEdit> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Navigation.Customer'.tr(),
+            'Navigation.Product'.tr(),
             style: StyleColor.textStyleKhmerDangrekAuto(
                 fontSize: 18, color: Colors.white),
           ),
@@ -119,7 +107,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                 shrinkWrap: true,
                 children: [
                   Text(
-                    'Navigation.CustomerEntity.Info'.tr(),
+                    'Navigation.ProductEntity.Info'.tr(),
                     style: StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
@@ -128,12 +116,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                       alignment: Alignment.center,
                       children: [
                         () {
-                          if (imageProfile == null && imageProfileWeb == null)
-                            return ExtensionComponent.cachedNetworkImage(
-                              url: widget.customerModel.imagePath ?? "",
-                              profile: false,
-                            );
-                          else if (imageProfile != null)
+                          if (imageProfile != null)
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.file(
@@ -198,7 +181,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                               Expanded(
                                 child: Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('នាមត្រកូល'.tr(),
+                                    child: Text('ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
                                         style: StyleColor
                                             .textStyleKhmerContent14Grey)),
                               ),
@@ -214,7 +197,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: customerLastNameCon,
+                                  controller: nameKhCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -246,7 +229,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                             ],
                           ),
                         ),
-                        //Customer First Name
+                        //Name En
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.blueLighterOpa01,
@@ -256,7 +239,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                               Expanded(
                                 child: Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('នាមខ្លួន'.tr(),
+                                    child: Text('ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
                                         style: StyleColor
                                             .textStyleKhmerContent14Grey)),
                               ),
@@ -272,7 +255,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: customerFirstNameCon,
+                                  controller: nameEnCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -304,7 +287,8 @@ class _CustomerEditState extends State<CustomerEdit> {
                             ],
                           ),
                         ),
-                        //Customer Description
+
+                        //Product Description
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.appBarColorOpa01,
@@ -330,7 +314,7 @@ class _CustomerEditState extends State<CustomerEdit> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: customerDescCon,
+                                  controller: descriptionCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -346,125 +330,6 @@ class _CustomerEditState extends State<CustomerEdit> {
                                             color: Colors.grey),
                                     hintText: 'បរិយាយ'.tr(),
                                     prefixIcon: Icon(Icons.description),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    contentPadding: EdgeInsets.only(
-                                        left: 10,
-                                        top: 13,
-                                        right: 10,
-                                        bottom: 15),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //Phone Number
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.blueLighterOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('លេខទូរស័ព្ទ'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Message.PleaseInputCorrectly"
-                                          .tr();
-                                    }
-                                    return null;
-                                  },
-                                  textCapitalization:
-                                      TextCapitalization.characters,
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  style: StyleColor.textStyleKhmerContent,
-                                  controller: customerPhoneNumberCon,
-                                  decoration: InputDecoration(
-                                    errorStyle:
-                                        StyleColor.textStyleKhmerContent12Red,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2,
-                                          color: StyleColor.appBarColor),
-                                    ),
-                                    hintStyle:
-                                        StyleColor.textStyleKhmerDangrekAuto(
-                                            color: Colors.grey),
-                                    hintText: 'លេខទូរស័ព្ទ'.tr(),
-                                    prefixIcon: Icon(Icons.phone),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    contentPadding: EdgeInsets.only(
-                                        left: 10,
-                                        top: 13,
-                                        right: 10,
-                                        bottom: 15),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //Address
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.appBarColorOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('អាសយដ្ឋាន'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Message.PleaseInputCorrectly"
-                                          .tr();
-                                    }
-                                    return null;
-                                  },
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  style: StyleColor.textStyleKhmerContent,
-                                  controller: customerAddressCon,
-                                  decoration: InputDecoration(
-                                    errorStyle:
-                                        StyleColor.textStyleKhmerContent12Red,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2,
-                                          color: StyleColor.appBarColor),
-                                    ),
-                                    hintStyle:
-                                        StyleColor.textStyleKhmerDangrekAuto(
-                                            color: Colors.grey),
-                                    hintText: 'អាសយដ្ឋាន'.tr(),
-                                    prefixIcon:
-                                        Icon(Icons.add_location_rounded),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
 import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
+import 'package:stm_report_app/Entity/Product/ProductModel.dart';
 import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Extension/ExtensionComponent.dart';
@@ -11,17 +12,18 @@ import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
 import 'package:stm_report_app/Widget/Setting/Company/Edit/CompanyEdit.dart';
 import 'package:stm_report_app/Widget/Setting/Customer/Edit/CustomerEdit.dart';
+import 'package:stm_report_app/Widget/Setting/Product/Edit/ProductEdit.dart';
 import 'package:stm_report_app/Widget/Setting/User/Edit/UserEdit.dart';
 
-class CustomerView extends StatefulWidget {
-  CustomerModel customerModel;
-  CustomerView({Key? key, required this.customerModel}) : super(key: key);
+class ProductView extends StatefulWidget {
+  ProductModel productModel;
+  ProductView({Key? key, required this.productModel}) : super(key: key);
 
   @override
-  State<CustomerView> createState() => _CustomerViewState();
+  State<ProductView> createState() => _ProductViewState();
 }
 
-class _CustomerViewState extends State<CustomerView> {
+class _ProductViewState extends State<ProductView> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,7 +38,7 @@ class _CustomerViewState extends State<CustomerView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Navigation.Customer'.tr(),
+            'Navigation.Product'.tr(),
             style: StyleColor.textStyleKhmerDangrekAuto(
                 fontSize: 18, color: Colors.white),
           ),
@@ -44,15 +46,15 @@ class _CustomerViewState extends State<CustomerView> {
           actions: [
             () {
               if (Extension.getPermissionByActivity(
-                      activiyName: "Customer", activityEn: true)
+                      activiyName: "Product", activityEn: true)
                   .UPDATE) {
                 return InkWell(
                   onTap: () async {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => CustomerEdit(
-                          customerModel: widget.customerModel,
+                        builder: (_) => ProductEdit(
+                          productModel: widget.productModel,
                         ),
                       ),
                     );
@@ -113,14 +115,14 @@ class _CustomerViewState extends State<CustomerView> {
                                 useSafeArea: false,
                                 context: context,
                                 builder: (_) => PhotoViewSlideOut(
-                                  url: widget.customerModel.imagePath ?? "",
+                                  url: widget.productModel.imagePath ?? "",
                                 ),
                               );
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
                               child: ExtensionComponent.cachedNetworkImage(
-                                url: widget.customerModel.imagePath ?? "",
+                                url: widget.productModel.imagePath ?? "",
                                 profile: false,
                               ),
                             ),
@@ -134,7 +136,7 @@ class _CustomerViewState extends State<CustomerView> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  widget.customerModel.fullName.toString(),
+                                  widget.productModel.code.toString(),
                                   style: StyleColor.textStyleKhmerDangrekAuto(
                                     fontSize: 16,
                                   ),
@@ -144,7 +146,7 @@ class _CustomerViewState extends State<CustomerView> {
                                 height: 30,
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'ID: ${widget.customerModel.code}',
+                                  'ID: ${widget.productModel.code}',
                                   style: StyleColor.textStyleKhmerContentAuto(),
                                   textAlign: TextAlign.center,
                                 ),
@@ -187,7 +189,7 @@ class _CustomerViewState extends State<CustomerView> {
                                     alignment: Alignment.centerRight,
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
                                     child: Text(
-                                        widget.customerModel.code.toString(),
+                                        widget.productModel.code.toString(),
                                         style:
                                             StyleColor.textStyleKhmerContent)),
                               ),
@@ -195,7 +197,7 @@ class _CustomerViewState extends State<CustomerView> {
                           ),
                         ),
 
-                        //Customer Full Name
+                        //Product Khmer
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.blueLighterOpa01,
@@ -205,7 +207,7 @@ class _CustomerViewState extends State<CustomerView> {
                               Expanded(
                                 child: Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('ឈ្មោះអតិថិជន'.tr(),
+                                    child: Text('ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
                                         style: StyleColor
                                             .textStyleKhmerContent14Grey)),
                               ),
@@ -214,7 +216,37 @@ class _CustomerViewState extends State<CustomerView> {
                                   alignment: Alignment.centerRight,
                                   margin: EdgeInsets.only(top: 5, bottom: 5),
                                   child: Text(
-                                    widget.customerModel.fullName ?? "",
+                                    widget.productModel.code ?? "",
+                                    style: TextStyle(
+                                        fontFamily: 'Khmer OS Content',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //Product Eng
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          color: StyleColor.blueLighterOpa01,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text('ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerContent14Grey)),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    widget.productModel.nameEn ?? "",
                                     style: TextStyle(
                                         fontFamily: 'Khmer OS Content',
                                         fontSize: 14,
@@ -244,72 +276,11 @@ class _CustomerViewState extends State<CustomerView> {
                                   alignment: Alignment.centerRight,
                                   margin: EdgeInsets.only(top: 5, bottom: 5),
                                   child: Text(
-                                    widget.customerModel.description ?? "",
+                                    widget.productModel.description ?? "",
                                     style: TextStyle(
                                         fontFamily: 'Khmer OS Content',
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //Address
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.blueLighterOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('Label.Address'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    widget.customerModel.address ?? "",
-                                    style: TextStyle(
-                                        fontFamily: 'Khmer OS Content',
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //Phone Number
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.blueLighterOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('Label.PhoneNumber'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  child: Text(
-                                    widget.customerModel.phoneNumber ?? "",
-                                    style: TextStyle(
-                                        fontFamily: 'Khmer OS Content',
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.right,
                                   ),
                                 ),
                               ),

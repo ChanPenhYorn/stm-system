@@ -15,6 +15,7 @@ import 'package:stm_report_app/Widget/Setting/Role/Role.dart';
 import 'package:stm_report_app/Widget/Setting/User/User.dart';
 import 'package:stm_report_app/Widget/Setting/User/UserProfileView.dart';
 import 'package:stm_report_app/Widget/Setting/UserApproval/UserApproval.dart';
+import 'package:stm_report_app/Widget/Setting/Zone/Zone.dart';
 import 'package:stm_report_app/Widget/SplashScreen/SplashScreen.dart';
 
 class AppRoute {
@@ -107,7 +108,7 @@ class AppRoute {
     ),
     GoRoute(
       path: zone,
-      builder: (BuildContext context, state) => PriceList(),
+      builder: (BuildContext context, state) => Zone(),
       redirect: (context, state) => _redirect(context),
     ),
   ]);

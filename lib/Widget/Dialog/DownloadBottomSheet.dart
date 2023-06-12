@@ -70,9 +70,7 @@ class _DownloadBottomSheetState extends State<DownloadBottomSheet> {
           periodType: "daily",
           fileType: "pdf");
       Navigator.pop(context);
-      print(stream);
       if (kIsWeb) {
-        print(stream);
         await FileSaver.instance.saveFile(
           name: "file.pdf",
           ext: "pdf",

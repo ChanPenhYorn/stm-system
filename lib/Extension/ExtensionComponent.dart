@@ -24,6 +24,7 @@ class ExtensionComponent {
       double height = 80,
       bool profile = false}) {
     return CachedNetworkImage(
+      key: Key(url),
       imageUrl: Domain.domain + url,
       fit: BoxFit.cover,
       errorWidget: (context, str, dynamic) {

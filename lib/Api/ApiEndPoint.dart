@@ -8,6 +8,7 @@ class ApiEndPoint {
   static String vehicleRevenue = '/api/v1/report/vehicle-and-weight';
   static String vehicleRevenueExport =
       '/api/v1/report/vehicle-and-weight/export';
+  static String couponInvoiceExport = '/api/v1/coupon-invoice/list/export';
 
   static String couponInvoiceList = "/api/v1/coupon-invoice/list";
 

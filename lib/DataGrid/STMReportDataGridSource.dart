@@ -7,6 +7,7 @@ import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Dialog/DownloadBottomSheet.dart';
+import 'package:stm_report_app/Widget/Dialog/DownloadCouponInvoiceBottomSheet.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class STMDataGridSource extends DataGridSource {
@@ -14,6 +15,7 @@ class STMDataGridSource extends DataGridSource {
   late BuildContext context;
   late String downloadFileName;
   final TABLE_DATE_TYPE_ENUM tableDateType;
+  late bool couponInvoice;
   STMDataGridSource({
     required STMReportModel model,
     required this.tableDateType,
@@ -346,6 +348,30 @@ class STMDataGridSource extends DataGridSource {
     );
   }
 
+  void onDownloadCouponInvoiceRowClick(
+      {required String pdf, required String excel, required String date}) {
+    showModalBottomSheet(
+      // context: Singleton.instance.graphContext!,
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      builder: (_) {
+        return DownloadCouponInvoiceBottomSheet(
+          enableScreenshot: false,
+          screenshotFunc: () {},
+          filename: downloadFileName + "-" + date.toDateYYYYMMDD_NoDash(),
+          date: date,
+          pdfUrl: pdf,
+          excelUrl: excel,
+        );
+      },
+    );
+  }
+
   // Overrides
   @override
   List<DataGridRow> get rows => _dataGridRows;
@@ -383,32 +409,42 @@ class STMDataGridSource extends DataGridSource {
                 padding: const EdgeInsets.only(
                   bottom: 4,
                 ),
-                child: InkWell(
-                  onTap: () {
+                child: InkWell(onTap: () {
+                  if (tableDateType == TABLE_DATE_TYPE_ENUM.MONTHLY)
                     onDownloadRowClick(
-
-                        // date: DateTime.parse(row.getCells()[0].value)
-                        //     .toYYYYMMDD(),
-                        date: () {
-                          if (tableDateType == TABLE_DATE_TYPE_ENUM.MONTHLY) {
-                            return DateFormat("yyyy-MM")
-                                .parse(row.getCells()[0].value)
-                                .toYYYYMMDD();
-                          } else
-                            return "";
-                        }(),
-                        pdf: "report",
-                        excel: "report");
-                  },
-                  child: row.getCells()[0].value.toString() == "Total" ||
-                          tableDateType != TABLE_DATE_TYPE_ENUM.MONTHLY
-                      ? Container()
-                      : Icon(
-                          Icons.ios_share,
-                          size: 20,
-                          color: Colors.grey,
-                        ),
-                ),
+                      date: () {
+                        if (tableDateType == TABLE_DATE_TYPE_ENUM.MONTHLY) {
+                          return DateFormat("yyyy-MM")
+                              .parse(row.getCells()[0].value)
+                              .toYYYYMMDD();
+                        } else
+                          return "";
+                      }(),
+                      pdf: "report",
+                      excel: "report",
+                    );
+                  else if (tableDateType == TABLE_DATE_TYPE_ENUM.DAILY) {
+                    onDownloadCouponInvoiceRowClick(
+                      date: DateFormat("yyyy-MM-dd")
+                          .parse(row.getCells()[0].value)
+                          .toYYYYMMDD(),
+                      pdf: "report",
+                      excel: "report",
+                    );
+                  }
+                }, child: () {
+                  if (row.getCells()[0].value.toString() == "Total")
+                    return Container();
+                  else if (tableDateType == TABLE_DATE_TYPE_ENUM.MONTHLY ||
+                      tableDateType == TABLE_DATE_TYPE_ENUM.DAILY)
+                    return Icon(
+                      Icons.ios_share,
+                      size: 20,
+                      color: Colors.grey,
+                    );
+                  else
+                    return Container();
+                }()),
               ),
             ],
           ),

@@ -717,7 +717,7 @@ class PopupDialog {
     _dir = await getApplicationDocumentsDirectory();
     List<File?> listImage = [];
     if (image != null) {
-      image.forEach((e) => {listImage.add(File(e.path))});
+      image.forEach((e) => listImage.add(File(e.path)));
     }
 
     return listImage;

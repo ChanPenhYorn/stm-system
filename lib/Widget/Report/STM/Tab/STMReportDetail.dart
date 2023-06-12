@@ -71,6 +71,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            //Date Picker
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -78,6 +79,33 @@ class _STMReportDetailState extends State<STMReportDetail> {
                   'របាយការណ៍ថ្ងៃ៖ ',
                   style: StyleColor.textStyleKhmerContentAuto(),
                 ),
+                //Arrow Left
+                TextButton(
+                  onPressed: () async {
+                    date = date.subtract(Duration(days: 1));
+                    InitData = initData();
+                    setState(() {});
+                  },
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                      ),
+                    ),
+                    padding:
+                        EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
+                    backgroundColor: StyleColor.appBarColor,
+                  ),
+                  child: Container(
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      )),
+                ),
+                //Date
                 TextButton(
                   onPressed: () async {
                     var res = await showDatePicker(
@@ -96,7 +124,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                   },
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(0)),
                     padding:
                         EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
                     backgroundColor: StyleColor.appBarColor,
@@ -111,6 +139,32 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       ),
                     ),
                   ),
+                ),
+                //Arrow Right
+                TextButton(
+                  onPressed: () async {
+                    date = date.add(Duration(days: 1));
+                    InitData = initData();
+                    setState(() {});
+                  },
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    padding:
+                        EdgeInsets.only(left: 10, right: 10, bottom: 7, top: 7),
+                    backgroundColor: StyleColor.appBarColor,
+                  ),
+                  child: Container(
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      )),
                 ),
               ],
             ),

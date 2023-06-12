@@ -244,6 +244,43 @@ class ApiExtension {
     }
   }
 
+  Future<Uint8List?> downloadReportCouponInvoiceFile(BuildContext context,
+      {required String date, required periodType, required fileType}) async {
+    try {
+      AnimateLoading().showLoading(context);
+      Singleton.instance.dioBearerSecondTokenInitialize();
+
+      final res = await Singleton.instance.dio
+          .get(
+        Domain.domain +
+            "${ApiEndPoint.couponInvoiceExport}?from_date=${date}&to_date=${date}&file_type=${fileType}&type=daily",
+        options: Options(
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+              'Access-Control-Allow-Headers':
+                  'Origin, Content-Type, X-Auth-Token'
+            },
+            responseType: ResponseType.bytes,
+            receiveDataWhenStatusError: true,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 501;
+            }),
+      )
+          .catchError((err) {
+        Navigator.pop(context);
+        PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
+            success: 0);
+      });
+
+      Navigator.of(context, rootNavigator: true).pop();
+      return res.data;
+    } catch (err) {
+      return null;
+    }
+  }
+
   Future<ResponseRes<Token, Token>> userLogin(
       BuildContext context, Map<String, dynamic> body,
       {bool noLoading = false}) async {
