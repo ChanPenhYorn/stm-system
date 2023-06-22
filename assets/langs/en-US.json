@@ -38,6 +38,10 @@
     "Zone": "Zone",
     "ZoneEntity": {
       "Info": "Zone Info"
+    },
+    "Barge": "Barge",
+    "BargeEntity": {
+      "Info": "Barge Info"
     }
   },
   "Home": {

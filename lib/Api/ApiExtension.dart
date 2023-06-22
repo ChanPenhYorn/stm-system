@@ -245,7 +245,10 @@ class ApiExtension {
   }
 
   Future<Uint8List?> downloadReportCouponInvoiceFile(BuildContext context,
-      {required String date, required periodType, required fileType}) async {
+      {required String date,
+      required periodType,
+      required fileType,
+      String? param = ""}) async {
     try {
       AnimateLoading().showLoading(context);
       Singleton.instance.dioBearerSecondTokenInitialize();
@@ -253,7 +256,7 @@ class ApiExtension {
       final res = await Singleton.instance.dio
           .get(
         Domain.domain +
-            "${ApiEndPoint.couponInvoiceExport}?from_date=${date}&to_date=${date}&file_type=${fileType}&type=daily",
+            "${ApiEndPoint.couponInvoiceExport}?from_date=${date}&to_date=${date}&file_type=${fileType}&type=daily&${param}",
         options: Options(
             headers: {
               'Access-Control-Allow-Origin': '*',

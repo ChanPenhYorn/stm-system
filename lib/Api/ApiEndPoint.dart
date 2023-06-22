@@ -44,6 +44,11 @@ class ApiEndPoint {
   static String zoneDelete = "/api/v1/zone/delete";
   static String zoneCreate = "/api/v1/zone/create";
   static String zoneUpdate = "/api/v1/zone/update";
+  //Zone
+  static String bargeList = "/api/v1/barge/list";
+  static String bargeDelete = "/api/v1/barge/delete";
+  static String bargeCreate = "/api/v1/barge/create";
+  static String bargeUpdate = "/api/v1/barge/update";
 
   static String register = "/api/v1/authentication/register-approval";
   static String getApprovedAccountByUDID = "/osr/get-approve-account-by-id";

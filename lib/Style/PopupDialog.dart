@@ -81,7 +81,7 @@ class PopupDialog {
                         return Container();
                     }(),
                     AutoSizeText(
-                      content,
+                      content + " ",
                       style: StyleColor.textStyleKhmerContent,
                       textAlign: TextAlign.center,
                     ),

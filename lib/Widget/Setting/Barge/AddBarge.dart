@@ -1,35 +1,34 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
-import 'package:stm_report_app/Entity/Product/ProductModel.dart';
+import 'package:stm_report_app/Entity/Barge/BargeModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 
-class AddProduct extends StatefulWidget {
-  AddProduct({Key? key}) : super(key: key);
+class AddBarge extends StatefulWidget {
+  AddBarge({Key? key}) : super(key: key);
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<AddBarge> createState() => _AddBargeState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _AddBargeState extends State<AddBarge> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
 
-  TextEditingController nameEnCon = TextEditingController();
-  TextEditingController nameKhCon = TextEditingController();
-  TextEditingController descriptionCon = TextEditingController();
+  TextEditingController bargeNameCon = TextEditingController();
+  TextEditingController bargeDescCon = TextEditingController();
+  TextEditingController bargePhoneNumberCon = TextEditingController();
+  TextEditingController bargeAddressCon = TextEditingController();
   String logoBase64 = "";
   File? imageProfile;
   XFile? imageProfileWeb;
@@ -40,15 +39,17 @@ class _AddProductState extends State<AddProduct> {
     if (available) {
       var prompt = await PopupDialog.yesNoPrompt(context);
       if (prompt) {
-        var body = ProductModel(
-          nameEn: nameEnCon.text.trim(),
-          nameKh: nameKhCon.text.trim(),
+        var body = BargeModel(
+          name: bargeNameCon.text.trim(),
+          description: bargeDescCon.text.trim(),
+          address: bargeAddressCon.text.trim(),
+          phoneNumber: bargePhoneNumberCon.text.trim(),
           image: logoBase64,
         ).toJson();
         var res = await Singleton.instance.apiExtension.post<String, String>(
             context: context,
             loading: true,
-            baseUrl: ApiEndPoint.productCreate,
+            baseUrl: ApiEndPoint.bargeCreate,
             body: body,
             deserialize: (e) => e.toString());
         if (res.success!) {
@@ -87,7 +88,7 @@ class _AddProductState extends State<AddProduct> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Navigation.Product'.tr(),
+            'Navigation.Barge'.tr(),
             style: StyleColor.textStyleKhmerDangrekAuto(
                 fontSize: 18, color: Colors.white),
           ),
@@ -107,7 +108,7 @@ class _AddProductState extends State<AddProduct> {
                 shrinkWrap: true,
                 children: [
                   Text(
-                    'Navigation.ProductEntity.Info'.tr(),
+                    'Navigation.BargeEntity.Info'.tr(),
                     style: StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
@@ -181,7 +182,7 @@ class _AddProductState extends State<AddProduct> {
                               Expanded(
                                 child: Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
+                                    child: Text('ឈ្មោះ'.tr(),
                                         style: StyleColor
                                             .textStyleKhmerContent14Grey)),
                               ),
@@ -197,7 +198,7 @@ class _AddProductState extends State<AddProduct> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: nameKhCon,
+                                  controller: bargeNameCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -211,65 +212,7 @@ class _AddProductState extends State<AddProduct> {
                                     hintStyle:
                                         StyleColor.textStyleKhmerDangrekAuto(
                                             color: Colors.grey),
-                                    hintText: 'ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
-                                    prefixIcon: Icon(Icons.person),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    contentPadding: EdgeInsets.only(
-                                        left: 10,
-                                        top: 13,
-                                        right: 10,
-                                        bottom: 15),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //Name En
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.blueLighterOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Message.PleaseInputCorrectly"
-                                          .tr();
-                                    }
-                                    return null;
-                                  },
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  style: StyleColor.textStyleKhmerContent,
-                                  controller: nameEnCon,
-                                  decoration: InputDecoration(
-                                    errorStyle:
-                                        StyleColor.textStyleKhmerContent12Red,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2,
-                                          color: StyleColor.appBarColor),
-                                    ),
-                                    hintStyle:
-                                        StyleColor.textStyleKhmerDangrekAuto(
-                                            color: Colors.grey),
-                                    hintText: 'ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
+                                    hintText: 'ឈ្មោះ'.tr(),
                                     prefixIcon: Icon(Icons.person),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -288,7 +231,7 @@ class _AddProductState extends State<AddProduct> {
                           ),
                         ),
 
-                        //Product Description
+                        //Barge Description
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.appBarColorOpa01,
@@ -314,7 +257,7 @@ class _AddProductState extends State<AddProduct> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: descriptionCon,
+                                  controller: bargeDescCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -330,6 +273,125 @@ class _AddProductState extends State<AddProduct> {
                                             color: Colors.grey),
                                     hintText: 'បរិយាយ'.tr(),
                                     prefixIcon: Icon(Icons.description),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 10,
+                                        top: 13,
+                                        right: 10,
+                                        bottom: 15),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //Phone Number
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          color: StyleColor.blueLighterOpa01,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text('លេខទូរស័ព្ទ'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerContent14Grey)),
+                              ),
+                              Expanded(
+                                child: TextFormField(
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Message.PleaseInputCorrectly"
+                                          .tr();
+                                    }
+                                    return null;
+                                  },
+                                  textCapitalization:
+                                      TextCapitalization.characters,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  style: StyleColor.textStyleKhmerContent,
+                                  controller: bargePhoneNumberCon,
+                                  decoration: InputDecoration(
+                                    errorStyle:
+                                        StyleColor.textStyleKhmerContent12Red,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: StyleColor.appBarColor),
+                                    ),
+                                    hintStyle:
+                                        StyleColor.textStyleKhmerDangrekAuto(
+                                            color: Colors.grey),
+                                    hintText: 'លេខទូរស័ព្ទ'.tr(),
+                                    prefixIcon: Icon(Icons.phone),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    contentPadding: EdgeInsets.only(
+                                        left: 10,
+                                        top: 13,
+                                        right: 10,
+                                        bottom: 15),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        //Address
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          color: StyleColor.appBarColorOpa01,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text('អាសយដ្ឋាន'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerContent14Grey)),
+                              ),
+                              Expanded(
+                                child: TextFormField(
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Message.PleaseInputCorrectly"
+                                          .tr();
+                                    }
+                                    return null;
+                                  },
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  style: StyleColor.textStyleKhmerContent,
+                                  controller: bargeAddressCon,
+                                  decoration: InputDecoration(
+                                    errorStyle:
+                                        StyleColor.textStyleKhmerContent12Red,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color: StyleColor.appBarColor),
+                                    ),
+                                    hintStyle:
+                                        StyleColor.textStyleKhmerDangrekAuto(
+                                            color: Colors.grey),
+                                    hintText: 'អាសយដ្ឋាន'.tr(),
+                                    prefixIcon:
+                                        Icon(Icons.add_location_rounded),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),

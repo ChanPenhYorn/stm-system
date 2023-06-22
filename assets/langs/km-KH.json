@@ -33,11 +33,15 @@
     },
     "Product": "ទំនិញ",
     "ProductEntity": {
-      "Info": "ព៌តមានទំនិញ់"
+      "Info": "ព៌តមានទំនិញ"
     },
     "Zone": "តំបន់",
     "ZoneEntity": {
       "Info": "ព៌តមានតំបន់"
+    },
+    "Barge": "សាឡង់",
+    "BargeEntity": {
+      "Info": "ព៌តមានសាឡង់"
     }
   },
   "Home": {

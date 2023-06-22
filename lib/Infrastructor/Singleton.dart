@@ -89,6 +89,13 @@ class Singleton with ChangeNotifier {
       route: '/zone',
       initFunc: () {},
     ),
+    DashboardButton(
+      id: 123437,
+      buttonTitle: 'Navigation.Barge'.tr(),
+      icon: 'assets/image/setting/barge.png',
+      route: '/barge',
+      initFunc: () {},
+    ),
   ];
 
   List<Language> listLanguages = [

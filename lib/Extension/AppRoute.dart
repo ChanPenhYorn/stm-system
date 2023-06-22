@@ -8,6 +8,7 @@ import 'package:stm_report_app/Widget/Home/Web/Dashboard_Web.dart';
 import 'package:stm_report_app/Widget/Language/SelectLanguage.dart';
 import 'package:stm_report_app/Widget/PriceList/PriceList.dart';
 import 'package:stm_report_app/Widget/Setting/AdminSetting.dart';
+import 'package:stm_report_app/Widget/Setting/Barge/Barge.dart';
 import 'package:stm_report_app/Widget/Setting/Company/Company.dart';
 import 'package:stm_report_app/Widget/Setting/Customer/Customer.dart';
 import 'package:stm_report_app/Widget/Setting/Product/Product.dart';
@@ -34,6 +35,7 @@ class AppRoute {
   static const customer = "/customer";
   static const product = "/product";
   static const zone = "/zone";
+  static const barge = "/barge";
 
   static final GoRouter routes = GoRouter(routes: <GoRoute>[
     GoRoute(
@@ -111,11 +113,15 @@ class AppRoute {
       builder: (BuildContext context, state) => Zone(),
       redirect: (context, state) => _redirect(context),
     ),
+    GoRoute(
+      path: barge,
+      builder: (BuildContext context, state) => Barge(),
+      redirect: (context, state) => _redirect(context),
+    ),
   ]);
 
   static Future<String?> _redirect(BuildContext context) async {
     var token = await Singleton.instance.readLoginToken();
-    print('res=${token}');
     return token == true ? null : "/login";
   }
 }

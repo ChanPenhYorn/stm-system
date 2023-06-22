@@ -1,38 +1,28 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
-import 'package:stm_report_app/Entity/Product/ProductModel.dart';
+import 'package:stm_report_app/Entity/Zone/ZoneModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 
-class AddProduct extends StatefulWidget {
-  AddProduct({Key? key}) : super(key: key);
+class AddZone extends StatefulWidget {
+  AddZone({Key? key}) : super(key: key);
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<AddZone> createState() => _AddZoneState();
 }
 
-class _AddProductState extends State<AddProduct> {
+class _AddZoneState extends State<AddZone> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
 
-  TextEditingController nameEnCon = TextEditingController();
-  TextEditingController nameKhCon = TextEditingController();
+  TextEditingController zoneNameCon = TextEditingController();
   TextEditingController descriptionCon = TextEditingController();
-  String logoBase64 = "";
-  File? imageProfile;
-  XFile? imageProfileWeb;
   final _formKey = GlobalKey<FormState>();
 
   onClickSubmit() async {
@@ -40,35 +30,20 @@ class _AddProductState extends State<AddProduct> {
     if (available) {
       var prompt = await PopupDialog.yesNoPrompt(context);
       if (prompt) {
-        var body = ProductModel(
-          nameEn: nameEnCon.text.trim(),
-          nameKh: nameKhCon.text.trim(),
-          image: logoBase64,
+        var body = ZoneModel(
+          name: zoneNameCon.text.trim(),
+          description: descriptionCon.text.trim(),
         ).toJson();
         var res = await Singleton.instance.apiExtension.post<String, String>(
             context: context,
             loading: true,
-            baseUrl: ApiEndPoint.productCreate,
+            baseUrl: ApiEndPoint.zoneCreate,
             body: body,
             deserialize: (e) => e.toString());
         if (res.success!) {
           await PopupDialog.showSuccess(context, data: true, layerContext: 2);
         } else
           PopupDialog.showFailed(context, data: false);
-      }
-    }
-  }
-
-  onClickUserProfile() async {
-    if (!kIsWeb) {
-      imageProfile = await PopupDialog.chooseImageDialog(context);
-      if (imageProfile != null) {
-        logoBase64 = base64Encode(await imageProfile!.readAsBytes());
-      }
-    } else {
-      imageProfileWeb = await PopupDialog.chooseImageDialogWeb(context);
-      if (imageProfileWeb != null) {
-        logoBase64 = base64Encode(await imageProfileWeb!.readAsBytes());
       }
     }
   }
@@ -87,7 +62,7 @@ class _AddProductState extends State<AddProduct> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Navigation.Product'.tr(),
+            'Navigation.Zone'.tr(),
             style: StyleColor.textStyleKhmerDangrekAuto(
                 fontSize: 18, color: Colors.white),
           ),
@@ -107,55 +82,9 @@ class _AddProductState extends State<AddProduct> {
                 shrinkWrap: true,
                 children: [
                   Text(
-                    'Navigation.ProductEntity.Info'.tr(),
+                    'Navigation.ZoneEntity.Info'.tr(),
                     style: StyleColor.textStyleKhmerDangrekAuto(fontSize: 20),
                     textAlign: TextAlign.center,
-                  ),
-                  Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        () {
-                          if (imageProfile != null)
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(
-                                imageProfile!,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            );
-                          else if (imageProfileWeb != null) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                imageProfileWeb!.path,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            );
-                          } else
-                            return Container();
-                        }(),
-                        InkWell(
-                          onTap: onClickUserProfile,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              width: 80,
-                              height: 80,
-                              color: Colors.grey.withOpacity(0.6),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
                   ),
                   //Panel
                   Container(
@@ -171,7 +100,7 @@ class _AddProductState extends State<AddProduct> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        //Customer Last Name
+                        //Zone Name
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.blueLighterOpa01,
@@ -181,7 +110,7 @@ class _AddProductState extends State<AddProduct> {
                               Expanded(
                                 child: Container(
                                     margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
+                                    child: Text('ឈ្មោះតំបន់'.tr(),
                                         style: StyleColor
                                             .textStyleKhmerContent14Grey)),
                               ),
@@ -197,7 +126,7 @@ class _AddProductState extends State<AddProduct> {
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
                                   style: StyleColor.textStyleKhmerContent,
-                                  controller: nameKhCon,
+                                  controller: zoneNameCon,
                                   decoration: InputDecoration(
                                     errorStyle:
                                         StyleColor.textStyleKhmerContent12Red,
@@ -211,7 +140,7 @@ class _AddProductState extends State<AddProduct> {
                                     hintStyle:
                                         StyleColor.textStyleKhmerDangrekAuto(
                                             color: Colors.grey),
-                                    hintText: 'ឈ្មោះទំនិញ (ខ្មែរ)'.tr(),
+                                    hintText: 'ឈ្មោះតំបន់'.tr(),
                                     prefixIcon: Icon(Icons.person),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -229,69 +158,10 @@ class _AddProductState extends State<AddProduct> {
                             ],
                           ),
                         ),
-                        //Name En
+                        //Description
                         Container(
                           padding: EdgeInsets.all(10),
                           color: StyleColor.blueLighterOpa01,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                                    child: Text('ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerContent14Grey)),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Message.PleaseInputCorrectly"
-                                          .tr();
-                                    }
-                                    return null;
-                                  },
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  style: StyleColor.textStyleKhmerContent,
-                                  controller: nameEnCon,
-                                  decoration: InputDecoration(
-                                    errorStyle:
-                                        StyleColor.textStyleKhmerContent12Red,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                          width: 2,
-                                          color: StyleColor.appBarColor),
-                                    ),
-                                    hintStyle:
-                                        StyleColor.textStyleKhmerDangrekAuto(
-                                            color: Colors.grey),
-                                    hintText: 'ឈ្មោះទំនិញ (អង់គ្លេស)'.tr(),
-                                    prefixIcon: Icon(Icons.person),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                    ),
-                                    contentPadding: EdgeInsets.only(
-                                        left: 10,
-                                        top: 13,
-                                        right: 10,
-                                        bottom: 15),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        //Product Description
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: StyleColor.appBarColorOpa01,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -329,7 +199,7 @@ class _AddProductState extends State<AddProduct> {
                                         StyleColor.textStyleKhmerDangrekAuto(
                                             color: Colors.grey),
                                     hintText: 'បរិយាយ'.tr(),
-                                    prefixIcon: Icon(Icons.description),
+                                    prefixIcon: Icon(Icons.person),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(10),
