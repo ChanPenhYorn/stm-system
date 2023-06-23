@@ -7,9 +7,11 @@ class Domain {
 
   //Local HTTP
 
+  ///API at MPWT
   static String domain = "https://api-klpt-stm.mpwt.gov.kh";
+
+  ///Proxy API at Site
+  // static String domain = "https://api.stmreport.net";
+
   // static String domain = "http://localhost:7100";
-  // static String domain = "http://192.168.0.114:7100";
-  // static String domain = "https://4426-58-97-226-132.ngrok-free.app/";
-  // static String domain = "https://dev-app-osr.mpwt.gov.kh/api/";
 }

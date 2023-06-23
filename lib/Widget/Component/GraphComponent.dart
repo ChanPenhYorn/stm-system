@@ -250,7 +250,7 @@ class GraphComponent {
               isVisible: element.label == "Digital" ? false : showDataLabel,
               labelIntersectAction: LabelIntersectAction.shift,
               showZeroValue: false,
-              labelAlignment: ChartDataLabelAlignment.top,
+              labelAlignment: ChartDataLabelAlignment.outer,
               alignment: element.label == "Digital"
                   ? ChartAlignment.far
                   : ChartAlignment.center,
