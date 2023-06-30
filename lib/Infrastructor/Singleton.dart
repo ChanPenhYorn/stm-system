@@ -380,6 +380,15 @@ class Singleton with ChangeNotifier {
     }
   }
 
+  Future<bool> clearTokenCache() async {
+    try {
+      await storage.delete(key: "stm_token");
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   //Authentication FaceID or Biometric
   Future<bool> authenticate({int faceIdScanDelay = 0}) async {
     await Future.delayed(

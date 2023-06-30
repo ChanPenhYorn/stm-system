@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -149,7 +150,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
   }
 
   String getPlateImageUrl(STMReportDetailDataModel data) {
-    print(data.couponOut!.plateFrontUrl!);
     if (data.couponIn != null &&
         data.couponIn!.plateFrontUrl != "/uploads/default/no_plate.jpg") {
       return data.couponIn!.plateFrontUrl!;
@@ -1029,7 +1029,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //Date Picker
-            Stack(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -1128,342 +1129,365 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ],
                 ),
-                FutureBuilder<STMReportDetailModel>(
-                  future: InitData,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                      return Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: TextButton(
-                            onPressed: () {
-                              onDownloadCouponInvoiceRowClick(
-                                pdf: "report",
-                                excel: "report",
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: FutureBuilder<STMReportDetailModel>(
+                    future: InitData,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data!.data!.length > 0)
+                        return Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: TextButton(
+                              onPressed: () {
+                                onDownloadCouponInvoiceRowClick(
+                                  pdf: "report",
+                                  excel: "report",
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                padding: EdgeInsets.only(
+                                    left: 5, right: 5, bottom: 7, top: 7),
+                                backgroundColor: StyleColor.appBarDarkColor,
                               ),
-                              padding: EdgeInsets.only(
-                                  left: 10, right: 10, bottom: 7, top: 7),
-                              backgroundColor: StyleColor.appBarDarkColor,
-                            ),
-                            child: Container(
-                              width: 130,
-                              height: 40,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.download,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'ទាញយក',
-                                    style: StyleColor.textStyleKhmerContentAuto(
+                              child: Container(
+                                width: 120,
+                                height: 40,
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.download,
                                       color: Colors.white,
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'ទាញយក',
+                                      style:
+                                          StyleColor.textStyleKhmerContentAuto(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    return Container();
-                  },
+                        );
+                      return Container();
+                    },
+                  ),
                 )
               ],
             ),
-            //Title Search Bar
+
+            //Search Bar
             Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Row(
-                children: [
-                  ///Search
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      child: Text(
-                        'ស្វែងរក',
-                        style: StyleColor.textStyleKhmerDangrekAuto(),
-                      ),
-                    ),
-                  ),
-
-                  ///Company
-                  Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    padding: EdgeInsets.only(left: 10),
-                    width: 150,
-                    child: Row(
+              padding: const EdgeInsets.only(top: 5, bottom: 5),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ///Search
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'ក្រុុមហ៊ុន',
-                          style: StyleColor.textStyleKhmerDangrekAuto(),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          child: AutoSizeText(
+                            maxLines: 1,
+                            overflow: TextOverflow.fade,
+                            'ស្វែងរក',
+                            style: StyleColor.textStyleKhmerDangrekAuto(),
+                          ),
                         ),
-                        selectedCompanyCode != null
-                            ? Container(
-                                margin: EdgeInsets.only(left: 10),
-                                padding: EdgeInsets.only(bottom: 3),
-                                width: 20,
-                                height: 25,
-                                child: IconButton(
-                                  iconSize: 20,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: onClearCompanyCode,
-                                  icon: Icon(Icons.clear, color: Colors.red),
-                                ),
-                              )
-                            : Container(),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          constraints: BoxConstraints(
+                            minWidth: MediaQuery.of(context).size.width * 0.3,
+                          ),
+                          child: TextFormField(
+                            style: StyleColor.textStyleKhmerContent14,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            cursorColor: StyleColor.appBarColor,
+                            controller: searchController,
+                            onChanged: (text) {
+                              plateNumber = text.trim();
+                              InitData = initData();
+                              setState(() {});
+                            },
+                            enableSuggestions: false,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade200,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 0, color: Colors.grey.shade200),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 0, color: Colors.grey.shade200),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              ),
+                              prefixIconConstraints: BoxConstraints(
+                                minWidth: 40,
+                                minHeight: 5,
+                              ),
+                              suffixIconConstraints: BoxConstraints(
+                                minWidth: 40,
+                                minHeight: 5,
+                              ),
+                              suffixIcon: InkWell(
+                                  child: searchController.text.trim().length > 0
+                                      ? Icon(
+                                          Icons.clear,
+                                          color: StyleColor.appBarColor,
+                                        )
+                                      : SizedBox(),
+                                  onTap: () {
+                                    Extension.clearFocus(context);
+                                    searchController.clear();
+                                    plateNumber = "";
+                                    InitData = initData();
+                                    setState(() {});
+                                  }),
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                              labelText: 'ស្វែងរក (ផ្លាកលេខ)',
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
 
-                  ///Customer
-                  Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    padding: EdgeInsets.only(left: 10),
-                    width: 150,
-                    child: Row(
+                    ///Company
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'អតិថិជន',
-                          style: StyleColor.textStyleKhmerDangrekAuto(),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          padding: EdgeInsets.only(left: 10),
+                          width: 150,
+                          child: Row(
+                            children: [
+                              Text(
+                                'ក្រុុមហ៊ុន',
+                                style: StyleColor.textStyleKhmerDangrekAuto(),
+                              ),
+                              selectedCompanyCode != null
+                                  ? Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(bottom: 3),
+                                      width: 20,
+                                      height: 25,
+                                      child: IconButton(
+                                        iconSize: 20,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: onClearCompanyCode,
+                                        icon: Icon(Icons.clear,
+                                            color: Colors.red),
+                                      ),
+                                    )
+                                  : Container(),
+                            ],
+                          ),
                         ),
-                        selectedCustomerCode != null
-                            ? Container(
-                                margin: EdgeInsets.only(left: 10),
-                                padding: EdgeInsets.only(bottom: 3),
-                                width: 20,
-                                height: 25,
-                                child: IconButton(
-                                  iconSize: 20,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: onClearCustomerCode,
-                                  icon: Icon(Icons.clear, color: Colors.red),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          height: 50,
+                          width: 150,
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.5, style: BorderStyle.solid),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: DropdownButton<String>(
+                                items: listDropDownCompany,
+                                value: selectedCompanyCode,
+                                focusColor: Colors.transparent,
+                                hint: Text(
+                                  'ជ្រើសរើសក្រុមហ៊ុន',
+                                  style: StyleColor.textStyleKhmerContent,
                                 ),
-                              )
-                            : Container(),
+                                padding: const EdgeInsets.only(left: 0),
+                                style: StyleColor.textStyleKhmerContent,
+                                onChanged: (companyCode) {
+                                  setState(() {
+                                    selectedCompanyCode = companyCode;
+                                    InitData = initData();
+                                  });
+                                },
+                                isExpanded: true,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
 
-                  ///Zone
-                  Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    padding: EdgeInsets.only(left: 10),
-                    width: 150,
-                    child: Row(
+                    ///Customer
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'តំបន់',
-                          style: StyleColor.textStyleKhmerDangrekAuto(),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          padding: EdgeInsets.only(left: 10),
+                          width: 150,
+                          child: Row(
+                            children: [
+                              Text(
+                                'អតិថិជន',
+                                style: StyleColor.textStyleKhmerDangrekAuto(),
+                              ),
+                              selectedCustomerCode != null
+                                  ? Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(bottom: 3),
+                                      width: 20,
+                                      height: 25,
+                                      child: IconButton(
+                                        iconSize: 20,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: onClearCustomerCode,
+                                        icon: Icon(Icons.clear,
+                                            color: Colors.red),
+                                      ),
+                                    )
+                                  : Container(),
+                            ],
+                          ),
                         ),
-                        selectedZoneCode != null
-                            ? Container(
-                                margin: EdgeInsets.only(left: 10),
-                                padding: EdgeInsets.only(bottom: 3),
-                                width: 20,
-                                height: 25,
-                                child: IconButton(
-                                  iconSize: 20,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: onClearZoneCode,
-                                  icon: Icon(Icons.clear, color: Colors.red),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          height: 50,
+                          width: 150,
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.5, style: BorderStyle.solid),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: DropdownButton<String>(
+                                items: listDropDownCustomer,
+                                value: selectedCustomerCode,
+                                focusColor: Colors.transparent,
+                                hint: Text(
+                                  'ជ្រើសរើសអតិថិជន',
+                                  style: StyleColor.textStyleKhmerContent,
                                 ),
-                              )
-                            : Container(),
+                                padding: const EdgeInsets.only(left: 0),
+                                style: StyleColor.textStyleKhmerContent,
+                                onChanged: (customerCode) {
+                                  setState(() {
+                                    selectedCustomerCode = customerCode;
+                                    InitData = initData();
+                                  });
+                                },
+                                isExpanded: true,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ],
+
+                    ///Zone
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          padding: EdgeInsets.only(left: 10),
+                          width: 150,
+                          child: Row(
+                            children: [
+                              Text(
+                                'តំបន់',
+                                style: StyleColor.textStyleKhmerDangrekAuto(),
+                              ),
+                              selectedZoneCode != null
+                                  ? Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(bottom: 3),
+                                      width: 20,
+                                      height: 25,
+                                      child: IconButton(
+                                        iconSize: 20,
+                                        padding: EdgeInsets.zero,
+                                        onPressed: onClearZoneCode,
+                                        icon: Icon(Icons.clear,
+                                            color: Colors.red),
+                                      ),
+                                    )
+                                  : Container(),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          height: 50,
+                          width: 150,
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                  width: 0.5, style: BorderStyle.solid),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: DropdownButton<String>(
+                                items: listDropDownZone,
+                                value: selectedZoneCode,
+                                focusColor: Colors.transparent,
+                                hint: Text(
+                                  'ជ្រើសរើសតំបន់',
+                                  style: StyleColor.textStyleKhmerContent,
+                                ),
+                                padding: const EdgeInsets.only(left: 0),
+                                style: StyleColor.textStyleKhmerContent,
+                                onChanged: (zoneCode) {
+                                  setState(() {
+                                    selectedZoneCode = zoneCode;
+                                    InitData = initData();
+                                  });
+                                },
+                                isExpanded: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            //Search Bar
-            Row(
-              children: [
-                ///Search
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      child: TextFormField(
-                        style: StyleColor.textStyleKhmerContent14,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        cursorColor: StyleColor.appBarColor,
-                        controller: searchController,
-                        onChanged: (text) {
-                          plateNumber = text.trim();
-                          InitData = initData();
-                          setState(() {});
-                        },
-                        enableSuggestions: false,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 0, color: Colors.grey.shade200),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 0, color: Colors.grey.shade200),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.black,
-                          ),
-                          prefixIconConstraints: BoxConstraints(
-                            minWidth: 40,
-                            minHeight: 5,
-                          ),
-                          suffixIconConstraints: BoxConstraints(
-                            minWidth: 40,
-                            minHeight: 5,
-                          ),
-                          suffixIcon: InkWell(
-                              child: searchController.text.trim().length > 0
-                                  ? Icon(
-                                      Icons.clear,
-                                      color: StyleColor.appBarColor,
-                                    )
-                                  : SizedBox(),
-                              onTap: () {
-                                Extension.clearFocus(context);
-                                searchController.clear();
-                                plateNumber = "";
-                                InitData = initData();
-                                setState(() {});
-                              }),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          labelText: 'ស្វែងរក (ផ្លាកលេខ)',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                ///Company
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  height: 50,
-                  width: 150,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.5, style: BorderStyle.solid),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: DropdownButton<String>(
-                        items: listDropDownCompany,
-                        value: selectedCompanyCode,
-                        focusColor: Colors.transparent,
-                        hint: Text(
-                          'ជ្រើសរើសក្រុមហ៊ុន',
-                          style: StyleColor.textStyleKhmerContent,
-                        ),
-                        padding: const EdgeInsets.only(left: 0),
-                        style: StyleColor.textStyleKhmerContent,
-                        onChanged: (companyCode) {
-                          setState(() {
-                            selectedCompanyCode = companyCode;
-                            InitData = initData();
-                          });
-                        },
-                        isExpanded: true,
-                      ),
-                    ),
-                  ),
-                ),
-
-                ///Customer
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  height: 50,
-                  width: 150,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.5, style: BorderStyle.solid),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: DropdownButton<String>(
-                        items: listDropDownCustomer,
-                        value: selectedCustomerCode,
-                        focusColor: Colors.transparent,
-                        hint: Text(
-                          'ជ្រើសរើសអតិថិជន',
-                          style: StyleColor.textStyleKhmerContent,
-                        ),
-                        padding: const EdgeInsets.only(left: 0),
-                        style: StyleColor.textStyleKhmerContent,
-                        onChanged: (customerCode) {
-                          setState(() {
-                            selectedCustomerCode = customerCode;
-                            InitData = initData();
-                          });
-                        },
-                        isExpanded: true,
-                      ),
-                    ),
-                  ),
-                ),
-
-                ///Zone
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  height: 50,
-                  width: 150,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.5, style: BorderStyle.solid),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    ),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: DropdownButton<String>(
-                        items: listDropDownZone,
-                        value: selectedZoneCode,
-                        focusColor: Colors.transparent,
-                        hint: Text(
-                          'ជ្រើសរើសតំបន់',
-                          style: StyleColor.textStyleKhmerContent,
-                        ),
-                        padding: const EdgeInsets.only(left: 0),
-                        style: StyleColor.textStyleKhmerContent,
-                        onChanged: (zoneCode) {
-                          setState(() {
-                            selectedZoneCode = zoneCode;
-                            InitData = initData();
-                          });
-                        },
-                        isExpanded: true,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Extension.getDeviceType() == DeviceType.PHONE
-                ? tabletAndWebWidget()
-                : tabletAndWebWidget(),
+            tabletAndWebWidget(),
           ],
         ),
       ),

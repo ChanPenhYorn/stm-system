@@ -410,6 +410,7 @@ class _STMReportViewDialogState extends State<STMReportViewDialog> {
                             ? widget.stmReportDataModel.companyName!
                             : "គ្មានទិន្នន័យ",
                         style: StyleColor.textStyleKhmerContentAuto(),
+                        textAlign: TextAlign.right,
                       ),
                     ),
                   ),

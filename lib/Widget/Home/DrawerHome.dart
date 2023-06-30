@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Extension/AppRoute.dart';
 import 'package:stm_report_app/Extension/ExtensionComponent.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
@@ -450,16 +451,17 @@ class _DrawerHomeState extends State<DrawerHome> {
                     if (res) {
                       await Singleton.instance.clearUserLoginCache();
                       await Future.delayed(Duration(milliseconds: 150));
-                      Singleton.instance.userLogOut();
-                      Navigator.of(context, rootNavigator: true)
-                          .pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) => Login(
-                                  faceIdScanDelay: 2,
-                                  isLoggedOut: true,
-                                ),
-                              ),
-                              (Route<dynamic> route) => true);
+                      Singleton.instance.clearTokenCache();
+                      context.go(AppRoute.login);
+                      // context.Navigator.of(context, rootNavigator: true)
+                      //     .pushAndRemoveUntil(
+                      //         MaterialPageRoute(
+                      //           builder: (context) => Login(
+                      //             faceIdScanDelay: 2,
+                      //             isLoggedOut: true,
+                      //           ),
+                      //         ),
+                      //         (Route<dynamic> route) => true);
                     }
                   },
                   style: TextButton.styleFrom(

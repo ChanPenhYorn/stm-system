@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,15 +7,36 @@ import 'package:stm_report_app/Infrastructor/ProviderListener.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:provider/provider.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   Singleton.instance.apiExtensionInit();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-
+  setPathUrlStrategy();
+  // runApp(
+  //   DevicePreview(
+  //     enabled: true,
+  //     builder: (context) => ChangeNotifierProvider(
+  //       create: (context) => ProviderListener(),
+  //       child: EasyLocalization(
+  //         supportedLocales: [
+  //           Locale('km', 'KH'),
+  //           Locale('en', 'US'),
+  //         ],
+  //         fallbackLocale: Locale('en', 'US'),
+  //         startLocale: Locale('km', 'KH'),
+  //         path: 'assets/langs',
+  //         saveLocale: true,
+  //         child: MyApp(),
+  //       ),
+  //     ),
+  //   ),
+  // );
   runApp(
     ChangeNotifierProvider(
       create: (context) => ProviderListener(),
