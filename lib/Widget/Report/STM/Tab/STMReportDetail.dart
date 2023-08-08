@@ -1209,62 +1209,64 @@ class _STMReportDetailState extends State<STMReportDetail> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
                           constraints: BoxConstraints(
-                            minWidth: MediaQuery.of(context).size.width * 0.3,
+                            maxWidth: MediaQuery.of(context).size.width * 0.4,
                           ),
-                          child: TextFormField(
-                            style: StyleColor.textStyleKhmerContent14,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            cursorColor: StyleColor.appBarColor,
-                            controller: searchController,
-                            onChanged: (text) {
-                              plateNumber = text.trim();
-                              InitData = initData();
-                              setState(() {});
-                            },
-                            enableSuggestions: false,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.grey.shade200,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 0, color: Colors.grey.shade200),
+                          child: Expanded(
+                            child: TextFormField(
+                              style: StyleColor.textStyleKhmerContent14,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              cursorColor: StyleColor.appBarColor,
+                              controller: searchController,
+                              onChanged: (text) {
+                                plateNumber = text.trim();
+                                InitData = initData();
+                                setState(() {});
+                              },
+                              enableSuggestions: false,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey.shade200,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, color: Colors.grey.shade200),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, color: Colors.grey.shade200),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                ),
+                                prefixIconConstraints: BoxConstraints(
+                                  minWidth: 40,
+                                  minHeight: 5,
+                                ),
+                                suffixIconConstraints: BoxConstraints(
+                                  minWidth: 40,
+                                  minHeight: 5,
+                                ),
+                                suffixIcon: InkWell(
+                                    child:
+                                        searchController.text.trim().length > 0
+                                            ? Icon(
+                                                Icons.clear,
+                                                color: StyleColor.appBarColor,
+                                              )
+                                            : SizedBox(),
+                                    onTap: () {
+                                      Extension.clearFocus(context);
+                                      searchController.clear();
+                                      plateNumber = "";
+                                      InitData = initData();
+                                      setState(() {});
+                                    }),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                labelText: 'ស្វែងរក (ផ្លាកលេខ)',
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 0, color: Colors.grey.shade200),
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                              ),
-                              prefixIconConstraints: BoxConstraints(
-                                minWidth: 40,
-                                minHeight: 5,
-                              ),
-                              suffixIconConstraints: BoxConstraints(
-                                minWidth: 40,
-                                minHeight: 5,
-                              ),
-                              suffixIcon: InkWell(
-                                  child: searchController.text.trim().length > 0
-                                      ? Icon(
-                                          Icons.clear,
-                                          color: StyleColor.appBarColor,
-                                        )
-                                      : SizedBox(),
-                                  onTap: () {
-                                    Extension.clearFocus(context);
-                                    searchController.clear();
-                                    plateNumber = "";
-                                    InitData = initData();
-                                    setState(() {});
-                                  }),
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              labelText: 'ស្វែងរក (ផ្លាកលេខ)',
                             ),
                           ),
                         ),
