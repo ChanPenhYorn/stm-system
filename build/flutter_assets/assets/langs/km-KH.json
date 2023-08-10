@@ -1,0 +1,205 @@
+{
+  "Button": {
+    "Accept": "យល់ព្រម",
+    "Reject": "បដិសេធ",
+    "Cancel": "បោះបង់",
+    "Submit": "បញ្ជូន",
+    "Login": "ចូល",
+    "Register": "ចុះឈ្មោះឥឡូវនេះ",
+    "TryAgain": "ម្តងទៀត",
+    "Add": "បន្ថែម",
+    "Continue" : "បន្ត",
+    "Download" : "ទាញយក",
+    "Approve"  : "អនុញ្ញាត"
+  },
+  "Navigation": {
+    "Home": "ទំព័រដើម",
+    "Account": "គណនី",
+    "TopUp" : "បញ្ចូលទឹកប្រាក់",
+    "RolePermission" : "សិទ្ធអ្នកប្រើប្រាស់",
+    "Permission" : "សិទ្ធ",
+    "Users"     : "អ្នកប្រើប្រាស់",
+    "EditRolePermission" : "កែប្រែអ្នកប្រើប្រាស់",
+    "Register" : "ចុះឈ្មោះប្រើប្រាស់",
+    "ScanQR" : "ស្កេន QR Code",
+    "PriceList" : "តារាងតម្លៃ",
+    "Company" : "ក្រុមហ៊ុន",
+    "CompanyEntity": {
+      "Info": "ព៌តមានក្រុមហ៊ុន"
+    },
+    "Customer": "អតិថិជន",
+    "CustomerEntity": {
+      "Info": "ព៌តមានអតិថិជន"
+    },
+    "Product": "ទំនិញ",
+    "ProductEntity": {
+      "Info": "ព៌តមានទំនិញ"
+    },
+    "Zone": "តំបន់",
+    "ZoneEntity": {
+      "Info": "ព៌តមានតំបន់"
+    },
+    "Barge": "សាឡង់",
+    "BargeEntity": {
+      "Info": "ព៌តមានសាឡង់"
+    }
+  },
+  "Home": {
+    "SeeMore": "ចូលមើល"
+  },
+  "Login": {
+    "phoneNumber" : "លេខទូរស័ព្ទ",
+    "username": "ឈ្មោះគណនី",
+    "password": "លេខសម្ងាត់"
+  },
+  "UserSetting": {
+    "SelectLanguage": "ជ្រើសរើសភាសា",
+    "PersonalInformation": "ព័ត៌មានទូទៅ",
+    "ChangePassword": "ប្តូរលេខសំងាត់ ",
+    "FaceId": "ស្កេនមុខ",
+    "FingerPrint": "ស្កេនម្រាមដៃ",
+    "Setting": "ការកំណត់",
+    "LogOut": "ចាកចេញ"
+  },
+  "ChangePassword": {
+    "ChangePassword": "ប្តូរលេខសម្ងាត់",
+    "CurrentPassword": "លេខសម្ងាត់ចាស់",
+    "NewPassword": "លេខសម្ងាត់ថ្មី",
+    "RetypeNewPassword": "លេខសម្ងាត់ថ្មីម្តងទៀត"
+  },
+  "AdminSetting": {
+    "Setting": "ការកំណត់"
+  },
+  "Label": {
+    "Version" : "ជំនាន់",
+    "ChooseImage" : "ជ្រើសរើសរូបភាព",
+    "Capture" : "ថតរូប",
+    "Amount": "ចំនួនទឹកប្រាក់",
+    "Cable" : "ខ្សែ",
+    "HaveAccount" : "មានគណនីហើយ",
+    "Info" : "ព័ត៌មាន",
+    "Quantity": "ចំនួន",
+    "ConfirmOTP": "ផ្ទៀងផ្ទាត់លេខកូដ",
+    "LaunchUserApproval" : "បើកដំណើរការគណនី",
+    "Register" : "ចុះឈ្មោះប្រើប្រាស់",
+    "Picture" : "រូបភាព",
+    "GraphAndTable" : "ក្រាហ្វ និង តារាង",
+    "Select" : "ជ្រើសរើស",
+    "Daily" : "ប្រចាំថ្ងៃ",
+    "Weekly" : "ប្រចាំសប្តាហ៍",
+    "Monthly" : "ប្រចាំខែ",
+    "Yearly" : "ប្រចាំឆ្នាំ",
+    "No" : "ល.រ",
+    "RolePermissionName" : "ឈ្មោះសិទ្ធ",
+    "View" : "មើល",
+    "Edit" : "កែប្រែ",
+    "Delete" : "លុប",
+    "Unknown" : "មិនស្គាល់",
+    "InfoUser" : "ព័ត៌មានអ្នកប្រើប្រាស់",
+    "Code" : "លេខកូដ",
+    "UserName" : "ឈ្មោះគណនី៖",
+    "Name"      : "នាម៖",
+    "NameEn" : "នាម (ឡាតាំង)",
+    "UserNameEn" : "គោត្តនាម (ឡាតាំង)",
+    "CodeDevice" : "កូដឧបករណ៍",
+    "DateRegister" : "កាលបរិច្ឆេទចុះឈ្មោះ",
+    "ApprovedRegister" : "កាលបរិច្ឆេទអនុញ្ញាត",
+    "FullName" : "គោត្តនាម និងនាម",
+    "FullNameEn" : "គោត្តនាម និងនាម (ឡាតាំង)៖",
+    "References" : "ឯកសារយោង",
+    "NoReferences" : "មិនមានឯកសារយោង",
+    "RegisterInfo" : "ព័ត៌មានអ្នកចុះឈ្មោះ",
+    "Description": "បរិយាយ",
+    "PhoneNumber" : "លេខទូរស័ព្ទ",
+    "Address": "អាសយដ្ឋាន"
+  },
+  "TechInspection" : {
+    "Year" : "ឆ្នាំ",
+    "RielIncrease" : "កំណើន ៛",
+    "Growth%" : "កំណើន %",
+    "Total" : "សរុប"
+  },
+  "Report": {
+    "Monthly" : "របាយការណ៍ខែ៖ ",
+    "Yearly"  : "របាយការណ៍ឆ្នាំ៖ ",
+    "Last7Days" : "7 ថ្ងៃចុងក្រោយ",
+    "Last12Months" : "12 ខែចុងក្រោយ",
+    "CompareRevenue" : "ប្រៀបធៀបចំណូល"
+  },
+  "Role" : {
+    "RolePermission"  : "សិទ្ធប្រើប្រាស់",
+    "RolePermissionName" : "ឈ្មោះសិទ្ធប្រើប្រាស់",
+    "AddRolePermission" : "បង្កើតសិទ្ធអ្នកប្រើប្រាស់",
+    "EditRolePermission" : "កែប្រែសិទ្ធអ្នកប្រើប្រាស់",
+    "RoleAdmin" : "មានសិទ្ធប្រើប្រាស់ទាំងអស់",
+    "NullPermission" : "មិនទាន់មានសិទ្ធប្រើប្រាស់"
+  },
+  "Hint": {
+    "LastNameKH" : "នាមត្រកូល",
+    "FirstNameKH" : "នាមខ្លួន",
+    "LastNameEN"  : "នាមត្រកូល (ឡាតាំង)",
+    "FirstNameEN" : "នាមខ្លួន (ឡាតាំង)",
+    "Position" : "តួនាទី",
+    "Org"     : "អង្គភាព",
+    "PhoneNumber"   : "លេខទូរស័ព្ទ",
+    "UserName" : "គោត្តនាម",
+    "UserNameEn" : "គោត្តនាម (ឡាតាំង)",
+    "Name"    : "នាម",
+    "NameEn"    : "នាម (ឡាតាំង)"
+  },
+  "Message": {
+    "Loading": "កំពុងដំណើរការ",
+    "Information": "ព៌តមាន",
+    "LogOutConfirm": "តើអ្នកចង់ចាកចេញមែនទេ?",
+    "CheckConfirm": "តើអ្នកបានត្រួតពិនិត្យរួចរាល់ហើយមែនទេ?",
+    "InvalidInfo": "សូមបញ្ចូលទិន្នន័យឲ្យបានត្រឹមត្រូវ.",
+    "InvalidSamePassword": "សូមផ្ទៀងផ្ទាត់លេខសំងាត់ថ្មីឲ្យបានត្រឹមត្រូវ",
+    "InvalidNewPassword": "លេខសំងាត់ថ្មីត្រូវខុសពីលេខសំងាត់ចាស់",
+    "PleaseInputPassword": "សូមបញ្ចូលលេខសំងាត់",
+    "PasswordMoreThan8Char": "លេខសំងាត់យ៉ាងតិច ៨ ខ្ទង់",
+    "PasswordMoreThan6Char": "លេខសំងាត់យ៉ាងតិច ៦ ខ្ទង់",
+    "PleaseInputUsername": "សូមបញ្ចូលឈ្មោះគណនី",
+    "OperationFailed": "ប្រតិបត្តិការបរាជ័យ\nសូមព្យាយាមម្តងទៀត",
+    "OperationSuccess": "ប្រតិបត្តិការជោគជ័យ",
+    "ServerError": "ប្រព័ន្ឋមានបញ្ហា\nសូមព្យាយាមម្តងទៀត",
+    "ServerConnectionError": "មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ឋបានទេ\nសូមព្យាយាមម្តងទៀត",
+    "Account": {
+      "InvalidCredential": "ឈ្មោះ ឬ លេខសំងាត់ដែលបានបញ្ចូលមិនត្រឹមត្រូវទេ",
+      "SuspendedAccount": "គណនីរបស់លោកអ្នកត្រូវបានបិទដំណើរការ",
+      "ReviewingAccount": "គណនីកំពុងស្ថិតក្នុងការត្រួតពិនិត្យ\nសូមព្យាយាមម្តងទៀត"
+    },
+    "PleaseInputFirstNameKH" : "សូមបញ្ចូលនាមខ្លួន",
+    "PleaseInputLastNameKH": "សូមបញ្ចូលនាមត្រកូល",
+    "PleaseInputFirstNameEN" : "សូមបញ្ចូលនាមខ្លួន (ឡាតាំង)",
+    "PleaseInputLastNameEN": "សូមបញ្ចូលនាមត្រកូល (ឡាតាំង)",
+    "PleaseInputCorrectly" : "សូមបញ្ចូលឲ្យបានត្រឹមត្រូវ",
+    "PleaseInputPosition" : "សូមបញ្ចូលតួនាទី",
+    "PleaseInputOrg" : "សូមបញ្ជូលអង្គភាព",
+    "PleaseInputPhoneNumber" : "សូមបញ្ជូលលេខទូរស័ព្ទ",
+    "PleaseDownloadForm" : "សូមធ្វើការទាញយកទម្រង់ស្នើរសុំប្រើប្រាស់",
+    "YourPasswordIs" : "លេខសំងាត់របស់លោកអ្នកគឺ",
+    "InvalidOTP": "លេខកូដផ្ទៀងផ្ទាត់មិនត្រឹមត្រូវ",
+    "QRScan" : {
+      "NoPermissionUserApproval" : "គ្មានសិទ្ធអនុញ្ញាតពាក្យស្នើសុំដំឡើង",
+      "UserApproved" : "គណនីត្រូវបានអនុញ្ញាតរួចរាល់",
+      "InvalidQRCode" : "រកមិនឃើញ QR Code"
+    },
+    "PleaseUpdateApp" : "សូមធ្វើបច្ចុប្បន្នភាពកម្មវិធី",
+    "DeviceNotApproved" : "ឧបករណ៍មិនទទួលបានការអនុញ្ញាត",
+    "RoleUser" : {
+      "PleaseAddRoleUser" : "សូមបញ្ជូលឈ្មោះសិទ្ធប្រើប្រាស់",
+      "PleaseSelectRoleUser" : "សូមជ្រើសរើសសិទ្ធប្រើប្រាស់"
+    },
+    "FormPDF" : {
+      "InvalidDocument" : "ឯកសារមិនត្រឹមត្រូវ",
+      "PleaseUploadDocument" : "សូមបញ្ចូលឯកសារយោង"
+    },
+    "InvalidUserNameOrPassword": "ឈ្មោះ ឬ លេខសំងាត់ដែលបានបញ្ជូលមិនត្រឹមត្រូវទេ។ \n",
+    "NoHaveRolePermission" : "មិនទាន់មានសិទ្ធប្រើប្រាស់",
+    "FaceAuthenticationToUseApp" : "ស្កេនមុខដើម្បីចូលទៅកាន់ប្រព័ន្ឋ",
+    "FingerPrintAuthenticationToUseApp" : "ស្កេនក្រយ៉ៅដៃដើម្បីចូលទៅកាន់ប្រព័ន្ឋ",
+    "WaitingVehiclePass" : "រង់ចាំយានយន្តឆ្លងកាត់",
+    "DataEmpty" : "មិនមានទិន្នន័យ",
+    "PleaseChoose" : "សូមជ្រើសរើស"
+  }
+}

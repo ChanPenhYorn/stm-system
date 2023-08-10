@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
@@ -28,6 +29,8 @@ class STMReportDetail extends StatefulWidget {
 class _STMReportDetailState extends State<STMReportDetail> {
   DateTime date = DateTime.now();
 
+  late ScrollController scrollController1, scrollController2, scrollController3;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -36,6 +39,25 @@ class _STMReportDetailState extends State<STMReportDetail> {
     InitZone = initZone();
     InitData = initData();
     super.initState();
+
+    scrollController1 = ScrollController();
+    scrollController2 = ScrollController();
+    scrollController3 = ScrollController();
+
+    scrollController1.addListener(() {
+      scrollController2.animateTo(scrollController1.offset,
+          duration: Duration(milliseconds: 300), curve: Curves.linear);
+      scrollController3.animateTo(scrollController1.offset,
+          duration: Duration(milliseconds: 300), curve: Curves.linear);
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController1.dispose();
+    scrollController2.dispose();
+    scrollController3.dispose();
+    super.dispose();
   }
 
   String plateNumber = "";
@@ -215,18 +237,19 @@ class _STMReportDetailState extends State<STMReportDetail> {
 
   Widget mobileScreen() {
     return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Column(
-          children: [
-            //Header
-            Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: StyleColor.appBarColor.withOpacity(0.8),
-              ),
-              height: 50,
+      child: Column(
+        children: [
+          //Header
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: StyleColor.appBarColor.withOpacity(0.8),
+            ),
+            height: 50,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: scrollController1,
               child: Row(
                 children: [
                   Container(
@@ -302,43 +325,47 @@ class _STMReportDetailState extends State<STMReportDetail> {
                 ],
               ),
             ),
-            FutureBuilder<STMReportDetailModel>(
-                future: InitData,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                      return Column(
-                        children: [
-                          // Panel
-                          Container(
-                            height: 400,
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              physics: ClampingScrollPhysics(),
-                              itemCount: snapshot.data!.data!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  height: 50,
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      showDialog(
-                                        context: context,
-                                        builder: (_) => Dialog(
-                                          child: STMReportViewDialog(
-                                              stmReportDataModel:
-                                                  snapshot.data!.data![index]),
-                                        ),
-                                      );
-                                    },
-                                    style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        backgroundColor: (index % 2) == 0
-                                            ? StyleColor.blueLighterOpa01
-                                            : StyleColor.appBarColorOpa01),
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.only(left: 10, right: 10),
+          ),
+          FutureBuilder<STMReportDetailModel>(
+              future: InitData,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData && snapshot.data!.data!.length > 0)
+                    return Column(
+                      children: [
+                        // Panel
+                        Container(
+                          height: 400,
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: snapshot.data!.data!.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                height: 50,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => Dialog(
+                                        child: STMReportViewDialog(
+                                            stmReportDataModel:
+                                                snapshot.data!.data![index]),
+                                      ),
+                                    );
+                                  },
+                                  style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor: (index % 2) == 0
+                                          ? StyleColor.blueLighterOpa01
+                                          : StyleColor.appBarColorOpa01),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      controller: scrollController2,
                                       child: Row(
                                         children: [
                                           Container(
@@ -482,22 +509,26 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
+                        ),
 
-                          SizedBox(
-                            height: 5,
+                        SizedBox(
+                          height: 5,
+                        ),
+                        //Footer
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: StyleColor.appBarColor.withOpacity(0.6),
                           ),
-                          //Footer
-                          Container(
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: StyleColor.appBarColor.withOpacity(0.6),
-                            ),
-                            height: 50,
+                          height: 50,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: scrollController3,
                             child: Row(
                               children: [
                                 Container(
@@ -583,15 +614,15 @@ class _STMReportDetailState extends State<STMReportDetail> {
                               ],
                             ),
                           ),
-                        ],
-                      );
-                    return PopupDialog.noResult();
-                  }
-                  return AnimateLoading();
-                  return Container();
-                }),
-          ],
-        ),
+                        ),
+                      ],
+                    );
+                  return PopupDialog.noResult();
+                }
+                return AnimateLoading();
+                return Container();
+              }),
+        ],
       ),
     );
   }
@@ -599,6 +630,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
   Widget tabletAndWebWidget() {
     return Expanded(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.only(left: 10, right: 10),
@@ -607,94 +639,99 @@ class _STMReportDetailState extends State<STMReportDetail> {
               color: StyleColor.appBarColor.withOpacity(0.8),
             ),
             height: 50,
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  child: Text(
-                    'Label.No'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: scrollController1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 40,
+                    child: Text(
+                      'Label.No'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Container(
-                  width: 150,
-                  child: Text(
-                    "ផ្លាកលេខ",
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    width: 150,
+                    child: Text(
+                      "ផ្លាកលេខ",
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: Text(
-                    'ស្ថានីយចូល'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    child: Text(
+                      'ស្ថានីយចូល'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Container(
-                  width: 100,
-                  child: Text(
-                    'ទម្ងន់ចូល(គក)'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
+                    width: 100,
+                    child: Text(
+                      'ទម្ងន់ចូល(គក)'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: Text(
-                    'ស្ថានីយចេញ'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
+                    child: Text(
+                      'ស្ថានីយចេញ'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Container(
-                  width: 100,
-                  child: Text(
-                    'ទម្ងន់ចេញ(គក)'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
+                    width: 100,
+                    child: Text(
+                      'ទម្ងន់ចេញ(គក)'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: Text(
-                    'ទម្ងន់ទំនិញ(គក)'.tr(),
-                    style: StyleColor.textStyleKhmerDangrekAuto(
-                      fontSize: 14,
-                      color: Colors.white,
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                    child: Text(
+                      'ទម្ងន់ទំនិញ(គក)'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -734,165 +771,179 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     child: Container(
                                       padding:
                                           EdgeInsets.only(left: 10, right: 10),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 40,
-                                            child: Text(
-                                              (index + 1).toString(),
-                                              style: StyleColor
-                                                  .textStyleKhmerDangrekAuto(
-                                                fontSize: 14,
+                                      color: Colors.blueGrey,
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        controller: scrollController2,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: 40,
+                                              child: Text(
+                                                (index + 1).toString(),
+                                                style: StyleColor
+                                                    .textStyleKhmerDangrekAuto(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            width: 80,
-                                            height: 50,
-                                            child: InkWell(
-                                              onTap: () {
-                                                showDialog(
-                                                  useSafeArea: false,
-                                                  context: context,
-                                                  builder: (_) =>
-                                                      PhotoViewSlideOut(
-                                                    url: getPlateImageUrl(
-                                                      snapshot
-                                                          .data!.data![index],
+                                            Container(
+                                              width: 80,
+                                              height: 50,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  showDialog(
+                                                    useSafeArea: false,
+                                                    context: context,
+                                                    builder: (_) =>
+                                                        PhotoViewSlideOut(
+                                                      url: getPlateImageUrl(
+                                                        snapshot
+                                                            .data!.data![index],
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                child: Container(
-                                                  color: Color.fromRGBO(
-                                                      192, 192, 192, 0.2),
-                                                  child: ExtensionComponent
-                                                      .cachedNetworkImage(
-                                                    url: getPlateImageUrl(
-                                                        snapshot.data!
-                                                            .data![index]),
-                                                    profile: true,
+                                                  );
+                                                },
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  child: Container(
+                                                    color: Color.fromRGBO(
+                                                        192, 192, 192, 0.2),
+                                                    child: ExtensionComponent
+                                                        .cachedNetworkImage(
+                                                      url: getPlateImageUrl(
+                                                          snapshot.data!
+                                                              .data![index]),
+                                                      profile: true,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            width: 70,
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                      .frontPlateObj!.nameKh! +
-                                                  "\n" +
-                                                  snapshot
-                                                      .data!
-                                                      .data![index]
-                                                      .frontPlateObj!
-                                                      .plateNumberFormatted!,
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
-                                              ),
-                                              textAlign: TextAlign.center,
+                                            SizedBox(
+                                              width: 5,
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 15,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                          .stationInId !=
-                                                      null
-                                                  ? snapshot.data!.data![index]
-                                                      .stationInId!
-                                                  : "",
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
+                                            Container(
+                                              width: 70,
+                                              child: Text(
+                                                snapshot
+                                                        .data!
+                                                        .data![index]
+                                                        .frontPlateObj!
+                                                        .nameKh! +
+                                                    "\n" +
+                                                    snapshot
+                                                        .data!
+                                                        .data![index]
+                                                        .frontPlateObj!
+                                                        .plateNumberFormatted!,
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
+                                                textAlign: TextAlign.center,
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                          .weightIn !=
-                                                      null
-                                                  ? snapshot.data!.data![index]
-                                                      .weightIn!
-                                                      .toNumberFormat()
-                                                  : "",
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Container(
+                                              child: Text(
+                                                snapshot.data!.data![index]
+                                                            .stationInId !=
+                                                        null
+                                                    ? snapshot
+                                                        .data!
+                                                        .data![index]
+                                                        .stationInId!
+                                                    : "",
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                          .stationOutId !=
-                                                      null
-                                                  ? snapshot.data!.data![index]
-                                                      .stationOutId
-                                                      .toString()
-                                                  : "",
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              width: 100,
+                                              child: Text(
+                                                snapshot.data!.data![index]
+                                                            .weightIn !=
+                                                        null
+                                                    ? snapshot.data!
+                                                        .data![index].weightIn!
+                                                        .toNumberFormat()
+                                                    : "",
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            width: 100,
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                          .weightOut !=
-                                                      null
-                                                  ? snapshot.data!.data![index]
-                                                      .weightOut!
-                                                      .toNumberFormat()
-                                                  : "",
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              child: Text(
+                                                snapshot.data!.data![index]
+                                                            .stationOutId !=
+                                                        null
+                                                    ? snapshot
+                                                        .data!
+                                                        .data![index]
+                                                        .stationOutId
+                                                        .toString()
+                                                    : "",
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              snapshot.data!.data![index]
-                                                          .weightProduct !=
-                                                      null
-                                                  ? snapshot.data!.data![index]
-                                                      .weightProduct!
-                                                      .toNumberFormat()
-                                                  : "",
-                                              style: StyleColor
-                                                  .textStyleKhmerContentAuto(
-                                                fontSize: 14,
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              width: 100,
+                                              child: Text(
+                                                snapshot.data!.data![index]
+                                                            .weightOut !=
+                                                        null
+                                                    ? snapshot.data!
+                                                        .data![index].weightOut!
+                                                        .toNumberFormat()
+                                                    : "",
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              child: Text(
+                                                snapshot.data!.data![index]
+                                                            .weightProduct !=
+                                                        null
+                                                    ? snapshot
+                                                        .data!
+                                                        .data![index]
+                                                        .weightProduct!
+                                                        .toNumberFormat()
+                                                    : "",
+                                                style: StyleColor
+                                                    .textStyleKhmerContentAuto(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -910,93 +961,102 @@ class _STMReportDetailState extends State<STMReportDetail> {
                               color: StyleColor.appBarColor.withOpacity(0.6),
                             ),
                             height: 50,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 40,
-                                  child: Text(
-                                    'សរុប'.tr(),
-                                    style: StyleColor.textStyleKhmerDangrekAuto(
-                                      fontSize: 14,
-                                      color: Colors.white,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              controller: scrollController3,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 40,
+                                    child: Text(
+                                      'សរុប'.tr(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  width: 170,
-                                  child: Text(
-                                    snapshot.data!.data!.length.toString(),
-                                    style: StyleColor.textStyleKhmerDangrekAuto(
-                                      fontSize: 14,
-                                      color: Colors.white,
+                                  Container(
+                                    width: 170,
+                                    child: Text(
+                                      snapshot.data!.data!.length.toString(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                Container(
-                                  width: 100,
-                                  margin: EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    () {
-                                      int total = 0;
-                                      total = snapshot.data!.data!
-                                          .map((e) => e.weightIn ?? 0)
-                                          .reduce((value, element) =>
-                                              value + element);
-                                      return total.toNumberFormat();
-                                    }(),
-                                    style: StyleColor.textStyleKhmerDangrekAuto(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      bold: true,
+                                  SizedBox(
+                                    width: 50,
+                                  ),
+                                  Container(
+                                    width: 100,
+                                    margin: EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      () {
+                                        int total = 0;
+                                        total = snapshot.data!.data!
+                                            .map((e) => e.weightIn ?? 0)
+                                            .reduce((value, element) =>
+                                                value + element);
+                                        return total.toNumberFormat();
+                                      }(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        bold: true,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10),
-                                  width: 100,
-                                  child: Text(
-                                    () {
-                                      int total = 0;
-                                      total = snapshot.data!.data!
-                                          .map((e) => e.weightOut ?? 0)
-                                          .reduce((value, element) =>
-                                              value + element);
-                                      return total.toNumberFormat();
-                                    }(),
-                                    style: StyleColor.textStyleKhmerDangrekAuto(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      bold: true,
+                                  SizedBox(
+                                    width: 50,
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    width: 100,
+                                    child: Text(
+                                      () {
+                                        int total = 0;
+                                        total = snapshot.data!.data!
+                                            .map((e) => e.weightOut ?? 0)
+                                            .reduce((value, element) =>
+                                                value + element);
+                                        return total.toNumberFormat();
+                                      }(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        bold: true,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    () {
-                                      int total = 0;
-                                      total = snapshot.data!.data!
-                                          .map((e) => e.weightProduct ?? 0)
-                                          .reduce((value, element) =>
-                                              value + element);
-                                      return total.toNumberFormat();
-                                    }(),
-                                    style: StyleColor.textStyleKhmerDangrekAuto(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      bold: true,
+                                  SizedBox(
+                                    width: 50,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      () {
+                                        int total = 0;
+                                        total = snapshot.data!.data!
+                                            .map((e) => e.weightProduct ?? 0)
+                                            .reduce((value, element) =>
+                                                value + element);
+                                        return total.toNumberFormat();
+                                      }(),
+                                      style:
+                                          StyleColor.textStyleKhmerDangrekAuto(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        bold: true,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -1029,163 +1089,166 @@ class _STMReportDetailState extends State<STMReportDetail> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //Date Picker
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'របាយការណ៍ថ្ងៃ៖ ',
-                      style: StyleColor.textStyleKhmerContentAuto(),
-                    ),
-                    //Arrow Left
-                    TextButton(
-                      onPressed: () async {
-                        date = date.subtract(Duration(days: 1));
-                        InitData = initData();
-                        setState(() {});
-                      },
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          ),
-                        ),
-                        padding: EdgeInsets.only(
-                            left: 10, right: 10, bottom: 7, top: 7),
-                        backgroundColor: StyleColor.appBarColor,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'របាយការណ៍ថ្ងៃ៖ ',
+                        style: StyleColor.textStyleKhmerContentAuto(),
                       ),
-                      child: Container(
-                          height: 40,
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Colors.white,
-                          )),
-                    ),
-                    //Date
-                    TextButton(
-                      onPressed: () async {
-                        var res = await showDatePicker(
-                          context: context,
-                          initialDate: date,
-                          firstDate: DateTime.now().subtract(Duration(
-                            days: 3650,
-                          )),
-                          lastDate: DateTime.now(),
-                        );
-                        if (res != null) {
-                          date = res;
+                      //Arrow Left
+                      TextButton(
+                        onPressed: () async {
+                          date = date.subtract(Duration(days: 1));
                           InitData = initData();
                           setState(() {});
-                        }
-                      },
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(0)),
-                        padding: EdgeInsets.only(
-                            left: 10, right: 10, bottom: 7, top: 7),
-                        backgroundColor: StyleColor.appBarColor,
-                      ),
-                      child: Container(
-                        height: 40,
-                        alignment: Alignment.center,
-                        child: Text(
-                          DateFormat('d MMMM', 'km').format(date) +
-                              " ${date.year}",
-                          style: StyleColor.textStyleKhmerContentAuto(
-                            color: Colors.white,
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
                           ),
+                          padding: EdgeInsets.only(
+                              left: 10, right: 10, bottom: 7, top: 7),
+                          backgroundColor: StyleColor.appBarColor,
                         ),
+                        child: Container(
+                            height: 40,
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Colors.white,
+                            )),
                       ),
-                    ),
-                    //Arrow Right
-                    TextButton(
-                      onPressed: () async {
-                        date = date.add(Duration(days: 1));
-                        InitData = initData();
-                        setState(() {});
-                      },
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                          ),
+                      //Date
+                      TextButton(
+                        onPressed: () async {
+                          var res = await showDatePicker(
+                            context: context,
+                            initialDate: date,
+                            firstDate: DateTime.now().subtract(Duration(
+                              days: 3650,
+                            )),
+                            lastDate: DateTime.now(),
+                          );
+                          if (res != null) {
+                            date = res;
+                            InitData = initData();
+                            setState(() {});
+                          }
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0)),
+                          padding: EdgeInsets.only(
+                              left: 10, right: 10, bottom: 7, top: 7),
+                          backgroundColor: StyleColor.appBarColor,
                         ),
-                        padding: EdgeInsets.only(
-                            left: 10, right: 10, bottom: 7, top: 7),
-                        backgroundColor: StyleColor.appBarColor,
-                      ),
-                      child: Container(
+                        child: Container(
                           height: 40,
                           alignment: Alignment.center,
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                          )),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: FutureBuilder<STMReportDetailModel>(
-                    future: InitData,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                        return Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 10),
-                            child: TextButton(
-                              onPressed: () {
-                                onDownloadCouponInvoiceRowClick(
-                                  pdf: "report",
-                                  excel: "report",
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                          child: Text(
+                            DateFormat('d MMMM', 'km').format(date) +
+                                " ${date.year}",
+                            style: StyleColor.textStyleKhmerContentAuto(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      //Arrow Right
+                      TextButton(
+                        onPressed: () async {
+                          date = date.add(Duration(days: 1));
+                          InitData = initData();
+                          setState(() {});
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              bottomRight: Radius.circular(10),
+                            ),
+                          ),
+                          padding: EdgeInsets.only(
+                              left: 10, right: 10, bottom: 7, top: 7),
+                          backgroundColor: StyleColor.appBarColor,
+                        ),
+                        child: Container(
+                            height: 40,
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: FutureBuilder<STMReportDetailModel>(
+                      future: InitData,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData && snapshot.data!.data!.length > 0)
+                          return Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: TextButton(
+                                onPressed: () {
+                                  onDownloadCouponInvoiceRowClick(
+                                    pdf: "report",
+                                    excel: "report",
+                                  );
+                                },
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  padding: EdgeInsets.only(
+                                      left: 5, right: 5, bottom: 7, top: 7),
+                                  backgroundColor: StyleColor.appBarDarkColor,
                                 ),
-                                padding: EdgeInsets.only(
-                                    left: 5, right: 5, bottom: 7, top: 7),
-                                backgroundColor: StyleColor.appBarDarkColor,
-                              ),
-                              child: Container(
-                                width: 120,
-                                height: 40,
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.download,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      'ទាញយក',
-                                      style:
-                                          StyleColor.textStyleKhmerContentAuto(
+                                child: Container(
+                                  width: 120,
+                                  height: 40,
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.download,
                                         color: Colors.white,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        'ទាញយក',
+                                        style: StyleColor
+                                            .textStyleKhmerContentAuto(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      return Container();
-                    },
-                  ),
-                )
-              ],
+                          );
+                        return Container();
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
 
             //Search Bar

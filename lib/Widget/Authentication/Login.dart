@@ -218,257 +218,260 @@ class _LoginState extends State<Login> {
               ),
             ),
             SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                // mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Expanded(child: SizedBox()),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        width: 150,
-                        height: 150,
-                        child: Image.asset(
-                          'assets/image/stm_report_logo.png',
-                          fit: BoxFit.contain,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Expanded(child: SizedBox()),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          width: 150,
+                          height: 150,
+                          child: Image.asset(
+                            'assets/image/stm_report_logo.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      FutureBuilder(
-                        future: Singleton.instance.apiExtension.GetConnection,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasData) {
-                              return Container(
-                                constraints: BoxConstraints(maxWidth: 400),
-                                margin: EdgeInsets.all(30),
-                                child: AutofillGroup(
-                                  key: UniqueKey(),
-                                  onDisposeAction: AutofillContextAction.commit,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      Container(
-                                        height: 50,
-                                        width: double.infinity,
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                            // override textfield's icon color when selected
-                                            primaryColor:
-                                                StyleColor.appBarColor,
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FutureBuilder(
+                          future: Singleton.instance.apiExtension.GetConnection,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasData) {
+                                return Container(
+                                  constraints: BoxConstraints(maxWidth: 400),
+                                  margin: EdgeInsets.all(30),
+                                  child: AutofillGroup(
+                                    key: UniqueKey(),
+                                    onDisposeAction: AutofillContextAction.commit,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Container(
+                                          height: 50,
+                                          width: double.infinity,
+                                          child: Theme(
+                                            data: Theme.of(context).copyWith(
+                                              // override textfield's icon color when selected
+                                              primaryColor:
+                                                  StyleColor.appBarColor,
+                                            ),
+                                            child: TextField(
+                                              autofillHints: [
+                                                AutofillHints.telephoneNumber
+                                              ],
+                                              focusNode: _phoneNumberNode,
+                                              style: StyleColor
+                                                  .textStyleKhmerContent,
+                                              controller: usernameInputController,
+                                              enableSuggestions: false,
+                                              autocorrect: false,
+                                              decoration: InputDecoration(
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10)),
+                                                  borderSide: BorderSide(
+                                                    width: 2,
+                                                    color: StyleColor.appBarColor,
+                                                  ),
+                                                ),
+                                                hintStyle: StyleColor
+                                                    .textStyleKhmerDangrek16,
+                                                hintText:
+                                                    'Login.phoneNumber'.tr(),
+                                                prefixIcon: Icon(Icons.phone,
+                                                    color:
+                                                        StyleColor.appBarColor),
+                                                border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
+                                                ),
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 10,
+                                                    top: 13,
+                                                    right: 10,
+                                                    bottom: 15),
+                                              ),
+                                            ),
                                           ),
-                                          child: TextField(
-                                            autofillHints: [
-                                              AutofillHints.telephoneNumber
-                                            ],
-                                            focusNode: _phoneNumberNode,
-                                            style: StyleColor
-                                                .textStyleKhmerContent,
-                                            controller: usernameInputController,
-                                            enableSuggestions: false,
-                                            autocorrect: false,
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                borderSide: BorderSide(
-                                                  width: 2,
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          width: double.infinity,
+                                          child: Theme(
+                                            data: Theme.of(context).copyWith(
+                                              // override textfield's icon color when selected
+                                              primaryColor:
+                                                  StyleColor.appBarColor,
+                                            ),
+                                            child: TextField(
+                                              autofillHints: [
+                                                AutofillHints.password
+                                              ],
+                                              focusNode: _passwordNode,
+                                              onEditingComplete: () => TextInput
+                                                  .finishAutofillContext(),
+                                              style: StyleColor
+                                                  .textStyleKhmerContent,
+                                              controller: passwordInputController,
+                                              obscureText: !_passwordVisible,
+                                              decoration: InputDecoration(
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10)),
+                                                  borderSide: BorderSide(
+                                                      width: 2,
+                                                      color:
+                                                          StyleColor.appBarColor),
+                                                ),
+                                                prefixIcon: Icon(
+                                                  Icons.security,
                                                   color: StyleColor.appBarColor,
                                                 ),
-                                              ),
-                                              hintStyle: StyleColor
-                                                  .textStyleKhmerDangrek16,
-                                              hintText:
-                                                  'Login.phoneNumber'.tr(),
-                                              prefixIcon: Icon(Icons.phone,
-                                                  color:
-                                                      StyleColor.appBarColor),
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(10),
+                                                hintStyle: StyleColor
+                                                    .textStyleKhmerDangrek16,
+                                                hintText: 'Login.password'.tr(),
+                                                border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                    Radius.circular(10),
+                                                  ),
                                                 ),
-                                              ),
-                                              contentPadding: EdgeInsets.only(
+                                                contentPadding: EdgeInsets.only(
                                                   left: 10,
                                                   top: 13,
                                                   right: 10,
-                                                  bottom: 15),
+                                                  bottom: 15,
+                                                ),
+                                                suffixIcon: IconButton(
+                                                  icon: Icon(
+                                                    // Based on passwordVisible state choose the icon
+                                                    _passwordVisible
+                                                        ? Icons.visibility
+                                                        : Icons.visibility_off,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  onPressed: () {
+                                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                                    setState(() {
+                                                      _passwordVisible =
+                                                          !_passwordVisible;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Container(
-                                        height: 50,
-                                        width: double.infinity,
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                            // override textfield's icon color when selected
-                                            primaryColor:
-                                                StyleColor.appBarColor,
-                                          ),
-                                          child: TextField(
-                                            autofillHints: [
-                                              AutofillHints.password
-                                            ],
-                                            focusNode: _passwordNode,
-                                            onEditingComplete: () => TextInput
-                                                .finishAutofillContext(),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        MaterialButton(
+                                          minWidth: double.infinity,
+                                          height: 50,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          padding: EdgeInsets.all(0),
+                                          clipBehavior: Clip.antiAlias,
+                                          onPressed: () async {
+                                            Extension.clearFocus(context);
+                                            loginUser(authenticated: false);
+                                          },
+                                          child: Text(
+                                            "Button.Login".tr(),
                                             style: StyleColor
-                                                .textStyleKhmerContent,
-                                            controller: passwordInputController,
-                                            obscureText: !_passwordVisible,
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                                borderSide: BorderSide(
-                                                    width: 2,
-                                                    color:
-                                                        StyleColor.appBarColor),
+                                                .textStyleKhmerDangrek18,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          color: StyleColor.appBarColor,
+                                          textColor: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            await Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (c, a1, a2) =>
+                                                    Register(),
+                                                transitionsBuilder:
+                                                    (c, anim, a2, child) =>
+                                                        FadeTransition(
+                                                            opacity: anim,
+                                                            child: child),
+                                                transitionDuration:
+                                                    Duration(milliseconds: 200),
                                               ),
-                                              prefixIcon: Icon(
-                                                Icons.security,
-                                                color: StyleColor.appBarColor,
-                                              ),
-                                              hintStyle: StyleColor
-                                                  .textStyleKhmerDangrek16,
-                                              hintText: 'Login.password'.tr(),
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(10),
-                                                ),
-                                              ),
-                                              contentPadding: EdgeInsets.only(
-                                                left: 10,
-                                                top: 13,
-                                                right: 10,
-                                                bottom: 15,
-                                              ),
-                                              suffixIcon: IconButton(
-                                                icon: Icon(
-                                                  // Based on passwordVisible state choose the icon
-                                                  _passwordVisible
-                                                      ? Icons.visibility
-                                                      : Icons.visibility_off,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: () {
-                                                  // Update the state i.e. toogle the state of passwordVisible variable
-                                                  setState(() {
-                                                    _passwordVisible =
-                                                        !_passwordVisible;
-                                                  });
-                                                },
-                                              ),
+                                            );
+                                            await initPermissionAndData();
+                                            InitUserModels = initUserModels();
+                                          },
+                                          child: Text(
+                                            "Button.Register".tr(),
+                                            style: StyleColor
+                                                .textStyleKhmerDangrekAuto(
+                                              fontSize: 16,
+                                              color: StyleColor.appBarColor,
                                             ),
                                           ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Column(
+                                  children: [
+                                    Text(
+                                      "Message.ServerConnectionError".tr(),
+                                      style: StyleColor.textStyleKhmerDangrek18,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: StyleColor.appBarColor,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      MaterialButton(
-                                        minWidth: double.infinity,
-                                        height: 50,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        padding: EdgeInsets.all(0),
-                                        clipBehavior: Clip.antiAlias,
-                                        onPressed: () async {
-                                          Extension.clearFocus(context);
-                                          loginUser(authenticated: false);
+                                        onPressed: () {
+                                          // Singleton.instance.apiExtension
+                                          //     .getConnectionInit(context,
+                                          //         noLoading: true);
+                                          // setState(() {});
                                         },
                                         child: Text(
-                                          "Button.Login".tr(),
-                                          style: StyleColor
-                                              .textStyleKhmerDangrek18,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        color: StyleColor.appBarColor,
-                                        textColor: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      GestureDetector(
-                                        onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (c, a1, a2) =>
-                                                  Register(),
-                                              transitionsBuilder:
-                                                  (c, anim, a2, child) =>
-                                                      FadeTransition(
-                                                          opacity: anim,
-                                                          child: child),
-                                              transitionDuration:
-                                                  Duration(milliseconds: 200),
-                                            ),
-                                          );
-                                          await initPermissionAndData();
-                                          InitUserModels = initUserModels();
-                                        },
-                                        child: Text(
-                                          "Button.Register".tr(),
+                                          "Button.TryAgain".tr(),
                                           style: StyleColor
                                               .textStyleKhmerDangrekAuto(
-                                            fontSize: 16,
-                                            color: StyleColor.appBarColor,
-                                          ),
+                                                  fontSize: 16,
+                                                  color: Colors.white),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return Column(
-                                children: [
-                                  Text(
-                                    "Message.ServerConnectionError".tr(),
-                                    style: StyleColor.textStyleKhmerDangrek18,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: StyleColor.appBarColor,
                                       ),
-                                      onPressed: () {
-                                        // Singleton.instance.apiExtension
-                                        //     .getConnectionInit(context,
-                                        //         noLoading: true);
-                                        // setState(() {});
-                                      },
-                                      child: Text(
-                                        "Button.TryAgain".tr(),
-                                        style: StyleColor
-                                            .textStyleKhmerDangrekAuto(
-                                                fontSize: 16,
-                                                color: Colors.white),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              );
+                                    )
+                                  ],
+                                );
+                              }
                             }
-                          }
-                          return AnimateLoading();
-                        },
-                      )
-                    ],
-                  ),
-                ],
+                            return AnimateLoading();
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
