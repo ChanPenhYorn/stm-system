@@ -50,6 +50,18 @@ class _STMReportDetailState extends State<STMReportDetail> {
       scrollController3.animateTo(scrollController1.offset,
           duration: Duration(milliseconds: 300), curve: Curves.linear);
     });
+    // scrollController2.addListener(() {
+    //   scrollController1.animateTo(scrollController2.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    //   scrollController3.animateTo(scrollController2.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    // });
+    // scrollController3.addListener(() {
+    //   scrollController2.animateTo(scrollController3.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    //   scrollController1.animateTo(scrollController3.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    // });
   }
 
   @override
@@ -311,6 +323,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                         color: Colors.white,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    width: 10,
                   ),
                   Container(
                     width: 100,
@@ -771,7 +786,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     child: Container(
                                       padding:
                                           EdgeInsets.only(left: 10, right: 10),
-                                      color: Colors.blueGrey,
+                                      color: Colors.grey[200],
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         controller: scrollController2,
