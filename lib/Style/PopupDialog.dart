@@ -417,33 +417,35 @@ class PopupDialog {
 
   static Widget noResult() {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          // Image.asset(
-          //   'assets/images/noimage.png',
-          //   width: 70,
-          // ),
-          SvgPicture.asset(
-            "assets/svg/search.svg",
-            width: 50,
-            color: Colors.grey.shade700,
-          ),
-          Text(
-            'មិនមានទិន្នន័យ',
-            style: StyleColor.textStyleKhmerDangrekAuto(
-              fontSize: 18,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Image.asset(
+            //   'assets/images/noimage.png',
+            //   width: 70,
+            // ),
+            SvgPicture.asset(
+              "assets/svg/search.svg",
+              width: 50,
               color: Colors.grey.shade700,
             ),
-          ),
-          Text(
-            'No Result Found',
-            style: StyleColor.textStyleKhmerDangrekAuto(
-              fontSize: 18,
-              color: Colors.grey.shade700,
+            Text(
+              'មិនមានទិន្នន័យ',
+              style: StyleColor.textStyleKhmerDangrekAuto(
+                fontSize: 18,
+                color: Colors.grey.shade700,
+              ),
             ),
-          ),
-        ],
+            Text(
+              'No Result Found',
+              style: StyleColor.textStyleKhmerDangrekAuto(
+                fontSize: 18,
+                color: Colors.grey.shade700,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

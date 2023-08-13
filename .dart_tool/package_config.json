@@ -338,6 +338,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/Users/yornc/AppData/Local/Pub/Cache/hosted/pub.dev/get-4.6.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "go_router",
       "rootUri": "file:///C:/Users/yornc/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-6.5.9",
       "packageUri": "lib/",
@@ -1058,7 +1064,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-08-09T05:07:47.125036Z",
+  "generated": "2023-08-12T01:05:24.662770Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }
