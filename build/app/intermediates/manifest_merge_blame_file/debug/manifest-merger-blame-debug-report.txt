@@ -13,20 +13,20 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->E:\flutter\ITS\3\stm_report\android\app\src\debug\AndroidManifest.xml:7:5-66
-15-->E:\flutter\ITS\3\stm_report\android\app\src\debug\AndroidManifest.xml:7:22-64
+15-->D:\FLUTTER\ITS\stm_report\android\app\src\debug\AndroidManifest.xml:7:5-66
+15-->D:\FLUTTER\ITS\stm_report\android\app\src\debug\AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-16-->E:\flutter\ITS\3\stm_report\android\app\src\main\AndroidManifest.xml:4:5-71
-16-->E:\flutter\ITS\3\stm_report\android\app\src\main\AndroidManifest.xml:4:22-69
+16-->D:\FLUTTER\ITS\stm_report\android\app\src\main\AndroidManifest.xml:4:5-71
+16-->D:\FLUTTER\ITS\stm_report\android\app\src\main\AndroidManifest.xml:4:22-69
 17    <uses-permission android:name="android.permission.CAMERA" />
-17-->E:\flutter\ITS\3\stm_report\android\app\src\main\AndroidManifest.xml:5:5-65
-17-->E:\flutter\ITS\3\stm_report\android\app\src\main\AndroidManifest.xml:5:22-62
+17-->D:\FLUTTER\ITS\stm_report\android\app\src\main\AndroidManifest.xml:5:5-65
+17-->D:\FLUTTER\ITS\stm_report\android\app\src\main\AndroidManifest.xml:5:22-62
 18    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-18-->[:screenshot_callback] E:\flutter\ITS\3\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-80
-18-->[:screenshot_callback] E:\flutter\ITS\3\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-77
+18-->[:screenshot_callback] D:\FLUTTER\ITS\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-80
+18-->[:screenshot_callback] D:\FLUTTER\ITS\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-77
 19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- suppress DeprecatedClassUsageInspection -->
-19-->[:screenshot_callback] E:\flutter\ITS\3\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
-19-->[:screenshot_callback] E:\flutter\ITS\3\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
+19-->[:screenshot_callback] D:\FLUTTER\ITS\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+19-->[:screenshot_callback] D:\FLUTTER\ITS\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
 20    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 20-->[androidx.biometric:biometric:1.1.0] C:\Users\yornc\.gradle\caches\transforms-3\7d843ecb961d60de278c04110ef3da8d\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
 20-->[androidx.biometric:biometric:1.1.0] C:\Users\yornc\.gradle\caches\transforms-3\7d843ecb961d60de278c04110ef3da8d\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
@@ -91,7 +91,7 @@
 53        android:icon="@mipmap/ic_launcher"
 54        android:label="STM Report"
 55        android:requestLegacyExternalStorage="true" >
-55-->[:screenshot_callback] E:\flutter\ITS\3\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-61
+55-->[:screenshot_callback] D:\FLUTTER\ITS\stm_report\build\screenshot_callback\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-61
 56        <activity
 57            android:name="kh.gov.mpwt.stm.MainActivity"
 58            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -126,58 +126,58 @@
 87            android:value="2" />
 88
 89        <provider
-89-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+89-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 90            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-90-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+90-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 91            android:authorities="kh.gov.mpwt.stm.flutter.image_provider"
-91-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+91-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 92            android:exported="false"
-92-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+92-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 93            android:grantUriPermissions="true" >
-93-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+93-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 94            <meta-data
-94-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+94-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 95                android:name="android.support.FILE_PROVIDER_PATHS"
-95-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+95-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 96                android:resource="@xml/flutter_image_picker_file_paths" />
-96-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+96-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 97        </provider>
 98        <!--
 99           Declares a provider which allows us to store files to share in
 100           '.../caches/share_plus' and grant the receiving action access
 101        -->
 102        <provider
-102-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
+102-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:20
 103            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-103-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
+103-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-77
 104            android:authorities="kh.gov.mpwt.stm.flutter.share_provider"
-104-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
+104-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-74
 105            android:exported="false"
-105-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+105-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
 106            android:grantUriPermissions="true" >
-106-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
+106-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-47
 107            <meta-data
-107-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+107-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 108                android:name="android.support.FILE_PROVIDER_PATHS"
-108-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+108-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 109                android:resource="@xml/flutter_share_file_paths" />
-109-->[:image_picker_android] E:\flutter\ITS\3\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+109-->[:image_picker_android] D:\FLUTTER\ITS\stm_report\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 110        </provider>
 111        <!--
 112           This manifest declared broadcast receiver allows us to use an explicit
 113           Intent when creating a PendingItent to be informed of the user's choice
 114        -->
 115        <receiver
-115-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
+115-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-34:20
 116            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-116-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
+116-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-82
 117            android:exported="false" >
-117-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
+117-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-37
 118            <intent-filter>
-118-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
+118-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-33:29
 119                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-119-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
-119-->[:share_plus] E:\flutter\ITS\3\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
+119-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:17-65
+119-->[:share_plus] D:\FLUTTER\ITS\stm_report\build\share_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:32:25-62
 120            </intent-filter>
 121        </receiver>
 122

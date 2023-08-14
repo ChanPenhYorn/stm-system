@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\flutter\\ITS\\3\\stm_report\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sk\\values-sk.xml",
+            "outputFile": "D:\\FLUTTER\\ITS\\stm_report\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sk\\values-sk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\yornc\\.gradle\\caches\\transforms-3\\8a19ab69fa485a97fa213a323db5f833\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-sk\\values-sk.xml",

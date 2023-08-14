@@ -23,6 +23,7 @@ class ApiExtension {
   }
 
   Future<bool> getConnection(BuildContext context,
+      // ignore: dead_code
       {bool noLoading = false}) async {
     return true;
     if (!noLoading) AnimateLoading().showLoading(context);

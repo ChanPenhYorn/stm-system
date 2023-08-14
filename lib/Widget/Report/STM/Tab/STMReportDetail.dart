@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
@@ -49,6 +52,18 @@ class _STMReportDetailState extends State<STMReportDetail> {
       scrollController3.animateTo(scrollController1.offset,
           duration: Duration(milliseconds: 300), curve: Curves.linear);
     });
+    // scrollController2.addListener(() {
+    //   scrollController1.animateTo(scrollController2.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    //   scrollController3.animateTo(scrollController2.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    // });
+    // scrollController3.addListener(() {
+    //   scrollController2.animateTo(scrollController3.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    //   scrollController1.animateTo(scrollController3.offset,
+    //       duration: Duration(milliseconds: 300), curve: Curves.linear);
+    // });
   }
 
   @override
@@ -265,8 +280,11 @@ class _STMReportDetailState extends State<STMReportDetail> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 100,
+                    ),
                     Container(
-                      width: 150,
+                      width: 100,
                       child: Text(
                         "ផ្លាកលេខ",
                         style: StyleColor.textStyleKhmerDangrekAuto(
@@ -652,12 +670,17 @@ class _STMReportDetailState extends State<STMReportDetail> {
   }
 
   Widget tabletAndWebWidget() {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
+            // height: screenHeight * 0.1,
+            width: screenWidth,
+            // alignment: Alignment.center,
             padding: EdgeInsets.only(left: 10, right: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -668,7 +691,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
               scrollDirection: Axis.horizontal,
               controller: scrollController1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     width: 40,
@@ -681,10 +705,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 200,
                   ),
                   Container(
-                    width: 150,
+                    width: 50,
                     child: Text(
                       "ផ្លាកលេខ",
                       style: StyleColor.textStyleKhmerDangrekAuto(
@@ -694,7 +718,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 15,
+                    width: 200,
                   ),
                   Container(
                     child: Text(
@@ -706,7 +730,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 30,
+                    width: 20,
                   ),
                   Container(
                     width: 100,
@@ -719,7 +743,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 30,
+                    width: 130,
                   ),
                   Container(
                     child: Text(
@@ -731,7 +755,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 30,
+                    width: 20,
                   ),
                   Container(
                     width: 100,
@@ -744,7 +768,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 100,
                   ),
                   Container(
                     child: Text(
@@ -765,327 +789,347 @@ class _STMReportDetailState extends State<STMReportDetail> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              itemCount: snapshot.data!.data!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  height: 50,
-                                  child: TextButton(
-                                    onPressed: () async {
-                                      showDialog(
-                                        context: context,
-                                        builder: (_) => Dialog(
-                                          child: STMReportViewDialog(
-                                              stmReportDataModel:
-                                                  snapshot.data!.data![index]),
-                                        ),
-                                      );
-                                    },
-                                    style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        backgroundColor: (index % 2) == 0
-                                            ? StyleColor.blueLighterOpa01
-                                            : StyleColor.appBarColorOpa01),
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.only(left: 10, right: 10),
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        controller: scrollController2,
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 40,
-                                              child: Text(
-                                                (index + 1).toString(),
-                                                style: StyleColor
-                                                    .textStyleKhmerDangrekAuto(
-                                                  fontSize: 14,
+                      return Container(
+                        width: screenWidth,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: ClampingScrollPhysics(),
+                                itemCount: snapshot.data!.data!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width: screenWidth,
+                                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                                    height: 60,
+                                    child: TextButton(
+                                      onPressed: () async {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => Dialog(
+                                            child: STMReportViewDialog(
+                                                stmReportDataModel: snapshot
+                                                    .data!.data![index]),
+                                          ),
+                                        );
+                                      },
+                                      style: TextButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          backgroundColor: (index % 2) == 0
+                                              ? StyleColor.blueLighterOpa01
+                                              : StyleColor.appBarColorOpa01),
+                                      child: Container(
+                                        width: screenWidth,
+                                        // alignment: Alignment.center,
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          controller: scrollController2,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 40,
+                                                child: Text(
+                                                  (index + 1).toString(),
+                                                  style: StyleColor
+                                                      .textStyleKhmerDangrekAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              width: 80,
-                                              height: 50,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  showDialog(
-                                                    useSafeArea: false,
-                                                    context: context,
-                                                    builder: (_) =>
-                                                        PhotoViewSlideOut(
-                                                      url: getPlateImageUrl(
-                                                        snapshot
-                                                            .data!.data![index],
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  child: Container(
-                                                    color: Color.fromRGBO(
-                                                        192, 192, 192, 0.2),
-                                                    child: ExtensionComponent
-                                                        .cachedNetworkImage(
-                                                      url: getPlateImageUrl(
+                                              Container(
+                                                width: 80,
+                                                height: 50,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      useSafeArea: false,
+                                                      context: context,
+                                                      builder: (_) =>
+                                                          PhotoViewSlideOut(
+                                                        url: getPlateImageUrl(
                                                           snapshot.data!
-                                                              .data![index]),
-                                                      profile: true,
+                                                              .data![index],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    child: Container(
+                                                      color: Color.fromRGBO(
+                                                          192, 192, 192, 0.2),
+                                                      child: ExtensionComponent
+                                                          .cachedNetworkImage(
+                                                        url: getPlateImageUrl(
+                                                            snapshot.data!
+                                                                .data![index]),
+                                                        profile: true,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              width: 70,
-                                              child: Text(
-                                                snapshot
-                                                        .data!
-                                                        .data![index]
-                                                        .frontPlateObj!
-                                                        .nameKh! +
-                                                    "\n" +
-                                                    snapshot
-                                                        .data!
-                                                        .data![index]
-                                                        .frontPlateObj!
-                                                        .plateNumberFormatted!,
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
-                                                ),
-                                                textAlign: TextAlign.center,
+                                              SizedBox(
+                                                width: 90,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Container(
-                                              child: Text(
-                                                snapshot.data!.data![index]
-                                                            .stationInId !=
-                                                        null
-                                                    ? snapshot
-                                                        .data!
-                                                        .data![index]
-                                                        .stationInId!
-                                                    : "",
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              Container(
+                                                width: 100,
+                                                child: Text(
+                                                  snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .frontPlateObj!
+                                                          .nameKh! +
+                                                      "\n" +
+                                                      snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .frontPlateObj!
+                                                          .plateNumberFormatted!,
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 11,
+                                                  ),
+                                                  textAlign: TextAlign.center,
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              width: 100,
-                                              child: Text(
-                                                snapshot.data!.data![index]
-                                                            .weightIn !=
-                                                        null
-                                                    ? snapshot.data!
-                                                        .data![index].weightIn!
-                                                        .toNumberFormat()
-                                                    : "",
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              SizedBox(
+                                                width: 180,
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  snapshot.data!.data![index]
+                                                              .stationInId !=
+                                                          null
+                                                      ? snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .stationInId!
+                                                      : "",
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              child: Text(
-                                                snapshot.data!.data![index]
-                                                            .stationOutId !=
-                                                        null
-                                                    ? snapshot
-                                                        .data!
-                                                        .data![index]
-                                                        .stationOutId
-                                                        .toString()
-                                                    : "",
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Container(
+                                                width: 100,
+                                                child: Text(
+                                                  snapshot.data!.data![index]
+                                                              .weightIn !=
+                                                          null
+                                                      ? snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .weightIn!
+                                                          .toNumberFormat()
+                                                      : "",
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              width: 100,
-                                              child: Text(
-                                                snapshot.data!.data![index]
-                                                            .weightOut !=
-                                                        null
-                                                    ? snapshot.data!
-                                                        .data![index].weightOut!
-                                                        .toNumberFormat()
-                                                    : "",
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              SizedBox(
+                                                width: 100,
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  snapshot.data!.data![index]
+                                                              .stationOutId !=
+                                                          null
+                                                      ? snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .stationOutId
+                                                          .toString()
+                                                      : "",
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Container(
-                                              child: Text(
-                                                snapshot.data!.data![index]
-                                                            .weightProduct !=
-                                                        null
-                                                    ? snapshot
-                                                        .data!
-                                                        .data![index]
-                                                        .weightProduct!
-                                                        .toNumberFormat()
-                                                    : "",
-                                                style: StyleColor
-                                                    .textStyleKhmerContentAuto(
-                                                  fontSize: 14,
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Container(
+                                                width: 100,
+                                                child: Text(
+                                                  snapshot.data!.data![index]
+                                                              .weightOut !=
+                                                          null
+                                                      ? snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .weightOut!
+                                                          .toNumberFormat()
+                                                      : "",
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                width: 80,
+                                              ),
+                                              Container(
+                                                child: Text(
+                                                  snapshot.data!.data![index]
+                                                              .weightProduct !=
+                                                          null
+                                                      ? snapshot
+                                                          .data!
+                                                          .data![index]
+                                                          .weightProduct!
+                                                          .toNumberFormat()
+                                                      : "",
+                                                  style: StyleColor
+                                                      .textStyleKhmerContentAuto(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: StyleColor.appBarColor.withOpacity(0.6),
-                            ),
-                            height: 50,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              controller: scrollController3,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 40,
-                                    child: Text(
-                                      'សរុប'.tr(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 170,
-                                    child: Text(
-                                      snapshot.data!.data!.length.toString(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 50,
-                                  ),
-                                  Container(
-                                    width: 100,
-                                    margin: EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      () {
-                                        int total = 0;
-                                        total = snapshot.data!.data!
-                                            .map((e) => e.weightIn ?? 0)
-                                            .reduce((value, element) =>
-                                                value + element);
-                                        return total.toNumberFormat();
-                                      }(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        bold: true,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 100,
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 10),
-                                    width: 100,
-                                    child: Text(
-                                      () {
-                                        int total = 0;
-                                        total = snapshot.data!.data!
-                                            .map((e) => e.weightOut ?? 0)
-                                            .reduce((value, element) =>
-                                                value + element);
-                                        return total.toNumberFormat();
-                                      }(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        bold: true,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 70,
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      () {
-                                        int total = 0;
-                                        total = snapshot.data!.data!
-                                            .map((e) => e.weightProduct ?? 0)
-                                            .reduce((value, element) =>
-                                                value + element);
-                                        return total.toNumberFormat();
-                                      }(),
-                                      style:
-                                          StyleColor.textStyleKhmerDangrekAuto(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        bold: true,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              width: screenWidth,
+                              // alignment: Alignment.center,
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: StyleColor.appBarColor.withOpacity(0.6),
+                              ),
+                              height: 50,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                controller: scrollController3,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      child: Text(
+                                        'សរុប'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 170,
+                                      child: Text(
+                                        snapshot.data!.data!.length.toString(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 300,
+                                    ),
+                                    Container(
+                                      width: 100,
+                                      margin: EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        () {
+                                          int total = 0;
+                                          total = snapshot.data!.data!
+                                              .map((e) => e.weightIn ?? 0)
+                                              .reduce((value, element) =>
+                                                  value + element);
+                                          return total.toNumberFormat();
+                                        }(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          bold: true,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 200,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      width: 100,
+                                      child: Text(
+                                        () {
+                                          int total = 0;
+                                          total = snapshot.data!.data!
+                                              .map((e) => e.weightOut ?? 0)
+                                              .reduce((value, element) =>
+                                                  value + element);
+                                          return total.toNumberFormat();
+                                        }(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          bold: true,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 180,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        () {
+                                          int total = 0;
+                                          total = snapshot.data!.data!
+                                              .map((e) => e.weightProduct ?? 0)
+                                              .reduce((value, element) =>
+                                                  value + element);
+                                          return total.toNumberFormat();
+                                        }(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          bold: true,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     return PopupDialog.noResult();
                   }
@@ -1099,488 +1143,549 @@ class _STMReportDetailState extends State<STMReportDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        Extension.clearFocus(context);
-        Singleton.instance.handleUserInteraction(context);
-      },
-      onPanDown: (_) {
-        Singleton.instance.handleUserInteraction(context);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //Date Picker
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            Extension.clearFocus(context);
+            Singleton.instance.handleUserInteraction(context);
+          },
+          onPanDown: (_) {
+            Singleton.instance.handleUserInteraction(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              width: screenWidth,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'របាយការណ៍ថ្ងៃ៖ ',
-                        style: StyleColor.textStyleKhmerContentAuto(),
-                      ),
-                      //Arrow Left
-                      TextButton(
-                        onPressed: () async {
-                          date = date.subtract(Duration(days: 1));
-                          InitData = initData();
-                          setState(() {});
-                        },
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                            ),
-                          ),
-                          padding: EdgeInsets.only(
-                              left: 10, right: 10, bottom: 7, top: 7),
-                          backgroundColor: StyleColor.appBarColor,
-                        ),
-                        child: Container(
-                            height: 40,
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                            )),
-                      ),
-                      //Date
-                      TextButton(
-                        onPressed: () async {
-                          var res = await showDatePicker(
-                            context: context,
-                            initialDate: date,
-                            firstDate: DateTime.now().subtract(Duration(
-                              days: 3650,
-                            )),
-                            lastDate: DateTime.now(),
-                          );
-                          if (res != null) {
-                            date = res;
-                            InitData = initData();
-                            setState(() {});
-                          }
-                        },
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(0)),
-                          padding: EdgeInsets.only(
-                              left: 10, right: 10, bottom: 7, top: 7),
-                          backgroundColor: StyleColor.appBarColor,
-                        ),
-                        child: Container(
-                          height: 40,
-                          alignment: Alignment.center,
-                          child: Text(
-                            DateFormat('d MMMM', 'km').format(date) +
-                                " ${date.year}",
-                            style: StyleColor.textStyleKhmerContentAuto(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      //Arrow Right
-                      TextButton(
-                        onPressed: () async {
-                          date = date.add(Duration(days: 1));
-                          InitData = initData();
-                          setState(() {});
-                        },
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10),
-                            ),
-                          ),
-                          padding: EdgeInsets.only(
-                              left: 10, right: 10, bottom: 7, top: 7),
-                          backgroundColor: StyleColor.appBarColor,
-                        ),
-                        child: Container(
-                            height: 40,
-                            alignment: Alignment.center,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                            )),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: FutureBuilder<STMReportDetailModel>(
-                      future: InitData,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData && snapshot.data!.data!.length > 0)
-                          return Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: TextButton(
-                                onPressed: () {
-                                  onDownloadCouponInvoiceRowClick(
-                                    pdf: "report",
-                                    excel: "report",
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, bottom: 7, top: 7),
-                                  backgroundColor: StyleColor.appBarDarkColor,
-                                ),
-                                child: Container(
-                                  width: 120,
-                                  height: 40,
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.download,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        'ទាញយក',
-                                        style: StyleColor
-                                            .textStyleKhmerContentAuto(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        return Container();
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            //Search Bar
-            Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 5),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ///Search
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  //Date Picker
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          child: AutoSizeText(
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            'ស្វែងរក',
-                            style: StyleColor.textStyleKhmerDangrekAuto(),
-                          ),
-                        ),
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.4,
-                          ),
-                          child: Expanded(
-                            child: TextFormField(
-                              style: StyleColor.textStyleKhmerContent14,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              cursorColor: StyleColor.appBarColor,
-                              controller: searchController,
-                              onChanged: (text) {
-                                plateNumber = text.trim();
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'របាយការណ៍ថ្ងៃ៖ ',
+                              style: StyleColor.textStyleKhmerContentAuto(),
+                            ),
+                            //Arrow Left
+                            TextButton(
+                              onPressed: () async {
+                                date = date.subtract(Duration(days: 1));
                                 InitData = initData();
                                 setState(() {});
                               },
-                              enableSuggestions: false,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey.shade200,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 0, color: Colors.grey.shade200),
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                  ),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 0, color: Colors.grey.shade200),
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 7, top: 7),
+                                backgroundColor: StyleColor.appBarColor,
+                              ),
+                              child: Container(
+                                  height: 40,
+                                  alignment: Alignment.center,
+                                  child: Icon(
+                                    Icons.arrow_back_ios_new,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            //Date
+                            TextButton(
+                              onPressed: () async {
+                                var res = await showDatePicker(
+                                  context: context,
+                                  initialDate: date,
+                                  firstDate: DateTime.now().subtract(Duration(
+                                    days: 3650,
+                                  )),
+                                  lastDate: DateTime.now(),
+                                );
+                                if (res != null) {
+                                  date = res;
+                                  InitData = initData();
+                                  setState(() {});
+                                }
+                              },
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0)),
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 7, top: 7),
+                                backgroundColor: StyleColor.appBarColor,
+                              ),
+                              child: Container(
+                                height: 40,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  DateFormat('d MMMM', 'km').format(date) +
+                                      " ${date.year}",
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.black,
+                              ),
+                            ),
+                            //Arrow Right
+                            TextButton(
+                              onPressed: () async {
+                                date = date.add(Duration(days: 1));
+                                InitData = initData();
+                                setState(() {});
+                              },
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  ),
                                 ),
-                                prefixIconConstraints: BoxConstraints(
-                                  minWidth: 40,
-                                  minHeight: 5,
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 7, top: 7),
+                                backgroundColor: StyleColor.appBarColor,
+                              ),
+                              child: Container(
+                                  height: 40,
+                                  alignment: Alignment.center,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: FutureBuilder<STMReportDetailModel>(
+                            future: InitData,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData &&
+                                  snapshot.data!.data!.length > 0)
+                                return Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        onDownloadCouponInvoiceRowClick(
+                                          pdf: "report",
+                                          excel: "report",
+                                        );
+                                      },
+                                      style: TextButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: EdgeInsets.only(
+                                            left: 5,
+                                            right: 5,
+                                            bottom: 7,
+                                            top: 7),
+                                        backgroundColor:
+                                            StyleColor.appBarDarkColor,
+                                      ),
+                                      child: Container(
+                                        width: 120,
+                                        height: 40,
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.download,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'ទាញយក',
+                                              style: StyleColor
+                                                  .textStyleKhmerContentAuto(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              return Container();
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+
+                  //Search Bar
+                  Container(
+                    width: screenWidth,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            ///Search
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  child: AutoSizeText(
+                                    maxLines: 1,
+                                    overflow: TextOverflow.fade,
+                                    'ស្វែងរក (ផ្លាកលេខ)',
+                                    style:
+                                        StyleColor.textStyleKhmerDangrekAuto(),
+                                  ),
                                 ),
-                                suffixIconConstraints: BoxConstraints(
-                                  minWidth: 40,
-                                  minHeight: 5,
+                                Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width * 0.4,
+                                    maxHeight:
+                                        MediaQuery.of(context).size.height *
+                                            0.4,
+                                  ),
+                                  child: Expanded(
+                                    child: TextFormField(
+                                      style: StyleColor.textStyleKhmerContent14,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      cursorColor: StyleColor.appBarColor,
+                                      controller: searchController,
+                                      onChanged: (text) {
+                                        plateNumber = text.trim();
+                                        InitData = initData();
+                                        setState(() {});
+                                      },
+                                      enableSuggestions: false,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.grey.shade200,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 0,
+                                              color: Colors.grey.shade200),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 0,
+                                              color: Colors.grey.shade200),
+                                        ),
+                                        prefixIcon: Icon(
+                                          Icons.search,
+                                          color: Colors.black,
+                                        ),
+                                        prefixIconConstraints: BoxConstraints(
+                                          minWidth: 40,
+                                          minHeight: 5,
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                          minWidth: 40,
+                                          minHeight: 5,
+                                        ),
+                                        suffixIcon: InkWell(
+                                            child: searchController.text
+                                                        .trim()
+                                                        .length >
+                                                    0
+                                                ? Icon(
+                                                    Icons.clear,
+                                                    color:
+                                                        StyleColor.appBarColor,
+                                                  )
+                                                : SizedBox(),
+                                            onTap: () {
+                                              Extension.clearFocus(context);
+                                              searchController.clear();
+                                              plateNumber = "";
+                                              InitData = initData();
+                                              setState(() {});
+                                            }),
+                                        floatingLabelBehavior:
+                                            FloatingLabelBehavior.never,
+                                        labelText: 'ស្វែងរក',
+                                        labelStyle: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                suffixIcon: InkWell(
-                                    child:
-                                        searchController.text.trim().length > 0
-                                            ? Icon(
-                                                Icons.clear,
-                                                color: StyleColor.appBarColor,
+                              ],
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+
+                            ///Company
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    padding: EdgeInsets.only(left: 10),
+                                    width: 150,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'ក្រុមហ៊ុន',
+                                          style: StyleColor
+                                              .textStyleKhmerDangrekAuto(),
+                                        ),
+                                        selectedCompanyCode != null
+                                            ? Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                width: 20,
+                                                height: 25,
+                                                child: IconButton(
+                                                  iconSize: 20,
+                                                  padding: EdgeInsets.zero,
+                                                  onPressed: onClearCompanyCode,
+                                                  icon: Icon(Icons.clear,
+                                                      color: Colors.red),
+                                                ),
                                               )
-                                            : SizedBox(),
-                                    onTap: () {
-                                      Extension.clearFocus(context);
-                                      searchController.clear();
-                                      plateNumber = "";
-                                      InitData = initData();
-                                      setState(() {});
-                                    }),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                labelText: 'ស្វែងរក (ផ្លាកលេខ)',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Company
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          padding: EdgeInsets.only(left: 10),
-                          width: 150,
-                          child: Row(
-                            children: [
-                              Text(
-                                'ក្រុមហ៊ុន',
-                                style: StyleColor.textStyleKhmerDangrekAuto(),
-                              ),
-                              selectedCompanyCode != null
-                                  ? Container(
-                                      margin: EdgeInsets.only(left: 10),
-                                      padding: EdgeInsets.only(bottom: 3),
-                                      width: 20,
-                                      height: 25,
-                                      child: IconButton(
-                                        iconSize: 20,
-                                        padding: EdgeInsets.zero,
-                                        onPressed: onClearCompanyCode,
-                                        icon: Icon(Icons.clear,
-                                            color: Colors.red),
+                                            : Container(),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    height: 50,
+                                    width: 150,
+                                    decoration: ShapeDecoration(
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            width: 0.5,
+                                            style: BorderStyle.solid),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                       ),
-                                    )
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          height: 50,
-                          width: 150,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 0.5, style: BorderStyle.solid),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10),
-                              child: DropdownButton<String>(
-                                items: listDropDownCompany,
-                                value: selectedCompanyCode,
-                                focusColor: Colors.transparent,
-                                hint: Text(
-                                  'ជ្រើសរើសក្រុមហ៊ុន',
-                                  style: StyleColor.textStyleKhmerContent,
-                                ),
-                                padding: const EdgeInsets.only(left: 0),
-                                style: StyleColor.textStyleKhmerContent,
-                                onChanged: (companyCode) {
-                                  setState(() {
-                                    selectedCompanyCode = companyCode;
-                                    InitData = initData();
-                                  });
-                                },
-                                isExpanded: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Customer
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          padding: EdgeInsets.only(left: 10),
-                          width: 150,
-                          child: Row(
-                            children: [
-                              Text(
-                                'អតិថិជន',
-                                style: StyleColor.textStyleKhmerDangrekAuto(),
-                              ),
-                              selectedCustomerCode != null
-                                  ? Container(
-                                      margin: EdgeInsets.only(left: 10),
-                                      padding: EdgeInsets.only(bottom: 3),
-                                      width: 20,
-                                      height: 25,
-                                      child: IconButton(
-                                        iconSize: 20,
-                                        padding: EdgeInsets.zero,
-                                        onPressed: onClearCustomerCode,
-                                        icon: Icon(Icons.clear,
-                                            color: Colors.red),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: Container(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: DropdownButton<String>(
+                                          items: listDropDownCompany,
+                                          value: selectedCompanyCode,
+                                          focusColor: Colors.transparent,
+                                          hint: Text(
+                                            'ជ្រើសរើសក្រុមហ៊ុន',
+                                            style: StyleColor
+                                                .textStyleKhmerContent,
+                                          ),
+                                          padding:
+                                              const EdgeInsets.only(left: 0),
+                                          style:
+                                              StyleColor.textStyleKhmerContent,
+                                          onChanged: (companyCode) {
+                                            setState(() {
+                                              selectedCompanyCode = companyCode;
+                                              InitData = initData();
+                                            });
+                                          },
+                                          isExpanded: true,
+                                        ),
                                       ),
-                                    )
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          height: 50,
-                          width: 150,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 0.5, style: BorderStyle.solid),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10),
-                              child: DropdownButton<String>(
-                                items: listDropDownCustomer,
-                                value: selectedCustomerCode,
-                                focusColor: Colors.transparent,
-                                hint: Text(
-                                  'ជ្រើសរើសអតិថិជន',
-                                  style: StyleColor.textStyleKhmerContent,
-                                ),
-                                padding: const EdgeInsets.only(left: 0),
-                                style: StyleColor.textStyleKhmerContent,
-                                onChanged: (customerCode) {
-                                  setState(() {
-                                    selectedCustomerCode = customerCode;
-                                    InitData = initData();
-                                  });
-                                },
-                                isExpanded: true,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
+                            SizedBox(
+                              width: 30,
+                            ),
 
-                    ///Zone
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          padding: EdgeInsets.only(left: 10),
-                          width: 150,
-                          child: Row(
-                            children: [
-                              Text(
-                                'តំបន់',
-                                style: StyleColor.textStyleKhmerDangrekAuto(),
-                              ),
-                              selectedZoneCode != null
-                                  ? Container(
-                                      margin: EdgeInsets.only(left: 10),
-                                      padding: EdgeInsets.only(bottom: 3),
-                                      width: 20,
-                                      height: 25,
-                                      child: IconButton(
-                                        iconSize: 20,
-                                        padding: EdgeInsets.zero,
-                                        onPressed: onClearZoneCode,
-                                        icon: Icon(Icons.clear,
-                                            color: Colors.red),
+                            ///Customer
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  padding: EdgeInsets.only(left: 10),
+                                  width: 150,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'អតិថិជន',
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(),
                                       ),
-                                    )
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10, right: 10),
-                          height: 50,
-                          width: 150,
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 0.5, style: BorderStyle.solid),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                            ),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 10),
-                              child: DropdownButton<String>(
-                                items: listDropDownZone,
-                                value: selectedZoneCode,
-                                focusColor: Colors.transparent,
-                                hint: Text(
-                                  'ជ្រើសរើសតំបន់',
-                                  style: StyleColor.textStyleKhmerContent,
+                                      selectedCustomerCode != null
+                                          ? Container(
+                                              margin: EdgeInsets.only(left: 10),
+                                              padding:
+                                                  EdgeInsets.only(bottom: 3),
+                                              width: 20,
+                                              height: 25,
+                                              child: IconButton(
+                                                iconSize: 20,
+                                                padding: EdgeInsets.zero,
+                                                onPressed: onClearCustomerCode,
+                                                icon: Icon(Icons.clear,
+                                                    color: Colors.red),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  ),
                                 ),
-                                padding: const EdgeInsets.only(left: 0),
-                                style: StyleColor.textStyleKhmerContent,
-                                onChanged: (zoneCode) {
-                                  setState(() {
-                                    selectedZoneCode = zoneCode;
-                                    InitData = initData();
-                                  });
-                                },
-                                isExpanded: true,
-                              ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  height: 50,
+                                  width: 150,
+                                  decoration: ShapeDecoration(
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 0.5, style: BorderStyle.solid),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: DropdownButton<String>(
+                                        items: listDropDownCustomer,
+                                        value: selectedCustomerCode,
+                                        focusColor: Colors.transparent,
+                                        hint: Text(
+                                          'ជ្រើសរើសអតិថិជន',
+                                          style:
+                                              StyleColor.textStyleKhmerContent,
+                                        ),
+                                        padding: const EdgeInsets.only(left: 0),
+                                        style: StyleColor.textStyleKhmerContent,
+                                        onChanged: (customerCode) {
+                                          setState(() {
+                                            selectedCustomerCode = customerCode;
+                                            InitData = initData();
+                                          });
+                                        },
+                                        isExpanded: true,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
+                            SizedBox(
+                              width: 30,
+                            ),
+
+                            ///Zone
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  padding: EdgeInsets.only(left: 10),
+                                  width: 150,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'តំបន់',
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(),
+                                      ),
+                                      selectedZoneCode != null
+                                          ? Container(
+                                              margin: EdgeInsets.only(left: 10),
+                                              padding:
+                                                  EdgeInsets.only(bottom: 3),
+                                              width: 20,
+                                              height: 25,
+                                              child: IconButton(
+                                                iconSize: 20,
+                                                padding: EdgeInsets.zero,
+                                                onPressed: onClearZoneCode,
+                                                icon: Icon(Icons.clear,
+                                                    color: Colors.red),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  height: 50,
+                                  width: 150,
+                                  decoration: ShapeDecoration(
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 0.5, style: BorderStyle.solid),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: DropdownButton<String>(
+                                        items: listDropDownZone,
+                                        value: selectedZoneCode,
+                                        focusColor: Colors.transparent,
+                                        hint: Text(
+                                          'ជ្រើសរើសតំបន់',
+                                          style:
+                                              StyleColor.textStyleKhmerContent,
+                                        ),
+                                        padding: const EdgeInsets.only(left: 0),
+                                        style: StyleColor.textStyleKhmerContent,
+                                        onChanged: (zoneCode) {
+                                          setState(() {
+                                            selectedZoneCode = zoneCode;
+                                            InitData = initData();
+                                          });
+                                        },
+                                        isExpanded: true,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+
+                  tabletAndWebWidget(),
+                ],
               ),
             ),
-            tabletAndWebWidget(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
