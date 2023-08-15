@@ -1,3 +1,6 @@
-2023/08/15-15:53:54.184 444c Reusing MANIFEST C:\Users\yornc\AppData\Local\Temp\flutter_tools.db3cb6bd\flutter_tools_chrome_device.7940cfa5\Default\IndexedDB\devtools_devtools_0.indexeddb.leveldb/MANIFEST-000001
-2023/08/15-15:53:54.185 444c Recovering log #7
-2023/08/15-15:53:54.185 444c Reusing old log C:\Users\yornc\AppData\Local\Temp\flutter_tools.db3cb6bd\flutter_tools_chrome_device.7940cfa5\Default\IndexedDB\devtools_devtools_0.indexeddb.leveldb/000007.log 
+2023/08/15-17:00:33.782 284c Reusing MANIFEST C:\Users\yornc\AppData\Local\Temp\flutter_tools.e3756dc4\flutter_tools_chrome_device.5dc17372\Default\IndexedDB\devtools_devtools_0.indexeddb.leveldb/MANIFEST-000001
+2023/08/15-17:00:33.785 284c Recovering log #7
+2023/08/15-17:00:33.785 284c Reusing old log C:\Users\yornc\AppData\Local\Temp\flutter_tools.e3756dc4\flutter_tools_chrome_device.5dc17372\Default\IndexedDB\devtools_devtools_0.indexeddb.leveldb/000007.log 
+2023/08/15-17:00:33.785 284c Delete type=0 #3
+2023/08/15-17:00:33.785 284c Delete type=0 #4
+2023/08/15-17:00:33.785 284c Delete type=2 #5
