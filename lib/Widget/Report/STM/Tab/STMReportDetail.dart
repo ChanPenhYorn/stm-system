@@ -291,7 +291,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 100,
+                    width: 90,
                   ),
                   Container(
                     width: 50,
@@ -304,7 +304,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 60,
+                    width: 30,
                   ),
                   Container(
                     child: Text(
@@ -316,7 +316,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 15,
                   ),
                   Container(
                     width: 100,
@@ -329,7 +329,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 50,
+                    width: 45,
                   ),
                   Container(
                     child: Text(
@@ -354,7 +354,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     ),
                   ),
                   SizedBox(
-                    width: 90,
+                    width: 20,
                   ),
                   Container(
                     child: Text(
@@ -467,8 +467,11 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
                                               Container(
-                                                width: 100,
+                                                width: 50,
                                                 child: Text(
                                                   snapshot
                                                           .data!
@@ -528,9 +531,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
                                               Container(
                                                 child: Text(
                                                   snapshot.data!.data![index]
@@ -570,7 +570,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 80,
+                                                width: 20,
                                               ),
                                               Container(
                                                 child: Text(
@@ -630,10 +630,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 120,
+                                      width: 100,
                                     ),
                                     Container(
-                                      width: 130,
+                                      width: 100,
                                       child: Text(
                                         snapshot.data!.data!.length.toString(),
                                         style: StyleColor
@@ -687,7 +687,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 110,
+                                      width: 70,
                                     ),
                                     Container(
                                       child: Text(
