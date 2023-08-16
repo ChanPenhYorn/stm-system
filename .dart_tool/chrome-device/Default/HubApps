@@ -545,7 +545,7 @@
          "enabled": true,
          "fallback_notification": {
             "show_count": 5,
-            "text": "View the email you came from in the side pane"
+            "text": "View source email"
          },
          "fre_notification": {
             "enabled": true,
@@ -576,7 +576,7 @@
             "builtin_icon": "NewEmail"
          },
          "location": "hovercard",
-         "name": "Compose new mail"
+         "name": "Compose new email"
       }, {
          "action": {
             "target": "sidepane",
@@ -606,9 +606,9 @@
       "description": "Check email while staying in your flow",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_dark.png/1.9.8/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_hc.png/1.9.8/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_light.png/1.9.8/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_dark.png/1.9.10/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_hc.png/1.9.10/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_light.png/1.9.10/asset"
          }
       },
       "id": "8682d0fa-50b3-4ece-aa5b-e0b33f9919e2",
@@ -617,12 +617,40 @@
       "lifetime|flight:msHubAppOutlookTabLifetime": "tab",
       "locales": [ "af", "am", "ar", "as", "az", "bg", "bn_IN", "bs", "ca", "ca_Es_VALENCIA", "cs", "cy", "da", "de", "el", "en", "en_GB", "es", "es_MX", "et", "eu", "fa", "fi", "fil", "fil", "fr", "fr_CA", "ga", "gd", "gl", "gu", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "kok", "kok", "lb", "lo", "lt", "lv", "mi", "mk", "ml", "mr", "ms", "mt", "nb", "ne", "nl", "nn", "or", "pa", "pl", "pt_BR", "pt_PT", "quz", "ro", "ru", "sk", "sl", "sq", "sr_Cyrl_BA", "sr_Cyrl_RS", "sr_Latn_RS", "sv", "ta", "te", "th", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "zh_CN", "zh_TW" ],
       "manifest_version": 3,
+      "microfeedback": {
+         "area_path": "Features\\Sidebar\\Outlook",
+         "dislike": {
+            "description_override": "__MSG_microfeedback_dislike_feedback_dialog_description_override__",
+            "options": [ "__MSG_microfeedback_dislike_option_1__", "__MSG_microfeedback_dislike_option_2__", "__MSG_microfeedback_dislike_option_3__", "__MSG_microfeedback_dislike_option_4__", "__MSG_microfeedback_dislike_option_5__", "__MSG_microfeedback_dislike_option_6__", "__MSG_microfeedback_other_option__" ],
+            "other_option_support": true,
+            "prompt": "__MSG_microfeedback_dislike_followup_prompt__"
+         },
+         "like": {
+            "description_override": "__MSG_microfeedback_like_feedback_dialog_description_override__",
+            "options": [ "__MSG_microfeedback_like_option_1__", "__MSG_microfeedback_like_option_2__", "__MSG_microfeedback_like_option_3__", "__MSG_microfeedback_other_option__" ],
+            "other_option_support": true,
+            "prompt": "__MSG_microfeedback_like_followup_prompt__"
+         },
+         "locations": {
+            "auto_open_settings_page": {
+               "item_id": 0,
+               "item_name": "Auto-open settings page",
+               "prompt": "__MSG_microfeedback_autoopen_settings_prompt__"
+            },
+            "footer": {
+               "item_id": 1,
+               "item_name": "Outlook sidebar",
+               "prompt": "__MSG_microfeedback_autoopen_footer_prompt__"
+            }
+         },
+         "service_id": "39f2d170-852b-4e8b-aa58-04e34218acef"
+      },
       "name": "Outlook",
       "notifications": {
          "awareness_prompts|flight:msEdgeHubAppOutlookAwarenessPrompts": {
             "bubble_notifications": {
                "domains": [ "outlook.live.com", "outlook.com", "outlook-sdf.office.com" ],
-               "text": "Check your mail while staying in your work flow"
+               "text": "Check your email while staying in your work flow!"
             }
          },
          "enabled": true,
@@ -636,7 +664,7 @@
       },
       "trusted_domains": [ "live.com", "office.com", "microsoftonline.com", "microsoft.com", "office365.com" ],
       "trusted_types": [ "default", "dompurify" ],
-      "version": "1.9.8"
+      "version": "1.9.10"
    }, {
       "default_locale": "en",
       "description": "Empower people to express themselves creatively",
@@ -1565,9 +1593,9 @@
       },
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_dark.png/1.1.18/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_hc.png/1.1.18/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_light.png/1.1.18/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_dark.png/1.2.18/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_hc.png/1.2.18/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_light.png/1.2.18/asset"
          }
       },
       "id": "bc25fcef-8964-4e72-8287-23e2b496c128",
@@ -1575,6 +1603,34 @@
       "lifetime": "background",
       "locales": [ "af", "am", "ar", "as", "az", "bg", "bn_IN", "bs", "ca", "ca_Es_VALENCIA", "cs", "cy", "da", "de", "el", "en", "en_GB", "es", "es_MX", "et", "eu", "fa", "fi", "fil", "fr", "fr_CA", "ga", "gd", "gl", "gu", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "kok", "lb", "lo", "lt", "lv", "mi", "mk", "ml", "mr", "ms", "mt", "nb", "ne", "nl", "nn", "or", "pa", "pl", "pt_BR", "pt_PT", "quz", "ro", "ru", "sk", "sl", "sq", "sr_Cyrl_BA", "sr_Cyrl_RS", "sr_Latn_RS", "sv", "ta", "te", "th", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "zh_CN", "zh_TW" ],
       "manifest_version": 3,
+      "microfeedback": {
+         "area_path": "Features\\Sidebar\\Teams",
+         "dislike": {
+            "description_override": "__MSG_microfeedback_dislike_feedback_dialog_description_override__",
+            "options": [ "__MSG_microfeedback_dislike_option_1__", "__MSG_microfeedback_dislike_option_2__", "__MSG_microfeedback_dislike_option_3__", "__MSG_microfeedback_dislike_option_4__", "__MSG_microfeedback_dislike_option_5__", "__MSG_microfeedback_dislike_option_6__", "__MSG_microfeedback_other_option__" ],
+            "other_option_support": true,
+            "prompt": "__MSG_microfeedback_dislike_followup_prompt__"
+         },
+         "like": {
+            "description_override": "__MSG_microfeedback_like_feedback_dialog_description_override__",
+            "options": [ "__MSG_microfeedback_like_option_1__", "__MSG_microfeedback_like_option_2__", "__MSG_microfeedback_like_option_3__", "__MSG_microfeedback_other_option__" ],
+            "other_option_support": true,
+            "prompt": "__MSG_microfeedback_like_followup_prompt__"
+         },
+         "locations": {
+            "auto_open_settings_page": {
+               "item_id": 0,
+               "item_name": "Auto-open settings page",
+               "prompt": "__MSG_microfeedback_autoopen_settings_prompt__"
+            },
+            "footer": {
+               "item_id": 1,
+               "item_name": "Teams sidebar",
+               "prompt": "__MSG_microfeedback_autoopen_footer_prompt__"
+            }
+         },
+         "service_id": "ef98a99f-f053-44be-939d-5875c41c09b3"
+      },
       "name": "Teams",
       "notifications": {
          "enabled": true
@@ -1583,7 +1639,7 @@
       "target": {
          "url": "https://teams.microsoft.com/embed-client/chats/list?layout=singlePane&hostCtx=edge"
       },
-      "version": "1.1.18"
+      "version": "1.2.18"
    }, {
       "capabilities": {
          "show_domain_in_header": true
