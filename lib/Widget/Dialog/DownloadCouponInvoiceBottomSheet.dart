@@ -8,6 +8,7 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:share_plus/share_plus.dart';
 
+// ignore: must_be_immutable
 class DownloadCouponInvoiceBottomSheet extends StatefulWidget {
   Function screenshotFunc;
   bool? enableScreenshot = true;

@@ -390,8 +390,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                 itemBuilder: (context, index) {
                                   return Container(
                                     width: screenWidth,
-                                    margin:
-                                        EdgeInsets.only(top: 5, bottom: 5),
+                                    margin: EdgeInsets.only(top: 5, bottom: 5),
                                     height: 60,
                                     child: TextButton(
                                       onPressed: () async {
@@ -461,8 +460,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                           .cachedNetworkImage(
                                                         url: getPlateImageUrl(
                                                             snapshot.data!
-                                                                    .data![
-                                                                index]),
+                                                                .data![index]),
                                                         profile: true,
                                                       ),
                                                     ),
@@ -609,8 +607,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                               padding: EdgeInsets.only(left: 10, right: 10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color:
-                                    StyleColor.appBarColor.withOpacity(0.6),
+                                color: StyleColor.appBarColor.withOpacity(0.6),
                               ),
                               height: 50,
                               child: SingleChildScrollView(
@@ -619,8 +616,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
                                       width: 40,
@@ -639,8 +635,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     Container(
                                       width: 100,
                                       child: Text(
-                                        snapshot.data!.data!.length
-                                            .toString(),
+                                        snapshot.data!.data!.length.toString(),
                                         style: StyleColor
                                             .textStyleKhmerDangrekAuto(
                                           fontSize: 14,
@@ -699,8 +694,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         () {
                                           int total = 0;
                                           total = snapshot.data!.data!
-                                              .map(
-                                                  (e) => e.weightProduct ?? 0)
+                                              .map((e) => e.weightProduct ?? 0)
                                               .reduce((value, element) =>
                                                   value + element);
                                           return total.toNumberFormat();
@@ -1107,8 +1101,11 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 200,
+                                    ),
                                     Container(
-                                      width: 170,
+                                      width: 50,
                                       child: Text(
                                         snapshot.data!.data!.length.toString(),
                                         style: StyleColor
@@ -1119,7 +1116,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 300,
+                                      width: 230,
                                     ),
                                     Container(
                                       width: 100,
@@ -1142,7 +1139,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 200,
+                                      width: 220,
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
@@ -1165,7 +1162,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 180,
+                                      width: 130,
                                     ),
                                     Container(
                                       child: Text(
