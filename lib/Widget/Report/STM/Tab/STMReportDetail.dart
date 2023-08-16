@@ -687,7 +687,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 70,
+                                      width: 60,
                                     ),
                                     Container(
                                       child: Text(
