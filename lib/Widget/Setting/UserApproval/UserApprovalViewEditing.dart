@@ -13,6 +13,7 @@ import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Setting/Role/Dialog/RoleSelectionDialog.dart';
 
+// ignore: must_be_immutable
 class UserApprovalViewEditing extends StatefulWidget {
   UserModel userModel;
   UserApprovalViewEditing({Key? key, required this.userModel})

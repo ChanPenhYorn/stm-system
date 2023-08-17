@@ -110,9 +110,9 @@ class _SplashScreenState extends State<SplashScreen>
       } else if (Platform.isAndroid) {
         AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
         _udid = androidDeviceInfo.id; // unique ID on Android
-        _modelName = androidDeviceInfo.model ?? ""; // Phone Name
+        _modelName = androidDeviceInfo.model; // Phone Name
         _modelVersion =
-            androidDeviceInfo.version.release ?? ""; // Version Firmeware
+            androidDeviceInfo.version.release; // Version Firmeware
         print("_modelVersion : $_modelVersion");
         print("_modelName : $_modelName");
         if (_udid != null && _udid != "") {

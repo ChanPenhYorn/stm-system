@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionComponent.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';

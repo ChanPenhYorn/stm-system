@@ -4,23 +4,15 @@ import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Chart/AxisKeyDataModel.dart';
 import 'package:stm_report_app/Entity/Report/STMReportModel.dart';
-import 'package:stm_report_app/Enum/AxisDataTypeEnum.dart';
 import 'package:stm_report_app/Enum/ChartTypeEnum.dart';
-import 'package:stm_report_app/Enum/IntervalTypeEnum.dart';
 import 'package:stm_report_app/Enum/TableDateType.dart';
 import 'package:stm_report_app/Enum/TableTypeEnum.dart';
-import 'package:stm_report_app/Enum/ValueDataTypeEnum.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionComponent.dart';
 import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
-import 'package:stm_report_app/Style/AnimateLoading.dart';
-import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Card/GraphCard.dart';
 import 'package:stm_report_app/Widget/Report/STM/Tab/STMReportDetail.dart';
 import 'package:stm_report_app/Widget/Report/STM/Tab/STMReportPeriod.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class STMReport extends StatefulWidget {
   const STMReport({Key? key}) : super(key: key);
@@ -66,7 +58,6 @@ class _STMReportState extends State<STMReport> {
   double getIntervalByLength(int length) {
     // if(selectedSegmentType==0)
     return 1;
-    return length > 15 || length == 1 ? -1 : 1;
   }
 
   String getTypeBySegmentIndex() {
@@ -361,7 +352,7 @@ class _STMReportState extends State<STMReport> {
   }
 
   double getPrimaryAxisYInterval(double total) {
-    if (total != null && total > 0) {
+    if (total > 0) {
       if (selectedSegmentType > 0) {
         return (total / 80).roundToDouble();
       } else if (selectedSegmentType == 0) {

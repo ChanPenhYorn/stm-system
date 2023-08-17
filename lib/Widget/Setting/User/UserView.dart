@@ -9,6 +9,7 @@ import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
 import 'package:stm_report_app/Widget/Setting/User/Edit/UserEdit.dart';
 
+// ignore: must_be_immutable
 class UserView extends StatefulWidget {
   UserModel userModel;
   UserView({Key? key, required this.userModel}) : super(key: key);

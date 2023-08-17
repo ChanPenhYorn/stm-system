@@ -64,7 +64,6 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
   double getIntervalByLength(int length) {
     // if(selectedSegmentType==0)
     return 1;
-    return length > 15 || length == 1 ? -1 : 1;
   }
 
   String getTypeBySegmentIndex() {
@@ -359,7 +358,7 @@ class _STMReportPeriodState extends State<STMReportPeriod> {
   }
 
   double getPrimaryAxisYInterval(double total) {
-    if (total != null && total > 0) {
+    if (total > 0) {
       if (selectedSegmentType > 0) {
         return (total / 80).roundToDouble();
       } else if (selectedSegmentType == 0) {

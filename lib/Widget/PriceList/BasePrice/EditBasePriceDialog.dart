@@ -1,12 +1,9 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/PriceList/PriceListModel.dart';
 import 'package:stm_report_app/Entity/PriceList/PricePostModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
@@ -98,8 +95,6 @@ class _EditBasePriceDialogState extends State<EditBasePriceDialog> {
               TextFormField(
                 controller: priceCon,
                 validator: (value) {
-                  String pattern = r'^\d+(?:[\.,]\d{0,2})?$';
-                  RegExp regExp = new RegExp(pattern);
                   if (value!.isEmpty) {
                     return 'សូមបញ្ជូលតម្លៃ';
                   }

@@ -7,6 +7,7 @@ import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
 
+// ignore: must_be_immutable
 class STMReportViewDialog extends StatefulWidget {
   STMReportDetailDataModel stmReportDataModel;
   STMReportViewDialog({Key? key, required this.stmReportDataModel})

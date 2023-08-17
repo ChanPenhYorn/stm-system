@@ -19,7 +19,6 @@ import 'package:stm_report_app/Widget/Component/TableComponent.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'dart:io' as IO;
 
 import 'package:store_redirect/store_redirect.dart';
@@ -178,7 +177,6 @@ class Singleton with ChangeNotifier {
   //Permission
   Future<bool> writeLocalStorage(String key, String value) async {
     try {
-      var res = await storage.write(key: key, value: value);
       return true;
     } catch (err) {
       return false;
@@ -294,7 +292,6 @@ class Singleton with ChangeNotifier {
 
   Future<bool> writeUserLoginCache(
       {required String username, required String password}) async {
-    var user = UserCache(username: username, password: password).toJson();
     try {
       await storage.write(key: "stm_passWordCache", value: password);
       await storage.write(key: "stm_userNameCache", value: username);

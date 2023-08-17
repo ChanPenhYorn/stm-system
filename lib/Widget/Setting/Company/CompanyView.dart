@@ -1,16 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
-import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Extension/ExtensionComponent.dart';
-import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
 import 'package:stm_report_app/Widget/Setting/Company/Edit/CompanyEdit.dart';
-import 'package:stm_report_app/Widget/Setting/User/Edit/UserEdit.dart';
 
+// ignore: must_be_immutable
 class CompanyView extends StatefulWidget {
   CompanyModel companyModel;
   CompanyView({Key? key, required this.companyModel}) : super(key: key);

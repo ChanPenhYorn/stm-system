@@ -8,6 +8,7 @@ import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
 import 'package:stm_report_app/Widget/Setting/Barge/Edit/BargeEdit.dart';
 
+// ignore: must_be_immutable
 class BargeView extends StatefulWidget {
   BargeModel bargeModel;
   BargeView({Key? key, required this.bargeModel}) : super(key: key);

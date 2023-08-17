@@ -4,7 +4,6 @@ import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Role/ActivityModel.dart';
 import 'package:stm_report_app/Entity/Role/ActivtyCheckBoxModel.dart';
 import 'package:stm_report_app/Entity/Role/Post/RolePostModel.dart';
-import 'package:stm_report_app/Entity/Role/RoleModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/AnimateLoading.dart';

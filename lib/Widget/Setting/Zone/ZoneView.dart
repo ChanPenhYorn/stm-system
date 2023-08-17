@@ -1,22 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
-import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
-import 'package:stm_report_app/Entity/Product/ProductModel.dart';
-import 'package:stm_report_app/Entity/User/UserModel.dart';
 import 'package:stm_report_app/Entity/Zone/ZoneModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
-import 'package:stm_report_app/Extension/ExtensionComponent.dart';
-import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Photo/PhotoViewSlideOut.dart';
-import 'package:stm_report_app/Widget/Setting/Company/Edit/CompanyEdit.dart';
-import 'package:stm_report_app/Widget/Setting/Customer/Edit/CustomerEdit.dart';
-import 'package:stm_report_app/Widget/Setting/Product/Edit/ProductEdit.dart';
-import 'package:stm_report_app/Widget/Setting/User/Edit/UserEdit.dart';
 import 'package:stm_report_app/Widget/Setting/Zone/Edit/ZoneEdit.dart';
 
+// ignore: must_be_immutable
 class ZoneView extends StatefulWidget {
   ZoneModel zoneModel;
   ZoneView({Key? key, required this.zoneModel}) : super(key: key);

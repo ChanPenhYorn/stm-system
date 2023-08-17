@@ -17,6 +17,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:screenshot_callback/screenshot_callback.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+// ignore: must_be_immutable
 class GraphExpand<T> extends StatefulWidget {
   // Widget graphCard;
   Function(double animationDuration, int axisFontSize) widgetFunction;

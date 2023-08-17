@@ -492,5 +492,6 @@ class STMDataGridSource extends DataGridSource {
           ),
         ),
       ]);
+    return null;
   }
 }

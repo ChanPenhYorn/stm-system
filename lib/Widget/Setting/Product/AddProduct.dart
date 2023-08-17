@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
-import 'package:stm_report_app/Entity/Customer/CustomerModel.dart';
 import 'package:stm_report_app/Entity/Product/ProductModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 import 'package:stm_report_app/Infrastructor/Singleton.dart';

@@ -5,6 +5,7 @@ import 'package:stm_report_app/Extension/ExtensionMethod.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Setting/UserApproval/UserApprovalViewEditing.dart';
 
+// ignore: must_be_immutable
 class UserApprovalView extends StatefulWidget {
   UserModel userModel;
   UserApprovalView({Key? key, required this.userModel}) : super(key: key);

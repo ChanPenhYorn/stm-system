@@ -1,7 +1,5 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/PriceList/PricePostModel.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
@@ -128,8 +126,6 @@ class _AddPriceListDialogState extends State<AddPriceListDialog> {
               TextFormField(
                 controller: priceCon,
                 validator: (value) {
-                  String pattern = r'^\d+(?:[\.,]\d{0,2})?$';
-                  RegExp regExp = new RegExp(pattern);
                   if (value!.isEmpty) {
                     return 'សូមបញ្ជូលតម្លៃ';
                   }

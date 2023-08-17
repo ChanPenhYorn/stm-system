@@ -7,7 +7,6 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/AnimateLoading.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
-import 'package:stm_report_app/Widget/Setting/Customer/AddCustomer.dart';
 import 'package:stm_report_app/Widget/Setting/Product/AddProduct.dart';
 import 'package:stm_report_app/Widget/Setting/Product/ProductView.dart';
 

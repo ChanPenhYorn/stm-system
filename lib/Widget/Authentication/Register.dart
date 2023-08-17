@@ -825,9 +825,6 @@ class _RegisterState extends State<Register> {
                                         Singleton.instance.userAccountCache
                                                 .username !=
                                             "") {
-                                      String phone = MaskTextInputFormatter(
-                                              mask: "### ### ### #")
-                                          .unmaskText(phoneCon.text.trim());
                                       // if (phone ==
                                       //     Singleton.instance.userAccountCache
                                       //         .username!) {
@@ -882,15 +879,6 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  _clearForm() {
-    firstNameKhCon.text = "";
-    lastNameKhCon.text = "";
-    firstNameEnCon.text = "";
-    lastNameEnCon.text = "";
-    orgCon.text = "";
-    positionCon.text = "";
-    phoneCon.text = "";
-  }
 
   Future<void> _userRegister() async {
     var body = RegisterPostModel(

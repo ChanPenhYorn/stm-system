@@ -26,23 +26,6 @@ class ApiExtension {
       // ignore: dead_code
       {bool noLoading = false}) async {
     return true;
-    if (!noLoading) AnimateLoading().showLoading(context);
-    final res = await Singleton.instance.dio
-        .get(
-      Domain.domain + "api/v1/authentication/getconnection",
-    )
-        .catchError((err) {
-      if (!noLoading) {
-        Navigator.pop(context);
-        PopupDialog.showPopup(context, "Message.OperationFailed".tr());
-      }
-    });
-
-    if (res != null) {
-      if (!noLoading) Navigator.pop(context);
-      return true;
-    } else
-      return false;
   }
 
   //New Repository
@@ -73,6 +56,7 @@ class ApiExtension {
           },
         ),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         print('this error');
         print(err);
@@ -112,6 +96,7 @@ class ApiExtension {
               return status! < 501;
             }),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         if (loading) Navigator.of(context, rootNavigator: true).pop();
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -148,6 +133,7 @@ class ApiExtension {
               return status! < 501;
             }),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         if (loading) Navigator.of(context, rootNavigator: true).pop();
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -182,6 +168,7 @@ class ApiExtension {
               return status! < 501;
             }),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         if (loading) Navigator.of(context, rootNavigator: true).pop();
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -231,6 +218,7 @@ class ApiExtension {
               return status! < 501;
             }),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         Navigator.pop(context);
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -271,6 +259,7 @@ class ApiExtension {
               return status! < 501;
             }),
       )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((err) {
         Navigator.pop(context);
         PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -300,6 +289,7 @@ class ApiExtension {
           }),
       data: body,
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((err) {
       if (!noLoading) Navigator.of(context, rootNavigator: true).pop();
       PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -327,6 +317,7 @@ class ApiExtension {
           }),
       data: body,
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((err) {
       if (!noLoading) Navigator.of(context, rootNavigator: true).pop();
       PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
@@ -354,6 +345,7 @@ class ApiExtension {
           }),
       data: body,
     )
+        // ignore: body_might_complete_normally_catch_error
         .catchError((err) {
       if (!noLoading) Navigator.of(context, rootNavigator: true).pop();
       PopupDialog.showPopup(context, "Message.OperationFailed".tr(),

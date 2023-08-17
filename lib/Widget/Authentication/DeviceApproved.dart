@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/OTP/OTPModel.dart';
@@ -11,7 +9,6 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Authentication/ConfirmOTP.dart';
-import 'package:stm_report_app/Widget/Setting/User/User.dart';
 
 class DeviceApproved extends StatefulWidget {
   final UserModel User;

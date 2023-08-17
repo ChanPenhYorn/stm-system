@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Entity/Role/PermissionGrant.dart';
 import 'package:stm_report_app/Entity/Token.dart';
@@ -29,7 +28,8 @@ class Extension {
   }
 
   static DeviceType getDeviceType() {
-    final data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    // ignore: deprecated_member_use
+    final data = MediaQueryData.fromView(WidgetsBinding.instance.window);
     return data.size.shortestSide < 700 ? DeviceType.PHONE : DeviceType.TABLET;
   }
 

@@ -12,8 +12,6 @@ import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/PriceList/AddPriceListDialog.dart';
 import 'package:stm_report_app/Widget/PriceList/BasePrice/EditBasePriceDialog.dart';
 import 'package:stm_report_app/Widget/PriceList/EditPriceListDialog.dart';
-import 'package:stm_report_app/Widget/Setting/Role/AddRole.dart';
-import 'package:stm_report_app/Widget/Setting/Role/RoleView.dart';
 
 class PriceList extends StatefulWidget {
   const PriceList({Key? key}) : super(key: key);

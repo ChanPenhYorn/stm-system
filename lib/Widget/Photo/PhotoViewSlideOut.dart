@@ -3,6 +3,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:stm_report_app/Api/Domain.dart';
 import 'package:stm_report_app/Extension/Extension.dart';
 
+// ignore: must_be_immutable
 class PhotoViewSlideOut extends StatefulWidget {
   String? url;
   PhotoViewSlideOut({Key? key, this.url}) : super(key: key);
@@ -46,6 +47,7 @@ class _PhotoViewSlideOutState extends State<PhotoViewSlideOut> {
                   if (state.extendedImageLoadState == LoadState.failed) {
                     return Extension.getNoImage();
                   }
+                  return null;
                 },
               ),
             ),

@@ -14,6 +14,7 @@ import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Setting/Role/Dialog/RoleSelectionDialog.dart';
 
+// ignore: must_be_immutable
 class UserEdit extends StatefulWidget {
   UserModel userModel;
   UserEdit({Key? key, required this.userModel}) : super(key: key);
@@ -104,7 +105,7 @@ class _UserEditState extends State<UserEdit> {
         );
       },
     );
-    if (result != null && result!.length > 0) {
+    if (result != null && result.length > 0) {
       listRole.clear();
       listRole.addAll(result);
     }

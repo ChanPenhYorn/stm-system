@@ -11,6 +11,7 @@ import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 import 'package:stm_report_app/Widget/Authentication/Register.dart';
 
+// ignore: must_be_immutable
 class Login extends StatefulWidget {
   int faceIdScanDelay = 0;
   bool isLoggedOut = false;

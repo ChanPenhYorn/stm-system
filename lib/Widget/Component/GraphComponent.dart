@@ -195,9 +195,6 @@ class GraphComponent {
         Color randomColor = Color(Random().nextInt(0xffffffff));
         Color color =
             element.colorRgb != null ? element.colorRgb! : randomColor;
-        Color colorTrendLine = element.trendLineColorRgb != null
-            ? element.trendLineColorRgb!
-            : randomColor;
         listSerial.add(
           ColumnSeries<T, DateTime>(
             animationDuration: animationDuration,
@@ -225,9 +222,6 @@ class GraphComponent {
         Color randomColor = Color(Random().nextInt(0xffffffff));
         Color color =
             element.colorRgb != null ? element.colorRgb! : randomColor;
-        Color colorTrendLine = element.trendLineColorRgb != null
-            ? element.trendLineColorRgb!
-            : randomColor;
         listSerial.add(
           ColumnSeries<T, dynamic>(
             animationDuration: animationDuration,

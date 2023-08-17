@@ -153,6 +153,7 @@ extension dateParsing on String {
     try {
       var isDate = DateTime.parse(this);
       // var isDate = new DateFormat('dd/MM/yy').parse(this);
+      // ignore: unnecessary_null_comparison
       if (isDate != null)
         return VALUE_DATA_TYPE.DATE_TIME;
       else if (double.tryParse(this) != null)

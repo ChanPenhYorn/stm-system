@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
+// ignore: must_be_immutable
 class GraphCard extends StatefulWidget {
   late String bigTitle;
   late String title;

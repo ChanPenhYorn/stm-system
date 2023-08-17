@@ -14,6 +14,7 @@ import 'package:stm_report_app/Infrastructor/Singleton.dart';
 import 'package:stm_report_app/Style/PopupDialog.dart';
 import 'package:stm_report_app/Style/StyleColor.dart';
 
+// ignore: must_be_immutable
 class UserProfileView extends StatefulWidget {
   UserModel userModel;
   UserProfileView({Key? key, required this.userModel}) : super(key: key);
