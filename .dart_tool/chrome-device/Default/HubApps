@@ -692,19 +692,18 @@
       "version": "1.0.14"
    }, {
       "capabilities": {
-         "deprecated_hide_header": true,
-         "deprecated_hide_header|flight:msEdgeEDropSharedHeader": false
+         "deprecated_hide_header": false
       },
-      "custom_actions|flight:msEdgeEDropSharedHeader": [ {
+      "custom_actions": [ {
          "action": {
             "event": "nav_header_nav_to_settings",
             "type": "event_action"
          },
          "icon": {
             "raster_icon": {
-               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.1.10/asset",
-               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.1.10/asset",
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.1.10/asset"
+               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.1.11/asset",
+               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.1.11/asset",
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.1.11/asset"
             }
          },
          "icon|flight:msEdgeEDropSharedHeaderVectorIcon": {
@@ -719,9 +718,9 @@
          },
          "icon": {
             "raster_icon": {
-               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_dark.png/1.1.10/asset",
-               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_hc.png/1.1.10/asset",
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_light.png/1.1.10/asset"
+               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_dark.png/1.1.11/asset",
+               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_hc.png/1.1.11/asset",
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_light.png/1.1.11/asset"
             }
          },
          "icon|flight:msEdgeEDropSharedHeaderVectorIcon": {
@@ -734,9 +733,9 @@
       "description": "Send files across your mobile and desktop devices",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_dark.png/1.1.10/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_hc.png/1.1.10/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_light.png/1.1.10/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_dark.png/1.1.11/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_hc.png/1.1.11/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_light.png/1.1.11/asset"
          }
       },
       "id": "92f1b743-e26b-433b-a1ec-912d1f0ad1fa",
@@ -750,10 +749,9 @@
       "on_by_default": true,
       "on_by_default|device:managed": false,
       "target": {
-         "url": "edge://e-drop/",
-         "url|flight:msEdgeEDropSharedHeader": "edge://e-drop/?shared_header=1"
+         "url": "edge://e-drop/?shared_header=1"
       },
-      "version": "1.1.10"
+      "version": "1.1.11"
    }, {
       "capabilities": {
          "resize_disabled": true

@@ -413,6 +413,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Container(
+                                                alignment: Alignment.centerLeft,
                                                 width: 40,
                                                 child: Text(
                                                   (index + 1).toString(),
@@ -423,7 +424,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                 ),
                                               ),
                                               Container(
-                                                width: 80,
+                                                alignment: Alignment.centerLeft,
+                                                width: 100,
                                                 height: 50,
                                                 child: InkWell(
                                                   onTap: () {
@@ -457,9 +459,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
                                                 width: 100,
@@ -475,7 +474,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                           .nameKh!,
                                                       style: StyleColor
                                                           .textStyleKhmerContentAuto(
-                                                        fontSize: 14,
+                                                        fontSize: 12,
                                                       ),
                                                     ),
                                                     Text(
@@ -486,7 +485,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                           .plateNumberFormatted!,
                                                       style: StyleColor
                                                           .textStyleKhmerContentAuto(
-                                                        fontSize: 14,
+                                                        fontSize: 12,
                                                       ),
                                                     )
                                                   ],
@@ -506,7 +505,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       : "",
                                                   style: StyleColor
                                                       .textStyleKhmerContentAuto(
-                                                    fontSize: 14,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ),
@@ -525,12 +524,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       : "",
                                                   style: StyleColor
                                                       .textStyleKhmerContentAuto(
-                                                    fontSize: 14,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 20,
                                               ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
@@ -547,7 +543,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       : "",
                                                   style: StyleColor
                                                       .textStyleKhmerContentAuto(
-                                                    fontSize: 14,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ),
@@ -566,7 +562,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       : "",
                                                   style: StyleColor
                                                       .textStyleKhmerContentAuto(
-                                                    fontSize: 14,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ),
@@ -585,7 +581,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       : "",
                                                   style: StyleColor
                                                       .textStyleKhmerContentAuto(
-                                                    fontSize: 14,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ),
@@ -640,7 +636,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         snapshot.data!.data!.length.toString(),
                                         style: StyleColor
                                             .textStyleKhmerDangrekAuto(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: Colors.white,
                                         ),
                                         textAlign: TextAlign.center,
@@ -664,14 +660,14 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         }(),
                                         style: StyleColor
                                             .textStyleKhmerDangrekAuto(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: Colors.white,
                                           bold: true,
                                         ),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 20,
+                                      width: 100,
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
@@ -688,7 +684,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         }(),
                                         style: StyleColor
                                             .textStyleKhmerDangrekAuto(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: Colors.white,
                                           bold: true,
                                         ),
@@ -708,7 +704,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         }(),
                                         style: StyleColor
                                             .textStyleKhmerDangrekAuto(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: Colors.white,
                                           bold: true,
                                         ),
