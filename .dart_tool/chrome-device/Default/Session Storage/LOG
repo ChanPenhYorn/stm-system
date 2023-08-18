@@ -1,3 +1,2 @@
-2023/08/18-09:09:44.589 500 Reusing MANIFEST C:\Users\yornc\AppData\Local\Temp\flutter_tools.9da06dac\flutter_tools_chrome_device.bf2e858e\Default\Session Storage/MANIFEST-000001
-2023/08/18-09:09:44.591 500 Recovering log #3
-2023/08/18-09:09:44.597 500 Reusing old log C:\Users\yornc\AppData\Local\Temp\flutter_tools.9da06dac\flutter_tools_chrome_device.bf2e858e\Default\Session Storage/000003.log 
+2023/08/18-09:27:55.855 2af4 Creating DB C:\Users\yornc\AppData\Local\Temp\flutter_tools.8101e2ce\flutter_tools_chrome_device.574bf9d\Default\Session Storage since it was missing.
+2023/08/18-09:27:55.910 2af4 Reusing MANIFEST C:\Users\yornc\AppData\Local\Temp\flutter_tools.8101e2ce\flutter_tools_chrome_device.574bf9d\Default\Session Storage/MANIFEST-000001
