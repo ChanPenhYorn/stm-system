@@ -1235,7 +1235,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
     );
   }
 
-  Widget screenBarForDesktop(BuildContext context) {
+  Widget screenBar(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
@@ -1736,7 +1736,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                   // screenBar(),
 
                   //Search Bar
-                  screenBarForDesktop(context),
+                  screenBar(context),
 
                   responsiveScreen(),
                 ],
