@@ -3,7 +3,7 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"404.html": "0a27a4163254fc8fce870c8cc3a3f94f",
+const RESOURCES = {"404.html": "a4e2271d19eb1f6f93a15e1b7a4e74dd",
 "assets/AssetManifest.bin": "33eaba531dda3ba6d091f09de99d8f80",
 "assets/AssetManifest.json": "f949132c7f8c388e87ad1fbdac2d9dec",
 "assets/assets/fonts/BritannicBoldRegular.ttf": "e22abe6de548655066df3522da0fe4b3",
@@ -343,8 +343,8 @@ const RESOURCES = {"404.html": "0a27a4163254fc8fce870c8cc3a3f94f",
 "icons/android-chrome-192x192.png": "f475d14fad319117f9706b44528b5586",
 "icons/android-chrome-512x512.png": "7f9aeb2e06ee81675caf5735b60ade59",
 "icons/apple-touch-icon.png": "935d7cd35113bc8076b5c3a531a69d8e",
-"index.html": "081cbbb2ca66fada691b3d0762bdd17b",
-"/": "081cbbb2ca66fada691b3d0762bdd17b",
+"index.html": "4201d7e6c9349053b5bcf14ea8b02e70",
+"/": "4201d7e6c9349053b5bcf14ea8b02e70",
 "main.dart.js": "927d133cdf6975f930e8ea364f276b07",
 "manifest.json": "be9c77bca5ba85a60e6d48e488fd6c3c",
 "version.json": "5f50e737e2992f2336ed8e003226623f"};

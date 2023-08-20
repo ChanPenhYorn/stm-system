@@ -528,6 +528,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
                                                 width: 100,
