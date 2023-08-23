@@ -390,149 +390,284 @@ class _STMReportDetailState extends State<STMReportDetail> {
   }
 
   void DialogScaleDesktop(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          backgroundColor: Colors.grey[200],
-          titleTextStyle: const TextStyle(
-              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          contentTextStyle: const TextStyle(fontSize: 16, color: Colors.white),
-          title: Container(
-            height: 30,
-            width: 200,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text(
-              'ទាញយករបាយការណ៏ថ្លឹង',
-              style: StyleColor.textStyleKhmerContentAuto(
-                fontSize: 18,
-                color: Colors.black,
-                bold: true,
-              ),
-            ),
-          ),
-          contentPadding: EdgeInsets.all(10),
-          content: Container(
-            width: 400,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                RadioListTile(
-                  title: Container(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              backgroundColor: Colors.grey[400],
+              child: Container(
+                padding: EdgeInsets.all(10),
+                width: 400,
+                height: 230,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
                       alignment: Alignment.center,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: StyleColor.appBarColor.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text('ស្ថានីយចូល',
-                          style: StyleColor.textStyleKhmerContentAuto(
-                            fontSize: 16,
-                            color: Colors.white,
-                            bold: true,
-                          ))),
-                  value: options[0],
-                  groupValue: currentOption,
-                  onChanged: (value) {
-                    setState(() {
-                      currentOption = value.toString();
-                    });
-                  },
-                ),
-                RadioListTile(
-                  title: Container(
-                      alignment: Alignment.center,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: StyleColor.appBarColor.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text('ស្ថានីយចេញ',
-                          style: StyleColor.textStyleKhmerContentAuto(
-                            fontSize: 16,
-                            color: Colors.white,
-                            bold: true,
-                          ))),
-                  value: options[1],
-                  groupValue: currentOption,
-                  onChanged: (value) {
-                    setState(() {
-                      currentOption = value.toString();
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            Container(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    width: 100,
-                    margin: EdgeInsets.only(left: 5, right: 5),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Close the dialog
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.grey[400],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      width: screenWidth,
+                      height: 50,
                       child: Text(
-                        'បោះបង',
+                        'ទាញយករបាយការណ៏ថ្លឹង',
                         style: StyleColor.textStyleKhmerContentAuto(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.black,
                           bold: true,
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 100,
-                    margin: EdgeInsets.only(left: 5, right: 5),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Close the dialog
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor:
-                            StyleColor.appBarColor.withOpacity(0.7),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    Container(
+                      height: 100,
+                      child: Column(children: [
+                        RadioListTile(
+                          title: Container(
+                              alignment: Alignment.center,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: StyleColor.appBarColor.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Text('ស្ថានីយចូល',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    bold: true,
+                                  ))),
+                          value: options[0],
+                          groupValue: currentOption,
+                          onChanged: (value) {
+                            setState(() {
+                              currentOption = value.toString();
+                            });
+                          },
                         ),
-                      ),
-                      child: Text(
-                        'យល់ព្រម',
-                        style: StyleColor.textStyleKhmerContentAuto(
-                          fontSize: 18,
-                          color: Colors.white,
-                          bold: true,
+                        RadioListTile(
+                          title: Container(
+                              alignment: Alignment.center,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: StyleColor.appBarColor.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Text('ស្ថានីយចេញ',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    bold: true,
+                                  ))),
+                          value: options[1],
+                          groupValue: currentOption,
+                          onChanged: (value) {
+                            setState(() {
+                              currentOption = value.toString();
+                            });
+                          },
                         ),
-                      ),
+                      ]),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context); // Close the dialog
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.grey[200],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                'បោះបង',
+                                style: StyleColor.textStyleKhmerContentAuto(
+                                  fontSize: 18,
+                                  color: Colors.red,
+                                  bold: true,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context); // Close the dialog
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor:
+                                    StyleColor.appBarColor.withOpacity(0.7),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Text(
+                                'យល់ព្រម',
+                                style: StyleColor.textStyleKhmerContentAuto(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  bold: true,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ));
+        }
+        //   return AlertDialog(
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(30),
+        //     ),
+        //     backgroundColor: Colors.grey[200],
+        //     titleTextStyle: const TextStyle(
+        //         fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+        //     contentTextStyle: const TextStyle(fontSize: 16, color: Colors.white),
+        //     title: Container(
+        //       height: 30,
+        //       width: 200,
+        //       decoration: BoxDecoration(
+        //         color: Colors.white,
+        //         borderRadius: BorderRadius.circular(10),
+        //       ),
+        //       padding: EdgeInsets.only(left: 10, right: 10),
+        //       child: Text(
+        //         'ទាញយករបាយការណ៏ថ្លឹង',
+        //         style: StyleColor.textStyleKhmerContentAuto(
+        //           fontSize: 18,
+        //           color: Colors.black,
+        //           bold: true,
+        //         ),
+        //       ),
+        //     ),
+        //     contentPadding: EdgeInsets.all(10),
+        //     content: Container(
+        //       width: 400,
+        //       height: 100,
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.start,
+        //         // crossAxisAlignment: CrossAxisAlignment.stretch,
+        //         children: [
+        //           RadioListTile(
+        //             title: Container(
+        //                 alignment: Alignment.center,
+        //                 height: 40,
+        //                 decoration: BoxDecoration(
+        //                   color: StyleColor.appBarColor.withOpacity(0.7),
+        //                   borderRadius: BorderRadius.circular(30),
+        //                 ),
+        //                 child: Text('ស្ថានីយចូល',
+        //                     style: StyleColor.textStyleKhmerContentAuto(
+        //                       fontSize: 16,
+        //                       color: Colors.white,
+        //                       bold: true,
+        //                     ))),
+        //             value: options[0],
+        //             groupValue: currentOption,
+        //             onChanged: (value) {
+        //               setState(() {
+        //                 currentOption = value.toString();
+        //               });
+        //             },
+        //           ),
+        //           RadioListTile(
+        //             title: Container(
+        //                 alignment: Alignment.center,
+        //                 height: 40,
+        //                 decoration: BoxDecoration(
+        //                   color: StyleColor.appBarColor.withOpacity(0.7),
+        //                   borderRadius: BorderRadius.circular(30),
+        //                 ),
+        //                 child: Text('ស្ថានីយចេញ',
+        //                     style: StyleColor.textStyleKhmerContentAuto(
+        //                       fontSize: 16,
+        //                       color: Colors.white,
+        //                       bold: true,
+        //                     ))),
+        //             value: options[1],
+        //             groupValue: currentOption,
+        //             onChanged: (value) {
+        //               setState(() {
+        //                 currentOption = value.toString();
+        //               });
+        //             },
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //     actions: [
+        //       Container(
+        //         padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.end,
+        //           children: [
+        //             Container(
+        //               width: 100,
+        //               margin: EdgeInsets.only(left: 5, right: 5),
+        //               child: TextButton(
+        //                 onPressed: () {
+        //                   Navigator.pop(context); // Close the dialog
+        //                 },
+        //                 style: TextButton.styleFrom(
+        //                   backgroundColor: Colors.grey[400],
+        //                   shape: RoundedRectangleBorder(
+        //                     borderRadius: BorderRadius.circular(10),
+        //                   ),
+        //                 ),
+        //                 child: Text(
+        //                   'បោះបង',
+        //                   style: StyleColor.textStyleKhmerContentAuto(
+        //                     fontSize: 18,
+        //                     color: Colors.white,
+        //                     bold: true,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //             Container(
+        //               width: 100,
+        //               margin: EdgeInsets.only(left: 5, right: 5),
+        //               child: TextButton(
+        //                 onPressed: () {
+        //                   Navigator.pop(context); // Close the dialog
+        //                 },
+        //                 style: TextButton.styleFrom(
+        //                   backgroundColor:
+        //                       StyleColor.appBarColor.withOpacity(0.7),
+        //                   shape: RoundedRectangleBorder(
+        //                     borderRadius: BorderRadius.circular(10),
+        //                   ),
+        //                 ),
+        //                 child: Text(
+        //                   'យល់ព្រម',
+        //                   style: StyleColor.textStyleKhmerContentAuto(
+        //                     fontSize: 18,
+        //                     color: Colors.white,
+        //                     bold: true,
+        //                   ),
+        //                 ),
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       )
+        //     ],
+        //   );
+        // },
         );
-      },
-    );
   }
 
   Widget mobileScreen() {
