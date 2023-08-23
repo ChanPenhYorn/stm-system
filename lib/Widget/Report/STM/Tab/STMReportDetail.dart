@@ -248,6 +248,182 @@ class _STMReportDetailState extends State<STMReportDetail> {
     setState(() {});
   }
 
+  void DialogScaleMobile(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          backgroundColor: Colors.grey[200],
+          titleTextStyle: const TextStyle(
+              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          contentTextStyle: const TextStyle(fontSize: 14, color: Colors.white),
+          title: Text(
+            'SCALE',
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+                color: Colors.black),
+          ),
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  margin: EdgeInsets.all(5),
+                  height: 40,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              StyleColor.appBarColor.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      child: Text('ស្ថានីយចូល',
+                          style: StyleColor.textStyleKhmerContentAuto(
+                            fontSize: 12,
+                            color: Colors.white,
+                            bold: true,
+                          )))),
+              Container(
+                  margin: EdgeInsets.all(5),
+                  height: 40,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              StyleColor.appBarColor.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      child: Text('ស្ថានីយចេញ',
+                          style: StyleColor.textStyleKhmerContentAuto(
+                            fontSize: 12,
+                            color: Colors.white,
+                            bold: true,
+                          )))),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text(
+                'បោះបង',
+                style: StyleColor.textStyleKhmerContentAuto(
+                  fontSize: 12,
+                  color: Colors.black,
+                  bold: true,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void DialogScaleDesktop(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          backgroundColor: Colors.grey[200],
+          titleTextStyle: const TextStyle(
+              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          contentTextStyle: const TextStyle(fontSize: 16, color: Colors.white),
+          title: Text(
+            'SCALE',
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+                color: Colors.black),
+          ),
+          content: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  margin: EdgeInsets.all(5),
+                  height: 50,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              StyleColor.appBarColor.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      child: Text('ស្ថានីយចូល',
+                          style: StyleColor.textStyleKhmerContentAuto(
+                            fontSize: 18,
+                            color: Colors.white,
+                            bold: true,
+                          )))),
+              Container(
+                  margin: EdgeInsets.all(5),
+                  height: 50,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              StyleColor.appBarColor.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      child: Text('ស្ថានីយចេញ',
+                          style: StyleColor.textStyleKhmerContentAuto(
+                            fontSize: 18,
+                            color: Colors.white,
+                            bold: true,
+                          )))),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text(
+                'បោះបង',
+                style: StyleColor.textStyleKhmerContentAuto(
+                  fontSize: 18,
+                  color: Colors.black,
+                  bold: true,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget mobileScreen() {
     double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
@@ -349,6 +525,18 @@ class _STMReportDetailState extends State<STMReportDetail> {
                     width: 100,
                     child: Text(
                       'ទម្ងន់ទំនិញ(គក)'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    alignment: Alignment.center,
+                    width: 100,
+                    child: Text(
+                      'ទាញយក'.tr(),
                       style: StyleColor.textStyleKhmerDangrekAuto(
                         fontSize: 14,
                         color: Colors.white,
@@ -588,6 +776,91 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
+                                              Container(
+                                                width: 100,
+                                                padding: const EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                child: FutureBuilder<
+                                                    STMReportDetailModel>(
+                                                  future: InitData,
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot.hasData &&
+                                                        snapshot.data!.data!
+                                                                .length >
+                                                            0)
+                                                      return Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: Container(
+                                                          // padding:
+                                                          //     EdgeInsets.only(
+                                                          //         right: 10),
+                                                          child: TextButton(
+                                                            onPressed: () {
+                                                              DialogScaleMobile(
+                                                                  context);
+                                                              // onDownloadCouponInvoiceRowClick(
+                                                              //   pdf: "report",
+                                                              //   excel: "report",
+                                                              // );
+                                                            },
+                                                            style: TextButton
+                                                                .styleFrom(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                              // padding: EdgeInsets
+                                                              //     .only(
+                                                              //         left: 5,
+                                                              //         right: 5,
+                                                              //         bottom: 7,
+                                                              //         top: 7),
+                                                              // backgroundColor:
+                                                              //     StyleColor
+                                                              //         .appBarDarkColor,
+                                                            ),
+                                                            child: Container(
+                                                              width: 50,
+                                                              height: 40,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .download_outlined,
+                                                                    color: Colors
+                                                                        .blue,
+                                                                  ),
+                                                                  // SizedBox(
+                                                                  //   width: 5,
+                                                                  // ),
+                                                                  // Text(
+                                                                  //   'ទាញយក',
+                                                                  //   style: StyleColor
+                                                                  //       .textStyleKhmerContentAuto(
+                                                                  //     color: Colors
+                                                                  //         .white,
+                                                                  //   ),
+                                                                  // ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    return Container();
+                                                  },
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -651,7 +924,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       width: 100,
-                                      margin: EdgeInsets.only(left: 5),
                                       child: Text(
                                         () {
                                           int total = 0;
@@ -670,11 +942,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 100,
+                                      width: 120,
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 10),
                                       width: 100,
                                       child: Text(
                                         () {
@@ -712,6 +983,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                           bold: true,
                                         ),
                                       ),
+                                    ),
+                                    Container(
+                                      width: 100,
                                     ),
                                   ],
                                 ),
@@ -765,14 +1039,12 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 80,
-                  ),
-                  SizedBox(
-                    width: 50,
+                  Container(
+                    alignment: Alignment.center,
+                    width: 100,
                   ),
                   Container(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     width: 150,
                     child: Text(
                       "ផ្លាកលេខ",
@@ -781,9 +1053,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                         color: Colors.white,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 50,
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
@@ -807,9 +1076,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 50,
-                  ),
                   Container(
                     alignment: Alignment.centerLeft,
                     width: 150,
@@ -832,13 +1098,26 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 50,
-                  ),
                   Container(
                     alignment: Alignment.centerLeft,
+                    width: 100,
                     child: Text(
                       'ទម្ងន់ទំនិញ(គក)'.tr(),
+                      style: StyleColor.textStyleKhmerDangrekAuto(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 5, right: 5),
+                    alignment: Alignment.center,
+                    width: 70,
+                    child: Text(
+                      'ទាញយក'.tr(),
                       style: StyleColor.textStyleKhmerDangrekAuto(
                         fontSize: 14,
                         color: Colors.white,
@@ -914,8 +1193,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                 ),
                                               ),
                                               Container(
-                                                alignment: Alignment.centerLeft,
-                                                width: 80,
+                                                alignment: Alignment.center,
+                                                width: 100,
                                                 height: 50,
                                                 child: InkWell(
                                                   onTap: () {
@@ -949,11 +1228,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 50,
-                                              ),
                                               Container(
-                                                alignment: Alignment.centerLeft,
+                                                alignment: Alignment.center,
                                                 width: 150,
                                                 child: Column(
                                                   mainAxisAlignment:
@@ -987,9 +1263,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                     )
                                                   ],
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 50,
                                               ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
@@ -1027,9 +1300,6 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                     fontSize: 14,
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: 50,
                                               ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
@@ -1069,12 +1339,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 50,
-                                              ),
                                               Container(
                                                 alignment: Alignment.centerLeft,
-                                                width: 150,
+                                                width: 100,
                                                 child: Text(
                                                   snapshot.data!.data![index]
                                                               .weightProduct !=
@@ -1089,6 +1356,93 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                       .textStyleKhmerContentAuto(
                                                     fontSize: 14,
                                                   ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Container(
+                                                padding: const EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                child: FutureBuilder<
+                                                    STMReportDetailModel>(
+                                                  future: InitData,
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot.hasData &&
+                                                        snapshot.data!.data!
+                                                                .length >
+                                                            0)
+                                                      return Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: Container(
+                                                          // padding:
+                                                          //     EdgeInsets.only(
+                                                          //         right: 10),
+                                                          child: TextButton(
+                                                            onPressed: () {
+                                                              DialogScaleDesktop(
+                                                                  context);
+                                                              // onDownloadCouponInvoiceRowClick(
+                                                              //   pdf: "report",
+                                                              //   excel: "report",
+                                                              // );
+                                                            },
+                                                            style: TextButton
+                                                                .styleFrom(
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                              // padding: EdgeInsets
+                                                              //     .only(
+                                                              //         left: 5,
+                                                              //         right: 5,
+                                                              //         bottom: 7,
+                                                              //         top: 7),
+                                                              // backgroundColor:
+                                                              //     StyleColor
+                                                              //         .appBarDarkColor,
+                                                            ),
+                                                            child: Container(
+                                                              width: 50,
+                                                              height: 40,
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .download_outlined,
+                                                                    color: Colors
+                                                                        .blue,
+                                                                  ),
+                                                                  // SizedBox(
+                                                                  //   width: 5,
+                                                                  // ),
+                                                                  // Text(
+                                                                  //   'ទាញយក',
+                                                                  //   style: StyleColor
+                                                                  //       .textStyleKhmerContentAuto(
+                                                                  //     color: Colors
+                                                                  //         .white,
+                                                                  //   ),
+                                                                  // ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    return Container();
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -1133,13 +1487,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 80,
-                                    ),
-                                    SizedBox(
-                                      width: 50,
+                                      width: 100,
                                     ),
                                     Container(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.center,
                                       width: 150,
                                       child: Text(
                                         snapshot.data!.data!.length.toString(),
@@ -1150,13 +1501,21 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 190,
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      width: 150,
+                                      child: Text(
+                                        'ទម្ងន់ចូលសរុប​​(គក)'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       width: 150,
-                                      margin: EdgeInsets.only(left: 5),
                                       child: Text(
                                         () {
                                           int total = 0;
@@ -1174,12 +1533,20 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 200,
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      width: 150,
+                                      child: Text(
+                                        'ទម្ងន់ចេញសរុប(គក)'.tr(),
+                                        style: StyleColor
+                                            .textStyleKhmerDangrekAuto(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 10),
                                       width: 150,
                                       child: Text(
                                         () {
@@ -1198,11 +1565,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 50,
-                                    ),
                                     Container(
-                                      width: 150,
+                                      width: 100,
                                       alignment: Alignment.centerLeft,
                                       child: Text(
                                         () {
@@ -1242,7 +1606,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.only(top: 5, bottom: 5),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       width: screenWidth,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -1325,7 +1689,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                 ),
               ],
             ),
-
+            SizedBox(
+              width: 20,
+            ),
             // Company Dropdown
             Container(
               child: Column(
@@ -1395,7 +1761,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                 ],
               ),
             ),
-
+            SizedBox(
+              width: 20,
+            ),
             // Customer Dropdown
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1463,7 +1831,9 @@ class _STMReportDetailState extends State<STMReportDetail> {
                 ),
               ],
             ),
-
+            SizedBox(
+              width: 20,
+            ),
             // Zone Dropdown
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

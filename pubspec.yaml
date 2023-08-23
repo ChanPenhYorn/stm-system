@@ -10,6 +10,7 @@ environment:
 dependencies:
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.3
+  clean_dialog: ^0.0.16
   cupertino_icons: ^1.0.2
   currency_text_input_formatter: ^2.1.8
   device_info_plus: ^8.1.0

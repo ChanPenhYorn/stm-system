@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "clean_dialog",
+      "rootUri": "file:///C:/Users/yornc/AppData/Local/Pub/Cache/hosted/pub.dev/clean_dialog-0.0.16",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "clock",
       "rootUri": "file:///C:/Users/yornc/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
@@ -1064,7 +1070,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-08-18T05:36:59.150167Z",
+  "generated": "2023-08-23T04:01:34.330230Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

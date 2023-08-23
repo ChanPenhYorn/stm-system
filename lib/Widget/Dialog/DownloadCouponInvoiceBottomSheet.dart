@@ -494,6 +494,56 @@ class _DownloadCouponInvoiceBottomSheetState
                   ),
                 ),
 
+                //New Implementation
+                // Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //         margin: EdgeInsets.all(5),
+                //         height: 30,
+                //         width: 200,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(30),
+                //         ),
+                //         child: ElevatedButton(
+                //             onPressed: () {},
+                //             style: ElevatedButton.styleFrom(
+                //                 backgroundColor:
+                //                     StyleColor.appBarColor.withOpacity(0.7),
+                //                 shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(10),
+                //                 )),
+                //             child: Text('ស្ថានីយចូល',
+                //                 style: StyleColor.textStyleKhmerContentAuto(
+                //                   fontSize: 18,
+                //                   color: Colors.white,
+                //                   bold: true,
+                //                 )))),
+                //     Container(
+                //         margin: EdgeInsets.all(5),
+                //         height: 30,
+                //         width: 200,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(30),
+                //         ),
+                //         child: ElevatedButton(
+                //             onPressed: () {},
+                //             style: ElevatedButton.styleFrom(
+                //                 backgroundColor:
+                //                     StyleColor.appBarColor.withOpacity(0.7),
+                //                 shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(10),
+                //                 )),
+                //             child: Text('ស្ថានីយចេញ',
+                //                 style: StyleColor.textStyleKhmerContentAuto(
+                //                   fontSize: 18,
+                //                   color: Colors.white,
+                //                   bold: true,
+                //                 )))),
+                //   ],
+                // ),
+
                 //Button
                 Row(
                   mainAxisSize: MainAxisSize.min,
