@@ -252,144 +252,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
     setState(() {});
   }
 
-  void DialogScaleMobile(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          backgroundColor: Colors.grey[200],
-          titleTextStyle: const TextStyle(
-              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          contentTextStyle: const TextStyle(fontSize: 16, color: Colors.white),
-          title: Container(
-            height: 30,
-            width: 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Text(
-              'ទាញយករបាយការណ៏ថ្លឹង',
-              style: StyleColor.textStyleKhmerContentAuto(
-                fontSize: 16,
-                color: Colors.black,
-                bold: true,
-              ),
-            ),
-          ),
-          content: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                  margin: EdgeInsets.all(5),
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              StyleColor.appBarColor.withOpacity(0.7),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                      child: Text('ស្ថានីយចូល',
-                          style: StyleColor.textStyleKhmerContentAuto(
-                            fontSize: 13,
-                            color: Colors.white,
-                            bold: true,
-                          )))),
-              Container(
-                  margin: EdgeInsets.all(5),
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              StyleColor.appBarColor.withOpacity(0.7),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                      child: Text('ស្ថានីយចេញ',
-                          style: StyleColor.textStyleKhmerContentAuto(
-                            fontSize: 13,
-                            color: Colors.white,
-                            bold: true,
-                          )))),
-            ],
-          ),
-          actions: [
-            Container(
-              margin: EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 5, right: 5),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Close the dialog
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.grey[400],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        'បោះបង',
-                        style: StyleColor.textStyleKhmerContentAuto(
-                          fontSize: 12,
-                          color: Colors.white,
-                          bold: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5, right: 10),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pop(context); // Close the dialog
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor:
-                            StyleColor.appBarColor.withOpacity(0.7),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        'យល់ព្រម',
-                        style: StyleColor.textStyleKhmerContentAuto(
-                          fontSize: 12,
-                          color: Colors.white,
-                          bold: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  void DialogScaleDesktop(BuildContext context) {
+  DialogScaleDesktop(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     showDialog(
         context: context,
@@ -411,62 +274,65 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       height: 50,
                       child: Text(
                         'ទាញយករបាយការណ៏ថ្លឹង',
-                        style: StyleColor.textStyleKhmerContentAuto(
+                        style: StyleColor.textStyleKhmerDangrekAuto(
+                          // bold: true,
                           fontSize: 18,
-                          color: Colors.black,
-                          bold: true,
                         ),
                       ),
                     ),
-                    Container(
-                      height: 100,
-                      child: Column(children: [
-                        RadioListTile(
-                          title: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: StyleColor.appBarColor.withOpacity(0.7),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Text('ស្ថានីយចូល',
-                                  style: StyleColor.textStyleKhmerContentAuto(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    bold: true,
-                                  ))),
-                          value: options[0],
-                          groupValue: currentOption,
-                          onChanged: (value) {
-                            setState(() {
-                              currentOption = value.toString();
-                            });
-                          },
-                        ),
-                        RadioListTile(
-                          title: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: StyleColor.appBarColor.withOpacity(0.7),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Text('ស្ថានីយចេញ',
-                                  style: StyleColor.textStyleKhmerContentAuto(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    bold: true,
-                                  ))),
-                          value: options[1],
-                          groupValue: currentOption,
-                          onChanged: (value) {
-                            setState(() {
-                              currentOption = value.toString();
-                            });
-                          },
-                        ),
-                      ]),
-                    ),
+                    StatefulBuilder(builder: (context, setState) {
+                      return Container(
+                        height: 100,
+                        child: Column(children: [
+                          RadioListTile(
+                            title: Container(
+                                alignment: Alignment.center,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Text('ស្ថានីយចូល',
+                                    style: StyleColor.textStyleKhmerContentAuto(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      bold: true,
+                                    ))),
+                            value: options[0],
+                            groupValue: currentOption,
+                            onChanged: (value) {
+                              setState(() {
+                                currentOption = value.toString();
+                              });
+                            },
+                          ),
+                          RadioListTile(
+                            title: Container(
+                                alignment: Alignment.center,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Text('ស្ថានីយចេញ',
+                                    style: StyleColor.textStyleKhmerContentAuto(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      bold: true,
+                                    ))),
+                            value: options[1],
+                            groupValue: currentOption,
+                            onChanged: (value) {
+                              setState(() {
+                                currentOption = value.toString();
+                              });
+                            },
+                          ),
+                        ]),
+                      );
+                    }),
                     Container(
                       padding: EdgeInsets.all(10),
                       height: 50,
@@ -477,49 +343,47 @@ class _STMReportDetailState extends State<STMReportDetail> {
                           Container(
                             width: 100,
                             margin: EdgeInsets.only(left: 5, right: 5),
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context); // Close the dialog
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor: Colors.grey[200],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey[200],
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                'បោះបង',
-                                style: StyleColor.textStyleKhmerContentAuto(
-                                  fontSize: 18,
-                                  color: Colors.red,
-                                  bold: true,
-                                ),
-                              ),
-                            ),
+                                child: Text(
+                                  'បោះបង',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 16,
+                                    color: Colors.red,
+                                    bold: true,
+                                  ),
+                                )),
                           ),
                           Container(
                             width: 100,
                             margin: EdgeInsets.only(left: 5, right: 5),
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pop(context); // Close the dialog
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor:
-                                    StyleColor.appBarColor.withOpacity(0.7),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                'យល់ព្រម',
-                                style: StyleColor.textStyleKhmerContentAuto(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  bold: true,
-                                ),
-                              ),
-                            ),
+                                child: Text(
+                                  'យល់ព្រម',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    bold: true,
+                                  ),
+                                )),
                           ),
                         ],
                       ),
@@ -527,147 +391,157 @@ class _STMReportDetailState extends State<STMReportDetail> {
                   ],
                 ),
               ));
-        }
-        //   return AlertDialog(
-        //     shape: RoundedRectangleBorder(
-        //       borderRadius: BorderRadius.circular(30),
-        //     ),
-        //     backgroundColor: Colors.grey[200],
-        //     titleTextStyle: const TextStyle(
-        //         fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-        //     contentTextStyle: const TextStyle(fontSize: 16, color: Colors.white),
-        //     title: Container(
-        //       height: 30,
-        //       width: 200,
-        //       decoration: BoxDecoration(
-        //         color: Colors.white,
-        //         borderRadius: BorderRadius.circular(10),
-        //       ),
-        //       padding: EdgeInsets.only(left: 10, right: 10),
-        //       child: Text(
-        //         'ទាញយករបាយការណ៏ថ្លឹង',
-        //         style: StyleColor.textStyleKhmerContentAuto(
-        //           fontSize: 18,
-        //           color: Colors.black,
-        //           bold: true,
-        //         ),
-        //       ),
-        //     ),
-        //     contentPadding: EdgeInsets.all(10),
-        //     content: Container(
-        //       width: 400,
-        //       height: 100,
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.start,
-        //         // crossAxisAlignment: CrossAxisAlignment.stretch,
-        //         children: [
-        //           RadioListTile(
-        //             title: Container(
-        //                 alignment: Alignment.center,
-        //                 height: 40,
-        //                 decoration: BoxDecoration(
-        //                   color: StyleColor.appBarColor.withOpacity(0.7),
-        //                   borderRadius: BorderRadius.circular(30),
-        //                 ),
-        //                 child: Text('ស្ថានីយចូល',
-        //                     style: StyleColor.textStyleKhmerContentAuto(
-        //                       fontSize: 16,
-        //                       color: Colors.white,
-        //                       bold: true,
-        //                     ))),
-        //             value: options[0],
-        //             groupValue: currentOption,
-        //             onChanged: (value) {
-        //               setState(() {
-        //                 currentOption = value.toString();
-        //               });
-        //             },
-        //           ),
-        //           RadioListTile(
-        //             title: Container(
-        //                 alignment: Alignment.center,
-        //                 height: 40,
-        //                 decoration: BoxDecoration(
-        //                   color: StyleColor.appBarColor.withOpacity(0.7),
-        //                   borderRadius: BorderRadius.circular(30),
-        //                 ),
-        //                 child: Text('ស្ថានីយចេញ',
-        //                     style: StyleColor.textStyleKhmerContentAuto(
-        //                       fontSize: 16,
-        //                       color: Colors.white,
-        //                       bold: true,
-        //                     ))),
-        //             value: options[1],
-        //             groupValue: currentOption,
-        //             onChanged: (value) {
-        //               setState(() {
-        //                 currentOption = value.toString();
-        //               });
-        //             },
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //     actions: [
-        //       Container(
-        //         padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-        //         child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.end,
-        //           children: [
-        //             Container(
-        //               width: 100,
-        //               margin: EdgeInsets.only(left: 5, right: 5),
-        //               child: TextButton(
-        //                 onPressed: () {
-        //                   Navigator.pop(context); // Close the dialog
-        //                 },
-        //                 style: TextButton.styleFrom(
-        //                   backgroundColor: Colors.grey[400],
-        //                   shape: RoundedRectangleBorder(
-        //                     borderRadius: BorderRadius.circular(10),
-        //                   ),
-        //                 ),
-        //                 child: Text(
-        //                   'បោះបង',
-        //                   style: StyleColor.textStyleKhmerContentAuto(
-        //                     fontSize: 18,
-        //                     color: Colors.white,
-        //                     bold: true,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //             Container(
-        //               width: 100,
-        //               margin: EdgeInsets.only(left: 5, right: 5),
-        //               child: TextButton(
-        //                 onPressed: () {
-        //                   Navigator.pop(context); // Close the dialog
-        //                 },
-        //                 style: TextButton.styleFrom(
-        //                   backgroundColor:
-        //                       StyleColor.appBarColor.withOpacity(0.7),
-        //                   shape: RoundedRectangleBorder(
-        //                     borderRadius: BorderRadius.circular(10),
-        //                   ),
-        //                 ),
-        //                 child: Text(
-        //                   'យល់ព្រម',
-        //                   style: StyleColor.textStyleKhmerContentAuto(
-        //                     fontSize: 18,
-        //                     color: Colors.white,
-        //                     bold: true,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        //       )
-        //     ],
-        //   );
-        // },
-        );
+        });
+  }
+
+  DialogScaleMobiile(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              backgroundColor: Colors.grey[400],
+              child: Container(
+                padding: EdgeInsets.all(10),
+                width: 300,
+                height: 220,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      alignment: Alignment.center,
+                      width: screenWidth,
+                      height: 50,
+                      child: Text(
+                        'ទាញយករបាយការណ៏ថ្លឹង',
+                        style: StyleColor.textStyleKhmerDangrekAuto(
+                          // bold: true,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    StatefulBuilder(builder: (context, setState) {
+                      return Container(
+                        height: 100,
+                        child: Column(children: [
+                          RadioListTile(
+                            title: Container(
+                                alignment: Alignment.center,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Text('ស្ថានីយចូល',
+                                    style: StyleColor.textStyleKhmerContentAuto(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      bold: true,
+                                    ))),
+                            value: options[0],
+                            groupValue: currentOption,
+                            onChanged: (value) {
+                              setState(() {
+                                currentOption = value.toString();
+                              });
+                            },
+                          ),
+                          RadioListTile(
+                            title: Container(
+                                alignment: Alignment.center,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Text('ស្ថានីយចេញ',
+                                    style: StyleColor.textStyleKhmerContentAuto(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      bold: true,
+                                    ))),
+                            value: options[1],
+                            groupValue: currentOption,
+                            onChanged: (value) {
+                              setState(() {
+                                currentOption = value.toString();
+                              });
+                            },
+                          ),
+                        ]),
+                      );
+                    }),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey[200],
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text(
+                                  'បោះបង',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 12,
+                                    color: Colors.red,
+                                    bold: true,
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(left: 5, right: 5),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      StyleColor.appBarColor.withOpacity(0.7),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text(
+                                  'យល់ព្រម',
+                                  style: StyleColor.textStyleKhmerContentAuto(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    bold: true,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ));
+        });
+  }
+
+  Widget RespnSiveDialog(BuildContext context) {
+    if (isDesktop(context)) {
+      return DialogScaleDesktop(context);
+    } else {
+      return DialogScaleMobiile(context);
+    }
   }
 
   Widget mobileScreen() {
@@ -780,7 +654,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                   Container(
                     padding: EdgeInsets.only(left: 5, right: 5),
                     alignment: Alignment.center,
-                    width: 100,
+                    width: 120,
                     child: Text(
                       'ទាញយក'.tr(),
                       style: StyleColor.textStyleKhmerDangrekAuto(
@@ -1022,9 +896,11 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
+
+                                              //download buttons
                                               Container(
                                                 alignment: Alignment.centerLeft,
-                                                width: 100,
+                                                width: 120,
                                                 padding: const EdgeInsets.only(
                                                     left: 5, right: 5),
                                                 child: FutureBuilder<
@@ -1036,20 +912,13 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                 .length >
                                                             0)
                                                       return Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Container(
-                                                          // padding:
-                                                          //     EdgeInsets.only(
-                                                          //         right: 10),
                                                           child: TextButton(
                                                             onPressed: () {
-                                                              DialogScaleMobile(
+                                                              RespnSiveDialog(
                                                                   context);
-                                                              // onDownloadCouponInvoiceRowClick(
-                                                              //   pdf: "report",
-                                                              //   excel: "report",
-                                                              // );
                                                             },
                                                             style: TextButton
                                                                 .styleFrom(
@@ -1060,22 +929,12 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                         .circular(
                                                                             10),
                                                               ),
-                                                              // padding: EdgeInsets
-                                                              //     .only(
-                                                              //         left: 5,
-                                                              //         right: 5,
-                                                              //         bottom: 7,
-                                                              //         top: 7),
-                                                              // backgroundColor:
-                                                              //     StyleColor
-                                                              //         .appBarDarkColor,
                                                             ),
                                                             child: Container(
                                                               width: 50,
                                                               height: 40,
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
+                                                              alignment: Alignment
+                                                                  .centerLeft,
                                                               child: Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
@@ -1083,21 +942,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                 children: [
                                                                   Icon(
                                                                     Icons
-                                                                        .download_for_offline_outlined,
+                                                                        .download_outlined,
                                                                     color: Colors
                                                                         .blue,
                                                                   ),
-                                                                  // SizedBox(
-                                                                  //   width: 5,
-                                                                  // ),
-                                                                  // Text(
-                                                                  //   'ទាញយក',
-                                                                  //   style: StyleColor
-                                                                  //       .textStyleKhmerContentAuto(
-                                                                  //     color: Colors
-                                                                  //         .white,
-                                                                  //   ),
-                                                                  // ),
                                                                 ],
                                                               ),
                                                             ),
@@ -1231,9 +1079,82 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
+
+                                    //Download all button
                                     Container(
-                                      width: 100,
-                                    ),
+                                      width: 120,
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child:
+                                            FutureBuilder<STMReportDetailModel>(
+                                          future: InitData,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData &&
+                                                snapshot.data!.data!.length > 0)
+                                              return Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 10),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      onDownloadCouponInvoiceRowClick(
+                                                        pdf: "report",
+                                                        excel: "report",
+                                                      );
+                                                    },
+                                                    style: TextButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      padding: EdgeInsets.only(
+                                                          left: 5,
+                                                          right: 5,
+                                                          bottom: 7,
+                                                          top: 7),
+                                                    ),
+                                                    child: Container(
+                                                      height: 50,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.download,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'ទាញយក',
+                                                            style: StyleColor
+                                                                .textStyleKhmerDangrekAuto(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            return Container();
+                                          },
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -1356,13 +1277,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
                   Container(
                     padding: EdgeInsets.only(left: 5, right: 5),
                     alignment: Alignment.center,
-                    width: 70,
+                    width: 100,
                     child: Text(
                       'ទាញយក'.tr(),
                       style: StyleColor.textStyleKhmerDangrekAuto(
@@ -1606,13 +1524,12 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 20,
-                                              ),
 
                                               //Report Download button
 
                                               Container(
+                                                alignment: Alignment.centerLeft,
+                                                width: 100,
                                                 padding: const EdgeInsets.only(
                                                     left: 5, right: 5),
                                                 child: FutureBuilder<
@@ -1624,12 +1541,12 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                 .length >
                                                             0)
                                                       return Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Container(
                                                           child: TextButton(
                                                             onPressed: () {
-                                                              DialogScaleDesktop(
+                                                              RespnSiveDialog(
                                                                   context);
                                                             },
                                                             style: TextButton
@@ -1645,9 +1562,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                             child: Container(
                                                               width: 50,
                                                               height: 40,
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
+                                                              alignment: Alignment
+                                                                  .centerLeft,
                                                               child: Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
@@ -1655,7 +1571,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                                 children: [
                                                                   Icon(
                                                                     Icons
-                                                                        .download_for_offline_outlined,
+                                                                        .download_outlined,
                                                                     color: Colors
                                                                         .blue,
                                                                   ),
@@ -1809,6 +1725,80 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                         ),
                                       ),
                                     ),
+
+                                    //Download ALL buttom
+                                    Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child:
+                                            FutureBuilder<STMReportDetailModel>(
+                                          future: InitData,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData &&
+                                                snapshot.data!.data!.length > 0)
+                                              return Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 10),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      onDownloadCouponInvoiceRowClick(
+                                                        pdf: "report",
+                                                        excel: "report",
+                                                      );
+                                                    },
+                                                    style: TextButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      padding: EdgeInsets.only(
+                                                          left: 5,
+                                                          right: 5,
+                                                          bottom: 7,
+                                                          top: 7),
+                                                    ),
+                                                    child: Container(
+                                                      width: 100,
+                                                      height: 40,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.download,
+                                                            color: Colors.white,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            'ទាញយក',
+                                                            style: StyleColor
+                                                                .textStyleKhmerContentAuto(
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            return Container();
+                                          },
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
