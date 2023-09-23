@@ -273,6 +273,45 @@ class ApiExtension {
     }
   }
 
+  //! Scale in and out
+  Future<Uint8List?> downloadReportCouponInvoiceByID(
+      BuildContext context, fileType, invoice_id, scale_type) async {
+    try {
+      AnimateLoading().showLoading(context);
+      Singleton.instance.dioBearerSecondTokenInitialize();
+
+      final res = await Singleton.instance.dio
+          .get(
+        Domain.domain +
+            "${ApiEndPoint.couponInvoiceInAndOut}?file_type=${fileType}&invoice_id=${invoice_id}&scale_type=${scale_type}",
+        options: Options(
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+              'Access-Control-Allow-Headers':
+                  'Origin, Content-Type, X-Auth-Token'
+            },
+            responseType: ResponseType.bytes,
+            receiveDataWhenStatusError: true,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 501;
+            }),
+      )
+          // ignore: body_might_complete_normally_catch_error
+          .catchError((err) {
+        Navigator.pop(context);
+        PopupDialog.showPopup(context, "Message.OperationFailed".tr(),
+            success: 0);
+      });
+
+      Navigator.of(context, rootNavigator: true).pop();
+      return res.data;
+    } catch (err) {
+      return null;
+    }
+  }
+
   Future<ResponseRes<Token, Token>> userLogin(
       BuildContext context, Map<String, dynamic> body,
       {bool noLoading = false}) async {

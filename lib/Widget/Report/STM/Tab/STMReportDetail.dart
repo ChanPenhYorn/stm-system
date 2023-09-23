@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_saver/file_saver.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stm_report_app/Api/ApiEndPoint.dart';
 import 'package:stm_report_app/Entity/Company/CompanyModel.dart';
@@ -27,6 +29,12 @@ class STMReportDetail extends StatefulWidget {
 List<String> options = ['ស្ថានីយចូល', 'ស្ថានីយចេញ'];
 
 class _STMReportDetailState extends State<STMReportDetail> {
+  late bool canOutOrNot;
+  var selectPrintINandOutID;
+
+  int select = 0;
+  late int scale;
+
   String currentOption = options[0];
 
   bool isDesktop(BuildContext context) =>
@@ -259,12 +267,12 @@ class _STMReportDetailState extends State<STMReportDetail> {
         builder: (BuildContext context) {
           return Dialog(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
-              backgroundColor: Colors.grey[400],
+                  borderRadius: BorderRadius.circular(10)),
+              backgroundColor: Colors.white,
               child: Container(
                 padding: EdgeInsets.all(10),
-                width: 400,
-                height: 230,
+                width: 450,
+                height: 330,
                 child: Column(
                   children: [
                     Container(
@@ -280,18 +288,21 @@ class _STMReportDetailState extends State<STMReportDetail> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     StatefulBuilder(builder: (context, setState) {
                       return Container(
-                        height: 100,
+                        height: 140,
                         child: Column(children: [
                           RadioListTile(
                             title: Container(
                                 alignment: Alignment.center,
-                                height: 40,
+                                height: 60,
                                 decoration: BoxDecoration(
                                   color:
-                                      StyleColor.appBarColor.withOpacity(0.7),
-                                  borderRadius: BorderRadius.circular(30),
+                                      StyleColor.appBarColor.withOpacity(0.6),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text('ស្ថានីយចូល',
                                     style: StyleColor.textStyleKhmerContentAuto(
@@ -303,6 +314,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                             groupValue: currentOption,
                             onChanged: (value) {
                               setState(() {
+                                select = 0;
                                 currentOption = value.toString();
                               });
                             },
@@ -310,11 +322,11 @@ class _STMReportDetailState extends State<STMReportDetail> {
                           RadioListTile(
                             title: Container(
                                 alignment: Alignment.center,
-                                height: 40,
+                                height: 60,
                                 decoration: BoxDecoration(
                                   color:
-                                      StyleColor.appBarColor.withOpacity(0.7),
-                                  borderRadius: BorderRadius.circular(30),
+                                      StyleColor.appBarColor.withOpacity(0.6),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text('ស្ថានីយចេញ',
                                     style: StyleColor.textStyleKhmerContentAuto(
@@ -324,28 +336,35 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     ))),
                             value: options[1],
                             groupValue: currentOption,
-                            onChanged: (value) {
-                              setState(() {
-                                currentOption = value.toString();
-                              });
-                            },
+                            onChanged: canOutOrNot
+                                ? (value) {
+                                    setState(() {
+                                      select = 1;
+                                      currentOption = value.toString();
+                                    });
+                                  }
+                                : null,
                           ),
                         ]),
                       );
                     }),
+                    Divider(),
                     Container(
                       padding: EdgeInsets.all(10),
-                      height: 50,
+                      height: 80,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: 100,
+                            height: 50,
+                            width: 190,
                             margin: EdgeInsets.only(left: 5, right: 5),
                             child: ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(context);
+                                  canOutOrNot = false;
+                                  currentOption = options[0];
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.grey[200],
@@ -363,15 +382,21 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                 )),
                           ),
                           Container(
-                            width: 100,
+                            width: 190,
+                            height: 50,
                             margin: EdgeInsets.only(left: 5, right: 5),
                             child: ElevatedButton(
                                 onPressed: () {
+                                  canOutOrNot = false;
+                                  currentOption = options[0];
+                                  String invoice_id = selectPrintINandOutID;
+                                  var scale_type = "";
+                                  DownloadDialog(invoice_id, scale_type);
                                   Navigator.pop(context);
                                 },
                                 style: TextButton.styleFrom(
                                   backgroundColor:
-                                      StyleColor.appBarColor.withOpacity(0.7),
+                                      StyleColor.appBarColor.withOpacity(0.6),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -1193,8 +1218,8 @@ class _STMReportDetailState extends State<STMReportDetail> {
               scrollDirection: Axis.horizontal,
               controller: scrollController1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     alignment: Alignment.centerLeft,
@@ -1318,6 +1343,10 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                     height: 60,
                                     child: TextButton(
                                       onPressed: () async {
+                                        var valueID =
+                                            snapshot.data!.data![index].id;
+                                        selectPrintINandOutID = valueID;
+                                        print(valueID);
                                         showDialog(
                                           context: context,
                                           builder: (_) => Dialog(
@@ -1525,7 +1554,7 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                 ),
                                               ),
 
-                                              //Report Download button
+                                              //!Report Download button
 
                                               Container(
                                                 alignment: Alignment.centerLeft,
@@ -1546,6 +1575,31 @@ class _STMReportDetailState extends State<STMReportDetail> {
                                                         child: Container(
                                                           child: TextButton(
                                                             onPressed: () {
+                                                              var weighOut =
+                                                                  snapshot
+                                                                      .data!
+                                                                      .data![
+                                                                          index]
+                                                                      .weightOut;
+                                                              if (weighOut ==
+                                                                  null) {
+                                                                canOutOrNot =
+                                                                    false;
+                                                              } else {
+                                                                canOutOrNot =
+                                                                    true;
+                                                              }
+
+                                                              var valueID =
+                                                                  snapshot
+                                                                      .data!
+                                                                      .data![
+                                                                          index]
+                                                                      .id;
+                                                              selectPrintINandOutID =
+                                                                  valueID;
+                                                              print(
+                                                                  selectPrintINandOutID);
                                                               RespnSiveDialog(
                                                                   context);
                                                             },
@@ -2333,5 +2387,43 @@ class _STMReportDetailState extends State<STMReportDetail> {
         );
       },
     );
+  }
+
+  void DownloadDialog(invoice_id, scaleType) {
+    DownloadScaleInAndOut(invoice_id, scaleType);
+  }
+
+  void DownloadScaleInAndOut(invoice_id, scale_type) async {
+    var fileType = "pdf";
+
+    if (select == 0) {
+      scale_type = "in";
+      var stream = await Singleton.instance.apiExtension
+          .downloadReportCouponInvoiceByID(
+              context, fileType, invoice_id, scale_type);
+      if (kIsWeb) {
+        await FileSaver.instance.saveFile(
+          name: "file.pdf",
+          ext: "pdf",
+          bytes: stream,
+          mimeType: MimeType.pdf,
+        );
+      }
+    } else if (select == 1) {
+      scale_type = "out";
+      var stream = await Singleton.instance.apiExtension
+          .downloadReportCouponInvoiceByID(
+              context, fileType, invoice_id, scale_type);
+      if (kIsWeb) {
+        await FileSaver.instance.saveFile(
+          name: "file.pdf",
+          ext: "pdf",
+          bytes: stream,
+          mimeType: MimeType.pdf,
+        );
+      }
+    } else {
+      Navigator.pop(context);
+    }
   }
 }

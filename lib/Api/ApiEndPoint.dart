@@ -10,6 +10,11 @@ class ApiEndPoint {
       '/api/v1/report/vehicle-and-weight/export';
   static String couponInvoiceExport = '/api/v1/coupon-invoice/list/export';
 
+  //! ipi download
+  // static String couponInvoiceInAndOut = '/api/v1/coupon/print_invoice_by_invoice_id?invoice_id=KLPT2308150006&scale_type=in';
+  static String couponInvoiceInAndOut =
+      '/api/v1/coupon-invoice/print_invoice_by_invoice_id';
+
   static String couponInvoiceList = "/api/v1/coupon-invoice/list";
 
   //STM

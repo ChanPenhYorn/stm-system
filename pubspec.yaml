@@ -30,6 +30,7 @@ dependencies:
   go_router: ^6.5.5
   google_mlkit_barcode_scanning: ^0.5.0
   hive: ^2.2.3
+  http: ^0.13.6
   image_gallery_saver: ^1.7.1
   image_picker: ^0.8.7
   image_picker_for_web: ^2.1.12
